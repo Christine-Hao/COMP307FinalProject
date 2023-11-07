@@ -28,3 +28,7 @@ slack-clone/
 |-- .gitignore            # Specifies intentionally untracked files to ignore
 |-- package.json          # Node project manifest
 `-- README.md             # Project documentation
+
+```
+
+Note: To conserve formatting of the plain text, use backticks to markdown so Github does not change formating on push 
