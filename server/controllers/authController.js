@@ -24,3 +24,23 @@ exports.login = async (req, res) => {
 
     res.json({token});
 }
+
+exports.register = async(req, res) => {
+    const {username, password} = req.body;
+    try{
+        const existingUser = await User.findByUsername(username);
+        if(existingUser){
+            return res.status.send("Username already taken. Choose another one.");
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const userID; = await User.createUser(username, hashedPassword);
+
+        // Optionally, maybe directly log in the user after registration?? Or no??
+        // and return a token as in the login function
+
+        res.status(201).send("User created successfully");
+    } catch(error){
+        res.status(500).send("Error happens when registering new user. Please wait for a while or reach out to the contact team.");
+    }
+}

@@ -10,5 +10,6 @@ const router = express.Router(); // used to declare routes
 // authCOntroller.login is the handler function.
 router.post("/login", authController.login); 
 
+router.post("/register", authController.register);
 
 module.exports = router;
