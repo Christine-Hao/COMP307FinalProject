@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'; // Import useEffect and useRef here
-import './login.css';
+import './login_style2.css';
 
 
 const Login = () => {
@@ -13,7 +13,7 @@ const Login = () => {
       setVantaEffect(window.VANTA.BIRDS({
         el: vantaRef.current,
         THREE: window.THREE, // Assuming THREE.js is included in your index.html
-        // ... other Vanta.js options you might want to use
+        // ... other Vanta.js options that we might want to use
       }));
     }
     // Cleanup function to destroy Vanta effect when the component unmounts
@@ -33,6 +33,29 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Email:', email, 'Password:', password);
+    try{
+      // process.env.[name] is envrionment variables defined in ".env" file of the root directory 
+      const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}:${process.env.REACT_APP_PORT}${process.env.REACT_APP_LOGIN_API}`, {
+        method: "POST",
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email:email,
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+      if(response.ok){
+        console.log("Login Successful");
+        // Handle successful login here (e.g., redirect, store token)
+      } else{
+        console.log("Login failed:", data.message);
+      }
+    }catch(error){
+      console.log("Error on logging in:" + error);
+    }
     // Import verfiication code form Jiahao 
   };
 
