@@ -61,7 +61,7 @@ const Login = () => {
   };
 
   return (
-    <div class="row" ref={vantaRef}>
+    <div className="row" ref={vantaRef}>
       <section className="col-sm-10 col-md-8 col-lg-6 mx-auto login-container" >
         
         <p className="welcome-message">Welcome to Double Bound</p>
