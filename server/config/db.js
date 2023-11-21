@@ -7,10 +7,10 @@ const { Pool } = require('pg');
 // This object includes the details required to connect to  PostgreSQL database,
 // such as the username, password, database name, host, and port.
 const pool = new Pool({
-  user: 'yourUsername',
-  host: 'localhost',
-  database: 'yourDatabase',
-  password: 'yourPassword',
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
   port: 5432,
 });
 

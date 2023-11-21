@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'; // Import useEffect and useRef here
-import './Login_styles.css';
+import './login_styles.css';
 
 
 
@@ -47,12 +47,14 @@ const Login = () => {
         }),
       });
 
-      const data = await response.json();
+      // response stream can be read only once
       if(response.ok){
-        console.log("Login Successful");
+        const data = await response.json();
+        console.log("Login Successful", data);
         // Handle successful login here (e.g., redirect, store token)
       } else{
-        console.log("Login failed:", data.message);
+        console.log("Login failed:", await response.text());
+
       }
     }catch(error){
       console.log("Error on logging in:" + error);
