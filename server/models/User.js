@@ -13,11 +13,11 @@ const User = {
         const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         return result.rows[0];
     },
-    // ...... additional stuff ......
-    createUser: async (username, hashedPassword) => {
+
+    createUser: async (username, hashedPassword, email) => {
         const result = await pool.query(
-            "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id",
-            [username, hashedPassword]
+            "INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING id",
+            [username, hashedPassword, email]
         );
     }
 }

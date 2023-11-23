@@ -51,6 +51,7 @@ const Login = () => {
       if(response.ok){
         const data = await response.json();
         console.log("Login Successful", data);
+        localStorage.setItem('token', data.token); // Store the token into local storage
         // Handle successful login here (e.g., redirect, store token)
       } else{
         console.log("Login failed:", await response.text());

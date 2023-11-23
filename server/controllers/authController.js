@@ -26,20 +26,20 @@ exports.login = async (req, res) => {
         console.log("not exist?", !user);
         console.log("user email upon login check:", user.email);
         console.log('correct email:', email);
-        console.log(" not equal password?)", ! await bcrypt.compare(password, user.password));
+        console.log(" not equal password?", ! await bcrypt.compare(password, user.password));
 
         return res.status(401).json({ message: "Invalid credentials upon login checking" });
     }
 
     // generates a Json  Web Token.
     // it securely confirm the identity of the user on subsequent requests...
-    const token = jwt.sign({userID: user.id}, "yourSecreteKey", {expiresIn: '1h' });
+    const token = jwt.sign({userID: user.id}, process.env.JWT_SECRET, {expiresIn: '1h' });
 
     res.json({token});
 }
 
 exports.register = async(req, res) => {
-    const {username, password} = req.body;
+    const {username, password, email} = req.body;
     try{
         const existingUser = await User.findByUsername(username);
         if(existingUser){
@@ -49,7 +49,7 @@ exports.register = async(req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const userID = await User.createUser(username, hashedPassword);
+        const userID = await User.createUser(username, hashedPassword, email);
 
         // Optionally, maybe directly log in the user after registration?? Or no??
         // and return a token as in the login function
@@ -63,3 +63,9 @@ exports.register = async(req, res) => {
 
     }
 }
+
+exports.logout = (req, res) => {
+    // Clear the token from the client by instructing them to clear the storage
+    res.json({ message: 'You have been logged out.' });
+    // Note: Actual token invalidation might require a token blacklist or a stateful mechanism
+};
