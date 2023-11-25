@@ -6,14 +6,26 @@ const Registration = ({ onLoginClick }) => {
   // State variables for user's McGill email and password
   const [mcgillEmail, setMcgillEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [preferredName, setPreferredName] = useState('');
 
-  // Handler for McGill email input change
-  const handleMcgillEmailChange = (event) => {
+// Handler for Fullname registration
+    const handleFullnameRegistration= (event) => {
+        setFullName(event.target.value);
+    };
+
+  // Handler for McGill registration
+  const handleMcgillEmailRegistration = (event) => {
     setMcgillEmail(event.target.value);
   };
 
-  // Handler for password input change
-  const handlePasswordChange = (event) => {
+  // Handler for preferred name registration
+  const handlePreferredNameRegistration = (event) => {
+    setPreferredName(event.target.value);
+  };
+
+    // Handler for password registration
+  const handlePasswordRegistration = (event) => {
     setPassword(event.target.value);
   };
 
@@ -31,7 +43,6 @@ const Registration = ({ onLoginClick }) => {
       <div className="container">
         <div className="row">
           <div className="col-sm-10 col-md-8 col-lg-6 mx-auto">
-            
             <p className="registration-message">Register for an Account</p>
             <form className="registration-form" onSubmit={handleSubmit}>
               <div className="input-group">
@@ -39,8 +50,8 @@ const Registration = ({ onLoginClick }) => {
                 <input
                   id="fullName"
                   type="text"
-                  value={mcgillEmail} // Remember to set up different state variables for each input
-                  onChange={handleMcgillEmailChange}
+                  value={fullName} // Remember to set up different state variables for each input
+                  onChange={handleFullnameRegistration}
                   required 
                 />
               </div>
@@ -50,8 +61,8 @@ const Registration = ({ onLoginClick }) => {
                 <input
                   id="preferredName"
                   type="text"
-                  value={mcgillEmail} // This should probably be a different state variable
-                  onChange={handleMcgillEmailChange}
+                  value={preferredName} // This should probably be a different state variable
+                  onChange={handlePreferredNameRegistration}
                   required 
                 />
               </div>
@@ -62,7 +73,7 @@ const Registration = ({ onLoginClick }) => {
                   id="mcgillEmail"
                   type="email"
                   value={mcgillEmail}
-                  onChange={handleMcgillEmailChange}
+                  onChange={handleMcgillEmailRegistration}
                   required 
                 />
               </div>
@@ -73,7 +84,7 @@ const Registration = ({ onLoginClick }) => {
                   id="password"
                   type="password"
                   value={password}
-                  onChange={handlePasswordChange}
+                  onChange={handlePasswordRegistration}
                   required 
                 />
               </div>

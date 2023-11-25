@@ -2,7 +2,6 @@
   display: flex;
   justify-content: flex-start; /* Aligns children to the start of the flex container */
   width: 100%; 
-
   width: 400px;
   margin-bottom: 10px; 
 }
@@ -16,8 +15,6 @@
   flex: 1; /* Allows input to take up the remaining space */
   margin-top: 20px;
   color: rgb(48, 47, 47);
- 
- 
 }
 .registration-message {
   font-size: 20px;

@@ -73,21 +73,25 @@ const Login = ({ onRegisterClick }) => {
       <section className="col-sm-10 col-md-8 col-lg-6 login-container">
         <p className="welcome-message">Welcome to Double Bound</p>
         <form className="login-form" onSubmit={handleSubmit}>
+          <label htmlFor="email">McGill Email</label>
           <input
+            id="email"
             type="email"
             value={email}
             onChange={handleEmailChange}
             placeholder="Enter email"
             required
           /><br/>
+          <label htmlFor="password">Password</label>
           <input
+          id ="password"
             type="password"
             value={password}
             onChange={handlePasswordChange}
             placeholder="Enter password"
             required
           /><br/>
-          <button type="submit">Login</button>
+          <button className='btn btn-primary' type="submit">Login</button>
         </form>
         <p>Don't have an account? <button className="link-button" onClick={onRegisterClick}>Register</button></p>
       </section>
