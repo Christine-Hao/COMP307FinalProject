@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'; 
-import styles from './login_styles.module.css';
+import './Login_styles.css';
 
 // The Login component, receiving 'onRegisterClick' as a prop for navigation
 const Login = ({ onRegisterClick }) => {
@@ -69,13 +69,12 @@ const Login = ({ onRegisterClick }) => {
 
   // Rendering the component
   return (
-    <div className={styles.row} ref={vantaRef}> 
-      <section className={`${styles.colSm10} ${styles.colMd8} ${styles.colLg6} ${styles.loginContainer}`}>
-        <p className={styles.welcomeMessage}>Welcome to Double Bound</p>
-        <form className={styles.loginForm} onSubmit={handleSubmit}>
+    <div className="row" ref={vantaRef}>
+      <section className="col-sm-10 col-md-8 col-lg-6 login-container">
+        <p className="welcome-message">Welcome to Double Bound</p>
+        <form className="login-form" onSubmit={handleSubmit}>
           <input
             type="email"
-            className={styles.emailInput} 
             value={email}
             onChange={handleEmailChange}
             placeholder="Enter email"
@@ -83,15 +82,14 @@ const Login = ({ onRegisterClick }) => {
           /><br/>
           <input
             type="password"
-            className={styles.passwordInput} 
             value={password}
             onChange={handlePasswordChange}
             placeholder="Enter password"
             required
           /><br/>
-          <button type="submit" className={styles.submitButton}>Login</button> 
+          <button type="submit">Login</button>
         </form>
-        <p className={styles.registerPrompt}>Don't have an account? <button className={styles.linkButton} onClick={onRegisterClick}>Register</button></p>
+        <p>Don't have an account? <button className="link-button" onClick={onRegisterClick}>Register</button></p>
       </section>
     </div>
   );

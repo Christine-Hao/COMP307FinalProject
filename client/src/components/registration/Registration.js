@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import './registration_styles.module.css'; // Assuming you have a separate CSS file for registration styles
+import './registration_styles.css'; // Assuming you have a separate CSS file for registration styles
 
 const Registration = ({ onLoginClick }) => {
   // State variables for user's McGill email and password
@@ -27,29 +27,60 @@ const Registration = ({ onLoginClick }) => {
 
   // Rendering the registration form
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-10 col-md-8 col-lg-6 mx-auto">
-          <div className="registration-container">
+    <div className='outer'>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-10 col-md-8 col-lg-6 mx-auto">
+            
             <p className="registration-message">Register for an Account</p>
             <form className="registration-form" onSubmit={handleSubmit}>
-              <input
-                type="email"
-                value={mcgillEmail}
-                onChange={handleMcgillEmailChange}
-                placeholder="Enter McGill email"
-                required // Ensuring the McGill email is filled
-              /><br/>
-              <input
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-                placeholder="Enter password"
-                required // Ensuring the password is filled
-              /><br/>
+              <div className="input-group">
+                <label htmlFor="fullName">Name</label>
+                <input
+                  id="fullName"
+                  type="text"
+                  value={mcgillEmail} // Remember to set up different state variables for each input
+                  onChange={handleMcgillEmailChange}
+                  required 
+                />
+              </div>
+
+              <div className="input-group">
+                <label htmlFor="preferredName">Preferred Name</label>
+                <input
+                  id="preferredName"
+                  type="text"
+                  value={mcgillEmail} // This should probably be a different state variable
+                  onChange={handleMcgillEmailChange}
+                  required 
+                />
+              </div>
+
+              <div className="input-group">
+                <label htmlFor="mcgillEmail">Email</label>
+                <input
+                  id="mcgillEmail"
+                  type="email"
+                  value={mcgillEmail}
+                  onChange={handleMcgillEmailChange}
+                  required 
+                />
+              </div>
+
+              <div className="input-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  required 
+                />
+              </div>
+              
               <button type="submit" className="btn btn-primary">Register</button>
             </form>
-            <p>Already have an account? <span className="link-button" onClick={onLoginClick}>Login</span></p>
+            <p className="account-exists">Already have an account? <span className="link-button-reg" onClick={onLoginClick}>Login</span></p>
           </div>
         </div>
       </div>
