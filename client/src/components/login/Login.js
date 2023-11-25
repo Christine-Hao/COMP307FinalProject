@@ -1,28 +1,33 @@
-import React, { useState, useEffect, useRef } from 'react'; // Import useEffect and useRef here
-import './login_styles.css';
+import React, { useState, useEffect, useRef } from 'react'; 
+import styles from './login_styles.module.css';
 
-
-
-const Login = () => {
-  const [vantaEffect, setVantaEffect] = useState(null); // Initialize vantaEffect with null
+// The Login component, receiving 'onRegisterClick' as a prop for navigation
+const Login = ({ onRegisterClick }) => {
+  // State variables for Vanta effect, user email, and password
+  const [vantaEffect, setVantaEffect] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const vantaRef = useRef(null); // Create a ref for the Vanta effect
 
+  // Ref for the Vanta effect
+  const vantaRef = useRef(null);
+
+  // useEffect hook to initialize and clean up the Vanta effect
   useEffect(() => {
+    // Initialize Vanta effect if it hasn't been set
     if (!vantaEffect) {
       setVantaEffect(window.VANTA.BIRDS({
         el: vantaRef.current,
-        THREE: window.THREE, // Assuming THREE.js is included in your index.html
-        // ... other Vanta.js options that we might want to use
+        THREE: window.THREE, // Assumes THREE.js is included
+        // Additional Vanta.js options can be set here
       }));
     }
     // Cleanup function to destroy Vanta effect when the component unmounts
     return () => {
       if (vantaEffect) vantaEffect.destroy();
     };
-  }, [vantaEffect]); // Dependency array ensures effect is only run once
+  }, [vantaEffect]); // Dependency array to ensure effect runs only once
 
+  // Handlers for email and password input changes
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -31,70 +36,65 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
+  // Handler for form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Email:', email, 'Password:', password);
-    try{
-      // process.env.[name] is envrionment variables defined in ".env" file of the root directory 
+    try {
+      // Making a POST request to the login API endpoint
       const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}:${process.env.REACT_APP_PORT}${process.env.REACT_APP_LOGIN_API}`, {
         method: "POST",
         headers:{
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email:email,
+          email: email,
           password: password,
         }),
       });
 
-      // response stream can be read only once
+      // Handling the response
       if(response.ok){
         const data = await response.json();
         console.log("Login Successful", data);
-        localStorage.setItem('token', data.token); // Store the token into local storage
-        // Handle successful login here (e.g., redirect, store token)
-      } else{
+        localStorage.setItem('token', data.token); // Storing the token
+        // Additional successful login actions can be added here
+      } else {
         console.log("Login failed:", await response.text());
-
       }
-    }catch(error){
-      console.log("Error on logging in:" + error);
+    } catch(error) {
+      console.log("Error on logging in:", error);
     }
-    // Import verfiication code form Jiahao 
   };
 
+  // Rendering the component
   return (
-    <div className="row" ref={vantaRef}>
-      <section className="col-sm-10 col-md-8 col-lg-6 mx-auto login-container" >
-        
-        <p className="welcome-message">Welcome to Double Bound</p>
-          <br></br>
-          <form className="login-form" onSubmit={handleSubmit}>
-            <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Enter email"
-              required // Ensuring the input is filled
-            /><br></br>
-            <input
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              placeholder="Enter password"
-              required // Ensuring the input is filled
-            /> <br></br>
-            <button type="submit">Login</button>
-          </form>
-
-          <br></br>
-          <p>Don't have an account? Register</p>
-        
-         
+    <div className={styles.row} ref={vantaRef}> 
+      <section className={`${styles.colSm10} ${styles.colMd8} ${styles.colLg6} ${styles.loginContainer}`}>
+        <p className={styles.welcomeMessage}>Welcome to Double Bound</p>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
+          <input
+            type="email"
+            className={styles.emailInput} 
+            value={email}
+            onChange={handleEmailChange}
+            placeholder="Enter email"
+            required
+          /><br/>
+          <input
+            type="password"
+            className={styles.passwordInput} 
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="Enter password"
+            required
+          /><br/>
+          <button type="submit" className={styles.submitButton}>Login</button> 
+        </form>
+        <p className={styles.registerPrompt}>Don't have an account? <button className={styles.linkButton} onClick={onRegisterClick}>Register</button></p>
       </section>
-    
     </div>
   );
 };
 
-export default Login;
+export default Login; 

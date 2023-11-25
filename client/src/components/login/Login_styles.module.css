@@ -8,6 +8,9 @@
   align-items: center;
 }*/
 
+p{
+  color: white;
+}
 /* Styling for the login form */
 .login-container {
   display: flex;
@@ -45,6 +48,23 @@
   color: #fff;
   margin-bottom: 20px;
 }
-p{
-  color: white;
+
+
+/*Register button*/
+.link-button {
+  background: none;
+  border: none;
+  color:black;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
 }
+
+
+.link-button:hover, .link-button:focus {
+  text-decoration: none; /* or any hover effect you like */
+}
+
+
+

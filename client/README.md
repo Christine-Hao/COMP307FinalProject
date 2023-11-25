@@ -1,3 +1,36 @@
+
+Visual Layout:
+
+Boostrap 12 colum : col-sm-10, col-md-8, and col-lg-6.
+
+The core feature is a login form that includes:
+An input field for the user's email address.
+An input field for the user's password.
+Both fields are marked as required, ensuring users cannot submit the form without filling these out.
+A submit button that says "Login".
+Form Interaction:
+
+The form handles user input for email and password through handleEmailChange and handlePasswordChange functions, updating the component's state accordingly.
+On submission (handleSubmit), a POST request is sent to a specified API endpoint for login, constructed from environment variables. The request includes the user's email and password in JSON format.
+The response from the server is handled within handleSubmit. If successful, it stores a token in local storage and could potentially redirect the user or perform other post-login actions. If the login fails, it logs the error message.
+Cleanup and Effects:
+
+A useEffect hook is used to initialize the Vanta.js effect when the component mounts and to clean up (destroy) the effect when the component unmounts, preventing potential memory leaks.
+Registration Prompt:
+
+Below the login form, there's a prompt indicating "Don't have an account? Register," suggesting a navigation option for new users to register.
+Overall User Flow:
+
+When a user visits this page, they will see a visually engaging interface with an animated background.
+They are greeted with a welcome message and presented with a straightforward form to enter their email and password.
+After filling out the form, they can attempt to log in. Depending on the success or failure of this attempt, they receive appropriate feedback.
+
+
+- Need to install react-router-dom
+
+
+
+React native documentation
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +101,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+

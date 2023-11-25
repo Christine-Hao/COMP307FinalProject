@@ -1,0 +1,39 @@
+/* This sets the background of the entire page or container to black */
+.container {
+    background-color: black;
+    color: white; /* Set text color to white */
+  }
+  
+  /* If you only want the form area to have a black background */
+  .registration-container {
+    background-color: black; /* Set form container background to black */
+    color: white; /* Set text color inside the container to white */
+    /* other styles */
+  }
+  
+  /* If you want to ensure that all input and button text is white */
+  .registration-form input,
+  .registration-form button {
+    color: white; /* This will set the text color inside the inputs and button to white */
+    background-color: #333; /* A slightly lighter shade of black for contrast */
+    border: 1px solid white; /* Add a white border if desired for visibility */
+    /* other styles */
+  }
+  
+  /* Adjust placeholder color for visibility */
+  ::placeholder {
+    color: #bbb; /* A gray tone for placeholder text that ensures visibility against the black */
+  }
+  
+  /* Styling for the link-button to match white text theme */
+  .link-button {
+    color: white;
+    /* other styles */
+  }
+  
+  /* Ensure the hover effect on the link-button is visible against the black background */
+  .link-button:hover, .link-button:focus {
+    color: #ddd; /* Lighter shade for hover and focus states */
+    text-decoration: none; /* Assuming you want to remove underline on hover/focus */
+  }
+  
