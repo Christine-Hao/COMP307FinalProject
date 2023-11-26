@@ -1,0 +1,35 @@
+.img-container {
+    margin-bottom: 20px;
+}
+.form-control-lg {
+    margin-bottom: 10px;
+}
+
+.form-group label, .form-group input {
+    display: block; /* Makes element occupy the full width */
+    width: 475px; /* Ensures it takes up all available space */
+    box-sizing: border-box; /* Optional: ensures padding doesn't affect width */
+    font-size: 15px;
+}
+
+.form-group label {
+    margin-bottom: 0.5em;
+}
+
+.form-group input {
+    margin-bottom: 1em;
+}
+input[type="text"], input[type="email"] {
+    font-size: 20px;
+}
+input, select, textarea{
+    color: black;
+
+}
+
+.form-text {
+    font-size: 13px;
+    margin-top: -15px;
+    margin-left: 3px;
+    font-style: oblique;
+}
