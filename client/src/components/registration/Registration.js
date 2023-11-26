@@ -46,7 +46,9 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
     };
 
     try{
-      const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}:${process.env.REACT_APP_SERVER_PORT}${process.env.REACT_APP_SIGNUP_API}`, {
+      //const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}:${process.env.REACT_APP_SERVER_PORT}${process.env.REACT_APP_SIGNUP_API}`, {
+      const response = await fetch(`${process.env.REACT_APP_SIGNUP_API}`, {
+
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -59,7 +61,7 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
       if(response.ok){
         console.log('Registration Successful', data);
         onRegistrationSuccess(); // We call the callback to redirect, after successful registration
-        
+
       }else{
         console.error("Registration failed:", data.message);
       }
