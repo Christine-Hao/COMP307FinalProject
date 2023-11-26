@@ -14,11 +14,13 @@ const User = {
         return result.rows[0];
     },
 
-    createUser: async (username, hashedPassword, email) => {
+    createUser: async (fullname, username, hashedPassword, email) => {
         const result = await pool.query(
-            "INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING id",
-            [username, hashedPassword, email]
+            "INSERT INTO users (fullname, username, password, email) VALUES ($1, $2, $3, $4) RETURNING id",
+            [fullname, username, hashedPassword, email]
         );
+
+        return result.rows[0];
     }
 }
 

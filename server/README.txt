@@ -13,4 +13,13 @@ express, pg, bcrypt, jsonwebtoken, cors.
 /server/:
     servers.js: entry point that defines and sets up the Node.js server configs above.
 
-// more details to be written...
+
+routes:
+1. In server.js, any routes defined in users.js shuold be prefixed with "/api/users":
+    const userRoutes = require("./routes/users");
+    app.use('/api/users', userRoutes); 
+
+    So, for Frontend to make an API call, -> fetch("/api/users" + some route in users.js) (POST)
+
+    When deploying app, the domain or IP of backend server is in the requested URL.
+    e.g. await fetch("https://backendwebsite.com/api/users/register);

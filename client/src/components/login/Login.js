@@ -42,7 +42,7 @@ const Login = ({ onRegisterClick }) => {
     console.log('Email:', email, 'Password:', password);
     try {
       // Making a POST request to the login API endpoint
-      const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}:${process.env.REACT_APP_PORT}${process.env.REACT_APP_LOGIN_API}`, {
+      const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}:${process.env.REACT_APP_SERVER_PORT}${process.env.REACT_APP_LOGIN_API}`, {
         method: "POST",
         headers:{
           'Content-Type': 'application/json',

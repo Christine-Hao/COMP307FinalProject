@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
+
 import './registration_styles.css'; // Assuming you have a separate CSS file for registration styles
 
-const Registration = ({ onLoginClick }) => {
+const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
+
   // State variables for user's McGill email and password
   const [mcgillEmail, setMcgillEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,6 +37,36 @@ const Registration = ({ onLoginClick }) => {
     console.log('McGill Email:', mcgillEmail, 'Password:', password);
     // Implement registration logic here
     // For example, making a POST request to a registration API endpoint
+
+    const userData = {
+      fullname: fullName,
+      username: preferredName,
+      password: password,
+      email: mcgillEmail
+    };
+
+    try{
+      const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}:${process.env.REACT_APP_SERVER_PORT}${process.env.REACT_APP_SIGNUP_API}`, {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+      });
+
+      const data = await response.json();
+
+      if(response.ok){
+        console.log('Registration Successful', data);
+        onRegistrationSuccess(); // We call the callback to redirect, after successful registration
+        
+      }else{
+        console.error("Registration failed:", data.message);
+      }
+    }catch(error){
+      console.error("Error during registration:", error);
+    }
+
   };
 
   // Rendering the registration form
