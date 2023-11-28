@@ -27,7 +27,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* This ensures that the .outer class takes up the full height of the viewport */
+  min-height: 92.5vh; /* This ensures that the .outer class takes up the full height of the viewport */
   width: 100vw; /* This ensures that the .outer class takes up the full width of the viewport */
   background-color: black;
 

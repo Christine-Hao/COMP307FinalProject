@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import './Navbar/Form_styles.css';
+//import './Navbar/Form_styles.css';
 import React from 'react';
 
 function AccountInfoPopup({ show, handleClose }) {
