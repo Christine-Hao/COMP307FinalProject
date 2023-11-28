@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import './Navbar/Navbar_styles.css';
+//import './Navbar/Navbar_styles.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import AccountInfoPopup from './AccountInfoPopup.js';
 
@@ -51,3 +51,4 @@ function Navbar_loggedin() {
 }
 
 export default Navbar_loggedin;
+

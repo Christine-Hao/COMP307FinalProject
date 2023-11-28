@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'; 
 import './Login_styles.css';
 
-// The Login component, receiving 'onRegisterClick' as a prop for navigation
-const Login = ({ onRegisterClick }) => {
+// The Login component, now receiving 'onRegisterClick' and 'onLoginSuccess' as props
+const Login = ({ onRegisterClick, onLoginSuccess }) => {
   // State variables for Vanta effect, user email, and password
   const [vantaEffect, setVantaEffect] = useState(null);
   const [email, setEmail] = useState('');
@@ -13,57 +13,43 @@ const Login = ({ onRegisterClick }) => {
 
   // useEffect hook to initialize and clean up the Vanta effect
   useEffect(() => {
-    // Initialize Vanta effect if it hasn't been set
     if (!vantaEffect) {
       setVantaEffect(window.VANTA.BIRDS({
         el: vantaRef.current,
-        THREE: window.THREE, // Assumes THREE.js is included
-        // Additional Vanta.js options can be set here
+        THREE: window.THREE,
       }));
     }
-    // Cleanup function to destroy Vanta effect when the component unmounts
     return () => {
       if (vantaEffect) vantaEffect.destroy();
     };
-  }, [vantaEffect]); // Dependency array to ensure effect runs only once
+  }, [vantaEffect]);
 
   // Handlers for email and password input changes
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
 
   // Handler for form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Email:', email, 'Password:', password);
     try {
-      // Making a POST request to the login API endpoint
-      //const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}:${process.env.REACT_APP_SERVER_PORT}${process.env.REACT_APP_LOGIN_API}`, {
-      const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_LOGIN_API}`, {
+      // Update the URL to point to backend login API endpoint
+      // Example: 'http://localhost:3000/api/users/login'
+      const loginApiUrl = `${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_LOGIN_API}/login`; 
+      const response = await fetch(loginApiUrl, {
         method: "POST",
-        headers:{
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }), // Sending email and password
       });
 
-      // Handling the response
-      if(response.ok){
+      if (response.ok) {
         const data = await response.json();
         console.log("Login Successful", data);
-        localStorage.setItem('token', data.token); // Storing the token
-        // Additional successful login actions can be added here
+        localStorage.setItem('token', data.token); // Storing the token if login is successful
+        onLoginSuccess(); // Navigate to the SelectBoard component
       } else {
         console.log("Login failed:", await response.text());
       }
-    } catch(error) {
+    } catch (error) {
       console.log("Error on logging in:", error);
     }
   };
@@ -85,7 +71,7 @@ const Login = ({ onRegisterClick }) => {
           /><br/>
           <label htmlFor="password">Password</label>
           <input
-          id ="password"
+            id="password"
             type="password"
             value={password}
             onChange={handlePasswordChange}
@@ -100,4 +86,4 @@ const Login = ({ onRegisterClick }) => {
   );
 };
 
-export default Login; 
+export default Login;

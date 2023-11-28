@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
-import './Navbar/Navbar_styles.css';
+//import './Navbar/Navbar_styles.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function CustomNavbar() {

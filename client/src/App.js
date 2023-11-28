@@ -1,31 +1,39 @@
 import React, { useState } from 'react';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
-import Navbar from './components/Navbar';
-import "bootstrap/dist/css/bootstrap.min.css";
-
+import SelectBoard from './components/select_board/SelectBoard';
 
 function App() {
-  //The initial page that appears is the login pahe 
   const [currentPage, setCurrentPage] = useState('login');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // Define the function to handle successful registration
-    const handleRegistrationSuccess = () => {
-      setCurrentPage('login');
-    };
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentPage('login'); // Redirect back to login page after logout
+  };
+
+  if (isLoggedIn) {
+    return (
+      <div>
+        <SelectBoard />
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <Navbar />
       {currentPage === 'login' ? (
-        <Login onRegisterClick={() => setCurrentPage('register')} />
+        <Login onRegisterClick={() => setCurrentPage('register')} onLoginSuccess={handleLoginSuccess} />
       ) : (
-        <Registration onLoginClick={() => setCurrentPage('login')}
-        onRegistrationSuccess={handleRegistrationSuccess}
-         />
+        <Registration onLoginClick={() => setCurrentPage('login')} />
       )}
     </div>
   );
-};
+}
 
 export default App;
