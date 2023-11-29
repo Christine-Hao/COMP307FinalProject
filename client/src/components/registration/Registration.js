@@ -47,7 +47,7 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
 
     try{
       //const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}:${process.env.REACT_APP_SERVER_PORT}${process.env.REACT_APP_SIGNUP_API}`, {
-      const response = await fetch(`${REACT_APP_URL_PREFIX}${process.env.REACT_APP_SIGNUP_API}`, {
+      const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_SIGNUP_API}`, {
 
         method: 'POST',
         headers:{
