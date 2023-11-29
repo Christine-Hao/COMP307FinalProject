@@ -4,17 +4,23 @@ const pool = require('../config/db');
 
 const BoardModel = {
   findByUserId: async (userId) => {
+      
+    //'SELECT b.* FROM boards b INNER JOIN board_members bm ON b.id = bm.board_id WHERE bm.user_id = $1', 
+
     const result = await pool.query('SELECT * FROM boards WHERE user_id = $1', [userId]);
     return result.rows;
   },
 
-  createBoard: async (boardName) => {
-    const newBoard = await pool.query("INSERT INTO boards (boardName) VALUES ($1) RETURNING *",
-    [boardName]);
+  createBoard: async (userID, boardName) => {
+
+    const newBoard = await pool.query(
+      "INSERT INTO boards (boardName) VALUES ($1) RETURNING *",
+      [boardName]
+    );
 
     await pool.query(
       "INSERT INTO board_members (boardID, userID) VALUES ($1, $2)",
-      [newBoard.rows[0].boardID, newBoard.rows[0].userId]
+      [newBoard.rows[0].boardID, userID]
     );
 
     return newBoard.rows[0];

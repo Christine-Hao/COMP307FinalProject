@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'; 
 import './Login_styles.css';
+//import { useNavigate } from 'react-router-dom';
 
 // The Login component, now receiving 'onRegisterClick' and 'onLoginSuccess' as props
 const Login = ({ onRegisterClick, onLoginSuccess }) => {
@@ -31,10 +32,11 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
   // Handler for form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
       // Update the URL to point to backend login API endpoint
       // Example: 'http://localhost:3000/api/users/login'
-      const loginApiUrl = `${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_LOGIN_API}/login`; 
+      const loginApiUrl = `${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_LOGIN_API}`; 
       const response = await fetch(loginApiUrl, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
@@ -46,12 +48,14 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
         console.log("Login Successful", data);
         localStorage.setItem('token', data.token); // Storing the token if login is successful
         onLoginSuccess(); // Navigate to the SelectBoard component
+        
       } else {
         console.log("Login failed:", await response.text());
       }
     } catch (error) {
       console.log("Error on logging in:", error);
     }
+ 
   };
 
   // Rendering the component
