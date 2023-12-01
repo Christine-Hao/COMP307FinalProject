@@ -38,6 +38,32 @@ exports.deleteBoard = async (req, res) => {
   }
 }
 
+exports.addBoardMember = async (req, res) =>{
+  const {boardID, userID} = req.body;
+  try{
+    await BoardModel.addMember(boardID, userID);
+    res.json({message: "Member added to board successfully"});
+  }catch(error){
+    res.status(500).json({message:"Error adding members to board."});
+  }
+
+}
+
+exports.removeBoardMember = async(req, res) => {
+  const {boardID, userID} = req.body;
+  try{
+    await BoardModel.removeMember(boardID, userID);
+
+    // also remove from channels, channel_members??
+    res.json({message:"Member removed from board successfully"});
+
+
+  }catch(error){
+
+    res.status(500).json({message: "Error happens in controller when removing members from the board."});
+
+  }
+}
 
 
 

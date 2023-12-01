@@ -19,7 +19,7 @@ app.use(express.json());
 // prefix: /api/users.
 // if userRoutes has a route defined as "/login", full path: /api/users/login
 app.use('/api/users', userRoutes);
-app.use('/api/discussions', discussionRoutes);
+app.use('/api/boards', discussionRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
