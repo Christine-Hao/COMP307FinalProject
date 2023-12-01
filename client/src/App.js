@@ -4,7 +4,13 @@ import Registration from './components/registration/Registration';
 import SelectBoard from './components/select_board/SelectBoard';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('login');
+  return(
+    <div>
+      
+      <SelectBoard />
+    </div>
+  );
+  /*const [currentPage, setCurrentPage] = useState('login');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //To be added after implementing the selected board?
@@ -53,25 +59,8 @@ function App() {
       {renderContent()}
     </div>
   )
-
-  // if (isLoggedIn) {
-  //   return (
-  //     <div>
-  //       <SelectBoard />
-  //       <button onClick={handleLogout}>Logout</button>
-  //     </div>
-  //   );
-  // }
-
-  // return (
-  //   <div>
-  //     {currentPage === 'login' ? (
-  //       <Login onRegisterClick={() => setCurrentPage('register')} onLoginSuccess={handleLoginSuccess} />
-  //     ) : (
-  //       <Registration onLoginClick={() => setCurrentPage('login')} />
-  //     )}
-  //   </div>
-  // );
+*/
+ 
 }
 
 export default App;
