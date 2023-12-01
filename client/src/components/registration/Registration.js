@@ -99,7 +99,7 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
             <p className="registration-message">Register for an Account</p>
             <form className="registration-form" onSubmit={handleSubmit}>
               <div className="input-group">
-                <label htmlFor="fullName">Name</label>
+                <label htmlFor="fullName">Full Name</label>
                 <input
                   id="fullName"
                   type="text"
