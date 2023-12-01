@@ -60,7 +60,7 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
 
   // Rendering the component
   return (
-    <div className="row" ref={vantaRef}>
+    <div className="login-row" ref={vantaRef}>
       <section className="col-sm-10 col-md-8 col-lg-6 login-container">
         <p className="welcome-message">Welcome to Double Bound</p>
         <form className="login-form" onSubmit={handleSubmit}>
@@ -82,7 +82,9 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
             placeholder="Enter password"
             required
           /><br/>
-          <button className='btn btn-primary' type="submit">Login</button>
+          <div className="login-button"  >
+          <button type="submit">Login</button>
+          </div>
         </form>
         <p>Don't have an account? <button className="link-button" onClick={onRegisterClick}>Register</button></p>
       </section>

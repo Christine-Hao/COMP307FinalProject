@@ -94,12 +94,12 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
   return (
     <div className='outer'>
       <div className="container">
-        <div className="row">
+        <div className="registration-row">
           <div className="col-sm-10 col-md-8 col-lg-6 mx-auto">
             <p className="registration-message">Register for an Account</p>
             <form className="registration-form" onSubmit={handleSubmit}>
               <div className="input-group">
-                <label htmlFor="fullName">Full Name</label>
+                <label htmlFor="fullName"> Name</label>
                 <input
                   id="fullName"
                   type="text"
@@ -142,7 +142,9 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
                 />
               </div>
               
+              <div className='reg-button'>
               <button type="submit" className="btn btn-primary">Register</button>
+              </div>
             </form>
             <p className="account-exists">Already have an account? <span className="link-button-reg" onClick={onLoginClick}>Login</span></p>
           </div>

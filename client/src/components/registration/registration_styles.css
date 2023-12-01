@@ -2,11 +2,12 @@
   display: flex;
   justify-content: flex-start; /* Aligns children to the start of the flex container */
   width: 100%; 
-  width: 400px;
+  width: 300px;
   margin-bottom: 10px; 
+  
 }
 .input-group label {
-  flex: 0 0 120px; /* Gives label a fixed width and prevents it from growing */
+  flex: 0 0 120px; /* Gives label a fixed width and prevents it from gregistration-rowing */
   margin-right: 10px;
   text-align: left; /* Aligns the text to the right of the label */
   margin-top: 20px;
@@ -17,17 +18,19 @@
   color: rgb(48, 47, 47);
 }
 .registration-message {
-  font-size: 20px;
+  font-weight: bold;
+  font-size: 24px;
   width: 100%; /* Ensures it takes the full width */
   text-align: center; /* Centers the text within the element */
   margin-top: 20px; /* Optional: Adds space above the title */
-  margin-bottom: 35px; /* Optional: Adds space below the title */
+  margin-bottom: 50px; /* Optional: Adds space below the title */
+  
 }
 .outer {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 92.5vh; /* This ensures that the .outer class takes up the full height of the viewport */
+  min-height: 100vh; /* This ensures that the .outer class takes up the full height of the viewport */
   width: 100vw; /* This ensures that the .outer class takes up the full width of the viewport */
   background-color: black;
 
@@ -38,10 +41,11 @@
   color: white;
 }
 
-.row {
+.registration-row {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 ::placeholder {
@@ -66,10 +70,10 @@
   flex-direction: column;
   align-items: center; /* This centers the .input-group containers */
   width: 100%;
-}
-.btn{
-  margin: 40px;
   
+}
+.reg-button{
+  margin: 40px;
 }
 
 
