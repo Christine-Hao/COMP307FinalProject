@@ -35,8 +35,27 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('McGill Email:', mcgillEmail, 'Password:', password);
-    // Implement registration logic here
-    // For example, making a POST request to a registration API endpoint
+
+    // Check if the username, password, or email exceed the character limits
+    if (preferredName.length > 45) {
+      alert("Preferred name should not exceed 45 characters.");
+      return;
+    }
+
+    if (fullName.length > 45) {
+      alert("Full Name should not exceed 45 characters.");
+      return;
+    }
+
+    if (password.length > 50) {
+      alert("Password should not exceed 50 characters.");
+      return;
+    }
+
+    if (mcgillEmail.length > 50) {
+      alert("Email should not exceed 50 characters.");
+      return;
+    }
 
     const userData = {
       fullname: fullName,
