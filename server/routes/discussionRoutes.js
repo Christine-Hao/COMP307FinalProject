@@ -4,25 +4,31 @@
 
 // api prefix in server.js: /api/boards
 
-const express = require('express');
-const router = express.Router();
-const discussionController = require('../controllers/discussionController');
-const authMiddleware = require('../middleware/authMiddleware');
+import { Router } from 'express';
+const router = Router();
+import { getBoards, createBoard, addBoardMember, removeBoardMember } from '../controllers/discussionController';
+import { verifyToken } from '../middleware/authMiddleware';
 
 
 /*server side api:
 api/boards/userBoards
-api/boards/createBoard
+api/boards/userBoards/createBoard
+api/boards/userBoards/deleteBoard/:boardID
 api/boards/userBoards/addMember
 api/boards/userBoards/removeMember
+
 */
-router.get('/userBoards', authMiddleware.verifyToken, discussionController.getBoards);
 
-router.post('/userBoards/createBoard', authMiddleware.verifyToken, discussionController.createBoard);
+router.get('/userBoards', verifyToken, getBoards);
 
-router.post('/userBoards/addMember', authMiddleware.verifyToken, discussionController.addBoardMember);
-router.post('/userBoards/removeMember', authMiddleware.verifyToken, discussionController.removeBoardMember);
+router.post('/userBoards/createBoard', verifyToken, createBoard);
+
+router.post('/userBoards/deleteBoard/:boardID');
+
+router.post('/userBoards/addMember', verifyToken, addBoardMember);
+
+router.post('/userBoards/removeMember', verifyToken, removeBoardMember);
 
 // Other discussion board-related routes...
 
-module.exports = router;
+export default router;

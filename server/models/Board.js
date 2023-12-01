@@ -1,12 +1,9 @@
 // We are in: server/models/boardModel.js
 
-const pool = require('../config/db');
+import pool from '../config/db';
 
 const BoardModel = {
-  findByUserId: async (userId) => {
-      
-    //const result = await pool.query('SELECT * FROM boards WHERE user_id = $1', [userId]);
-   
+  findByUserId: async (userId) => {   
     // give "boards" an alias called "b", and "board_members" an alias called "bm"
     // inner join -> all records in boards with the board_members table
     // join condition -> b.board_id = bm.board_id
@@ -18,6 +15,11 @@ const BoardModel = {
     return result.rows;
   },
 
+  findByBoardId: async (boardID) => {
+    const result = await pool.query("SELECT * FROM boards WHERE board_id = $1", [boardID]);
+    return result.rows[0];
+  },
+
   createBoard: async (userID, boardName) => {
 
     const newBoard = await pool.query(
@@ -25,10 +27,11 @@ const BoardModel = {
       [boardName, userID]
     );
 
-    // await pool.query(
-    //   "INSERT INTO board_members (board_id, user_id) VALUES ($1, $2)",
-    //   [newBoard.rows[0].boardID, userID]
-    // );
+    await pool.query(
+      "INSERT INTO board_members (board_id, user_id) VALUES ($1, $2)",
+      [newBoard.rows[0].boardID, userID]
+    );
+
 
     // create default channels ??
 
@@ -46,7 +49,7 @@ const BoardModel = {
   addMember: async (boardID, userID) => {
     await pool.query(
       "INSERT INTO board_members (board_id, user_id) VALUES ($1, $2)",
-      [boardID, userId]
+      [boardID, userID]
     );
   },
 
@@ -60,4 +63,4 @@ const BoardModel = {
 };
 
 
-module.exports = BoardModel;
+export default BoardModel;
