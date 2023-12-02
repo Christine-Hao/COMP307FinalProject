@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 
-import './registration_styles.css'; // Assuming you have a separate CSS file for registration styles
+import './registration_styles.css'; 
 
 const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
 
