@@ -2,9 +2,9 @@
 // sets up the Express server with middleware(e.g. cors and express.json())
 // cors means Cross-Origin Resource Sharing, allowing frontend to communicate with the backend.
 // This file tells the server to use routes defined in users.js
-require('dotenv').config();
 
-import express, { json } from 'express';
+import 'dotenv/config';
+import express from 'express';
 import cors from 'cors';
 
 import userRoutes from "./routes/users.js";
@@ -14,7 +14,7 @@ const app = express();
 
 // the middlewares
 app.use(cors());
-app.use(json());
+app.use(express.json());
 
 // prefix: /api/users.
 // if userRoutes has a route defined as "/login", full path: /api/users/login
