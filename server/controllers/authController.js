@@ -3,8 +3,10 @@
 // then uses functions that interact with the database in /server/models/User.js
 
 
-import { compare, hash } from "bcrypt"; //for hashing password anc com
-import { sign } from "jsonwebtoken"; // json token
+// import { compare, hash } from "bcrypt"; //for hashing password anc com
+// import { sign } from "jsonwebtoken"; // json token
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { findByEmail, createUser } from "../models/User.js"; // use the functions in models/User.js
 
 // create a login function for other files to use.
@@ -18,7 +20,7 @@ export async function login(req, res) {
 
     // check if user exists, and check if the provided password matches with the stored one.
     // bcrypt.compare -> hashes the entered password(left argument), and compare with the correct password(expect to be hashed)
-    if(!user || !await compare(password, user.password)){
+    if(!user || !await bcrypt.compare(password, user.password)){
 
         //return res.status(401).send("Invalid credentials");
         // console.log("user password upon login check:", user.password);
@@ -34,7 +36,7 @@ export async function login(req, res) {
     // 1. generates a Json  Web Token.
     // 2. encodes: the user.id from the database
     // purpose: To confirm the identity of the user on subsequent requests.
-    const token = sign({userID: user.id}, process.env.JWT_SECRET, {expiresIn: '1h' });
+    const token = jwt.sign({userID: user.id}, process.env.JWT_SECRET, {expiresIn: '1h' });
 
     res.json({token});
 }
@@ -52,7 +54,7 @@ export async function register(req, res) {
             return res.status(400).json({message:"Email already taken. Choose another one."});
 
         }
-        const hashedPassword = await hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
         const createdUser = await createUser(fullname, username, hashedPassword, email);
 
         // Optionally, maybe directly log in the user after registration?? Or no??
