@@ -40,7 +40,7 @@ export async function createBoardModel(userID, boardName){
 
 };
 
-export async function deleteBoardModel(boardID) => {
+export async function deleteBoardModel(boardID){
 
     await pool.query("DELETE FROM board_members WHERE boardID = $1", [boardID]);
     await pool.query("DELETE FROM boards WHERE boardID = $1", [boardID]);
