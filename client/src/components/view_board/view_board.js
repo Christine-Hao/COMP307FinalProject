@@ -57,7 +57,7 @@ const DiscussionBoard = () => {
                                 <div className="message-content">
                                     <div className="message-header">
                                         <span className="message-sender">{msg.sender}</span>
-                                        <span className="message-time">{msg.time}</span>
+                                        {/* <span className="messange-time">{msg.time}</span> */}
                                     </div>
                                     <div className="message-text">{msg.text}</div>
                                 </div>
