@@ -62,4 +62,4 @@ export const removeMember = async (boardID, userID) => {
 };
 
 
-export default BoardModel;
+//export default BoardModel;
