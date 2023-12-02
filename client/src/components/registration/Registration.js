@@ -79,9 +79,8 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
 
       if(response.ok){
         console.log('Registration Successful', data);
-        onRegistrationSuccess(); // We call the callback to redirect, after successful registration
-
-      }else{
+        onRegistrationSuccess(); // Call the callback to redirect after successful registration
+      } else {
         console.error("Registration failed:", data.message);
       }
     }catch(error){

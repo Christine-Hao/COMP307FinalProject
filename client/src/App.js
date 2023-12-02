@@ -31,6 +31,9 @@ function App() {
     //setCurrentPage('???'); // Change to board details page
   };
 
+  const handleRegistrationSuccess = () => {
+    setCurrentPage('login'); // Redirect to login page after successful registration
+  };
 
   const renderContent = () => {
 
@@ -38,7 +41,7 @@ function App() {
       case 'login':
         return <Login onRegisterClick={() => setCurrentPage('register')} onLoginSuccess={handleLoginSuccess} />;
       case 'register':
-        return <Registration onLoginClick={() => setCurrentPage('login')} />;
+        return <Registration onLoginClick={() => setCurrentPage('login')} onRegistrationSuccess={handleRegistrationSuccess} />;
       case 'selectBoard':
         return <SelectBoard onBoardSelect={handleBoardSelect} />;
       // case '???':
