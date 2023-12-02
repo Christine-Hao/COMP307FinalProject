@@ -3,7 +3,7 @@
 // invokes the login function from authController
 
 const express = require('express');
-const authController = require("../controllers/authController");
+const authController = require("../controllers/authController.mjs");
 const router = express.Router(); // used to declare routes
 
 // HTTP method which indicates that this route responds to HTTP POST request
