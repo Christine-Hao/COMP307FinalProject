@@ -1,8 +1,7 @@
 // Inside: /server/controllers/discussionController.js
 import { findByUserId, findByBoardId, createBoardModel, deleteBoardModel, addMember, removeMember } from "../models/Board.js";
-import ChannelModel from "../models/Channel.js";
-//import { findByEmail } from "../models/User";
-
+import { createChannel, addChannelMember, findDefaultChannel, removeAllChannelsMember } from "../models/Channel.js";
+import { findByEmail } from "../models/User.js"; // Adjusted import for findByEmail
 
 export async function getBoards(req, res) {
 
@@ -37,10 +36,10 @@ export async function createBoard(req, res) {
 
     // maybe also: Create Default Channel
     const defaultChannelName = "general";
-    const defaultChannel = await ChannelModel.createChannel(newBoard.board_id, defaultChannelName);
+    const defaultChannel = await createChannel(newBoard.board_id, defaultChannelName);
 
     // add owner to default channel
-    await ChannelModel.addChannelMember(defaultChannel.channel_id, userID, true); // true => is the owner
+    await addChannelMember(defaultChannel.channel_id, userID, true); // true => is the owner
 
     res.json(newBoard);
 
@@ -72,7 +71,7 @@ export async function deleteBoard(req, res) {
     }
 
     // 3. if passing the check, first delete all channels of the board
-    await ChannelModel.removeAllChannelsMember(boardID);
+    await removeAllChannelsMember(boardID);
 
     // 4. then, delete the board
     await deleteBoardModel(boardID);
@@ -95,7 +94,7 @@ export async function addBoardMember(req, res){
     const board = await findByBoardId(boardID);
     
     // userToAdd: {id: xx, fullname:xx, username:xx, password: xx, email:xx }
-    const userToAdd = await User.findByEmail(userEmail);
+    const userToAdd = await findByEmail(userEmail);
 
     // 1. check if the board is found in the database
     if(!board){
@@ -117,8 +116,8 @@ export async function addBoardMember(req, res){
     await addMember(boardID, userToAdd.id);
     
     // 5. add the user to the default channel
-    const defaultChannel = await ChannelModel.findDefaultChannel(boardID);
-    await ChannelModel.addChannelMember(defaultChannel.channel_id, userToAdd.id, false); // "false" means isOwner = false
+    const defaultChannel = await findDefaultChannel(boardID);
+    await addChannelMember(defaultChannel.channel_id, userToAdd.id, false); // "false" means isOwner = false
 
 
     res.json({message: "Member added to board successfully"});
@@ -139,7 +138,7 @@ export async function removeBoardMember(req, res) {
     
     const board = await findByBoardId(boardID);
     // userToRemove: {id: xx, fullname:xx, username:xx, password: xx, email:xx }
-    const userToRemove = await User.findByEmail(userEmail);
+    const userToRemove = await findByEmail(userEmail);
 
     // 1. if no board, returns an error msg
     if(!board){
@@ -160,7 +159,7 @@ export async function removeBoardMember(req, res) {
     await removeMember(boardID, userToRemove.id);
 
     // 5. also remove the member from all the channels of the board
-    await ChannelModel.removeAllChannelsMember(boardID, userToRemove.id);
+    await removeAllChannelsMember(boardID, userToRemove.id);
 
 
     res.json({message:"Member removed from board successfully"});
