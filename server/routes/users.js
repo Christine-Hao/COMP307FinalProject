@@ -3,7 +3,7 @@
 // invokes the login function from authController
 
 import { Router } from 'express';
-import { login, register } from "../controllers/authController";
+import { login, register } from "../controllers/authController.js";
 const router = Router(); // used to declare routes
 
 // HTTP method which indicates that this route responds to HTTP POST request

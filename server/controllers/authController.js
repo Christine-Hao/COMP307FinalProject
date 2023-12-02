@@ -5,7 +5,7 @@
 
 import { compare, hash } from "bcrypt"; //for hashing password anc com
 import { sign } from "jsonwebtoken"; // json token
-import { findByEmail, createUser } from "../models/User"; // use the functions in models/User.js
+import { findByEmail, createUser } from "../models/User.js"; // use the functions in models/User.js
 
 // create a login function for other files to use.
 export async function login(req, res) {

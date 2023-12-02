@@ -7,8 +7,8 @@ require('dotenv').config();
 import express, { json } from 'express';
 import cors from 'cors';
 
-import userRoutes from "./routes/users";
-import discussionRoutes from './routes/discussionRoutes';
+import userRoutes from "./routes/users.js";
+import discussionRoutes from './routes/discussionRoutes.js';
 
 const app = express();
 

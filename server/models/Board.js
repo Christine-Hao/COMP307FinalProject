@@ -1,5 +1,5 @@
 // We are in: server/models/boardModel.js
-import pool from '../config/db';
+import pool from '../config/db.js';
 //const pool = require('../config/db.mjs');
 
 

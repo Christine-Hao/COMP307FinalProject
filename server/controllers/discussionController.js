@@ -1,6 +1,6 @@
 // Inside: /server/controllers/discussionController.js
-import { findByUserId, findByBoardId, createBoardModel, deleteBoardModel, addMember, removeMember } from "../models/Board";
-import ChannelModel from "../models/Channel";
+import { findByUserId, findByBoardId, createBoardModel, deleteBoardModel, addMember, removeMember } from "../models/Board.js";
+import ChannelModel from "../models/Channel.js";
 //import { findByEmail } from "../models/User";
 
 

@@ -1,7 +1,7 @@
 // This file: defines how to interact with the users table in PostgreSQL database.
 
 //const pool = require("../config/db.mjs");
-import pool from '../config/db';
+import pool from '../config/db.js';
 
 // define a User object with some functions.
 const User = {

@@ -1,5 +1,5 @@
 //const pool = require('../config/db.mjs');
-import pool from '../config/db';
+import pool from '../config/db.js';
 
 const ChannelModel = {
 
