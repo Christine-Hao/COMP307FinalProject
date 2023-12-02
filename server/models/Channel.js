@@ -2,7 +2,7 @@
 import pool from '../config/db.js';
 
 
-export const createChannel = async (boardID, channelName) => {
+export async function createChannel(boardID, channelName) {
     const result = await pool.query(
         "INSERT INTO channels (channel_name, board_id) VALUES ($1, $2) RETURNING *",
         [channelName, boardID]
@@ -13,7 +13,7 @@ export const createChannel = async (boardID, channelName) => {
 };
 
     // add a member to the channel
-export const addChannelMember = async (channelID, userID, isOwner = false) => {
+export async function addChannelMember(channelID, userID, isOwner = false){
     await pool.query(
         "INSERT INTO channel_members (channel_id, user_id, is_owner) VALUES ($1, $2, $3)",
         [channelID, userID, isOwner]
@@ -21,7 +21,7 @@ export const addChannelMember = async (channelID, userID, isOwner = false) => {
 };
 
     // find the default channels
-export const findDefaultChannel = async(boardID) => {
+export async function findDefaultChannel(boardID){
     const result = await pool.query(
         "SELECT * FROM channels WHERE board_id = $1 AND channel_name = 'general' ",
         [boardID]
@@ -30,7 +30,7 @@ export const findDefaultChannel = async(boardID) => {
 };
 
     // remove a member from all channels of a board
-export const removeAllChannelsMember = async (boardID, userID) => {
+export async function removeAllChannelsMember(boardID, userID){
     // first, select all channels that the user has
     // secondly, narrow-down the range of channels to those that the user joins in a particular board
     // then, remove those channels from the database.

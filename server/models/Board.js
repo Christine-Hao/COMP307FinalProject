@@ -3,7 +3,7 @@ import pool from '../config/db.js';
 //const pool = require('../config/db.mjs');
 
 
-export const findByUserId = async (userId) => {   
+export async function findByUserId(userId){   
 
   // give "boards" an alias called "b", and "board_members" an alias called "bm"
   // inner join -> all records in boards with the board_members table
@@ -16,12 +16,12 @@ export const findByUserId = async (userId) => {
   return result.rows;
 };
 
-export const findByBoardId = async (boardID) => {
+export async function findByBoardId(boardID) {
   const result = await pool.query("SELECT * FROM boards WHERE board_id = $1", [boardID]);
   return result.rows[0];
 };
 
-export const createBoardModel = async (userID, boardName) => {
+export async function createBoardModel(userID, boardName){
 
     const newBoard = await pool.query(
       "INSERT INTO boards (board_name, user_id) VALUES ($1, $2) RETURNING *",
@@ -40,21 +40,21 @@ export const createBoardModel = async (userID, boardName) => {
 
 };
 
-export const deleteBoardModel = async (boardID) => {
+export async function deleteBoardModel(boardID) => {
 
     await pool.query("DELETE FROM board_members WHERE boardID = $1", [boardID]);
     await pool.query("DELETE FROM boards WHERE boardID = $1", [boardID]);
     // also delete from channels, channel_members ? need to delete from messages ??
 };
 
-export const addMember = async (boardID, userID) => {
+export async function addMember(boardID, userID){
     await pool.query(
       "INSERT INTO board_members (board_id, user_id) VALUES ($1, $2)",
       [boardID, userID]
     );
 };
 
-export const removeMember = async (boardID, userID) => {
+export async function removeMember(boardID, userID){
     await pool.query(
       "DELETE FROM board_members WHERE board_id = $1 AND user_id = $2",
       [boardID, userID]
