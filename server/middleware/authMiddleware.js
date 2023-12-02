@@ -3,7 +3,8 @@
 to protect certain routes to ensure that only authenticated users can access them.
 */
 
-import { verify } from 'jsonwebtoken';
+//import { verify } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 export function verifyToken(req, res, next) {
 
@@ -21,7 +22,7 @@ export function verifyToken(req, res, next) {
 
     // 1. It verifies the JWT using the secret key from the .env file (i.e. the environment variable...)
     // 2. If the JWT is invalid or expired, it sends a 400 status response.
-    const decoded = verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Now, we can add the decoded info to the req.user
     // The token should contain the userID
