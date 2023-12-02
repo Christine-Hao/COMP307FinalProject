@@ -1,7 +1,9 @@
 
 // imports the Pool class from the pg module.
 // Pools manage multiple client connections
-import { Pool } from 'pg';
+// import { Pool } from 'pg';
+import pg from 'pg';
+const { Pool } = pg;
 
 // a new instance of Pool is created with a configuration object. 
 // This object includes the details required to connect to  PostgreSQL database,
