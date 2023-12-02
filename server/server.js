@@ -4,17 +4,17 @@
 // This file tells the server to use routes defined in users.js
 require('dotenv').config();
 
-const express = require('express');
-const cors = require('cors');
+import express, { json } from 'express';
+import cors from 'cors';
 
-const userRoutes = require("./routes/users");
-const discussionRoutes = require('./routes/discussionRoutes');
+import userRoutes from "./routes/users";
+import discussionRoutes from './routes/discussionRoutes';
 
 const app = express();
 
 // the middlewares
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 // prefix: /api/users.
 // if userRoutes has a route defined as "/login", full path: /api/users/login
