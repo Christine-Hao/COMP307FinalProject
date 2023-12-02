@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import SelectBoard from './components/select_board/SelectBoard';
+import ViewBoard from './components/view_board/view_board';
 
 function App() {
   return(
     <div>
-      
-      <SelectBoard />
+      {/* <SelectBoard /> */}
+      <ViewBoard />
     </div>
   );
   /*const [currentPage, setCurrentPage] = useState('login');
