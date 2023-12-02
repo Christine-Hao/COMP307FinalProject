@@ -6,8 +6,8 @@
 
 import { Router } from 'express';
 const router = Router();
-import { getBoards, createBoard, addBoardMember, removeBoardMember } from '../controllers/discussionController';
-import { verifyToken } from '../middleware/authMiddleware';
+import { getBoards, createBoard, addBoardMember, removeBoardMember } from '../controllers/discussionController.mjs';
+import { verifyToken } from '../middleware/authMiddleware.mjs';
 
 
 /*server side api:

@@ -1,9 +1,11 @@
 // We are in: server/models/boardModel.js
+//import pool from '../config/db';
+const pool = require('../config/db.mjs');
 
-import pool from '../config/db';
 
 const BoardModel = {
   findByUserId: async (userId) => {   
+
     // give "boards" an alias called "b", and "board_members" an alias called "bm"
     // inner join -> all records in boards with the board_members table
     // join condition -> b.board_id = bm.board_id
@@ -20,7 +22,7 @@ const BoardModel = {
     return result.rows[0];
   },
 
-  createBoard: async (userID, boardName) => {
+  createBoardModel: async (userID, boardName) => {
 
     const newBoard = await pool.query(
       "INSERT INTO boards (board_name, user_id) VALUES ($1, $2) RETURNING *",
@@ -39,7 +41,7 @@ const BoardModel = {
 
   },
 
-  deleteBoard: async (boardID) => {
+  deleteBoardModel: async (boardID) => {
 
     await pool.query("DELETE FROM board_members WHERE boardID = $1", [boardID]);
     await pool.query("DELETE FROM boards WHERE boardID = $1", [boardID]);

@@ -2,16 +2,11 @@ import React, { useState } from 'react';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import SelectBoard from './components/select_board/SelectBoard';
-import ViewBoard from './components/view_board/view_board';
+// import ViewBoard from './components/view_board/view_board';
 
 function App() {
-  return(
-    <div>
-      {/* <SelectBoard /> */}
-      <ViewBoard />
-    </div>
-  );
-  /*const [currentPage, setCurrentPage] = useState('login');
+
+  const [currentPage, setCurrentPage] = useState('login');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //To be added after implementing the selected board?
@@ -60,7 +55,7 @@ function App() {
       {renderContent()}
     </div>
   )
-*/
+
  
 }
 
