@@ -6,7 +6,7 @@
 
 import { Router } from 'express';
 const router = Router();
-import { getBoards, createBoard, addBoardMember, removeBoardMember } from '../controllers/discussionController.js';
+import { getBoards, createBoard, addBoardMember, removeBoardMember, deleteBoard } from '../controllers/discussionController.js';
 import { verifyToken } from '../middleware/authMiddleware.js';
 
 
@@ -23,7 +23,7 @@ router.get('/userBoards', verifyToken, getBoards);
 
 router.post('/userBoards/createBoard', verifyToken, createBoard);
 
-router.post('/userBoards/deleteBoard/:boardID');
+router.delete('/userBoards/deleteBoard/:boardID', verifyToken, deleteBoard);
 
 router.post('/userBoards/addMember', verifyToken, addBoardMember);
 

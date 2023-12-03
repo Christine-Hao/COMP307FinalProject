@@ -39,3 +39,15 @@ export async function removeAllChannelsMember(boardID, userID){
         [userID, boardID]
     );
 }
+
+export async function removeAllChannelsBoard(boardID){
+    
+    await pool.query(
+        "DELETE FROM channel_members WHERE channel_id IN (SELECT channel_id FROM channels WHERE board_id = $1)",
+        [boardID]
+    );
+    await pool.query(
+        "DELETE FROM channels WHERE board_id = $1",
+        [boardID]
+    );
+}

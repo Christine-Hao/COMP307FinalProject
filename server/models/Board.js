@@ -17,7 +17,9 @@ export async function findByUserId(userId){
 };
 
 export async function findByBoardId(boardID) {
+
   const result = await pool.query("SELECT * FROM boards WHERE board_id = $1", [boardID]);
+
   return result.rows[0];
 };
 
@@ -28,9 +30,11 @@ export async function createBoardModel(userID, boardName){
       [boardName, userID]
     );
 
+    console.log("In Board.js createBoard, the new board in Modal:", newBoard.rows);
+
     await pool.query(
       "INSERT INTO board_members (board_id, user_id) VALUES ($1, $2)",
-      [newBoard.rows[0].boardID, userID]
+      [newBoard.rows[0].board_id, userID]
     );
 
 
@@ -42,8 +46,8 @@ export async function createBoardModel(userID, boardName){
 
 export async function deleteBoardModel(boardID){
 
-    await pool.query("DELETE FROM board_members WHERE boardID = $1", [boardID]);
-    await pool.query("DELETE FROM boards WHERE boardID = $1", [boardID]);
+    await pool.query("DELETE FROM board_members WHERE board_id = $1", [boardID]);
+    await pool.query("DELETE FROM boards WHERE board_id = $1", [boardID]);
     // also delete from channels, channel_members ? need to delete from messages ??
 };
 

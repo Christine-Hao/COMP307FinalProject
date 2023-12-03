@@ -1,6 +1,6 @@
 // Inside: /server/controllers/discussionController.js
 import { findByUserId, findByBoardId, createBoardModel, deleteBoardModel, addMember, removeMember } from "../models/Board.js";
-import { createChannel, addChannelMember, findDefaultChannel, removeAllChannelsMember } from "../models/Channel.js";
+import { createChannel, addChannelMember, findDefaultChannel, removeAllChannelsMember, removeAllChannelsBoard } from "../models/Channel.js";
 import { findByEmail } from "../models/User.js"; // Adjusted import for findByEmail
 
 export async function getBoards(req, res) {
@@ -25,14 +25,17 @@ export async function createBoard(req, res) {
 
   // suppose boardName is stored in the request body
   const{ boardName } = req.body;
+  console.log("Board name to create:", boardName);
   try{
     
     // still, we suppose the req.user is of the form {userID: ActualID}
     // the verifyToken function in authMiddleware.js assign this decoded token to req.user
     // the newly created board data returned by the function.
     const userID = req.user.userID;
-
+    console.log("userID:", userID);
     const newBoard = await createBoardModel(userID, boardName);
+
+    console.log("In discussionController creareBoard, the new board:", newBoard);
 
     // maybe also: Create Default Channel
     const defaultChannelName = "general";
@@ -54,10 +57,14 @@ export async function deleteBoard(req, res) {
 
   // assume the deleted board ID is known in the request URL path's parameters
   const {boardID} = req.params;
+  console.log("In discussionController deleteBoard");
+  console.log("board ID to delete:", boardID);
+  console.log("user ID that requests:", req.user.userID);
 
   try{
 
     const board = await findByBoardId(boardID);
+    console.log("The board found by the ID:", board);
 
     // 1. check if board exists
     if(!board){
@@ -70,14 +77,21 @@ export async function deleteBoard(req, res) {
       return res.status(403).json({message:"Not authorized to delete this board."});
     }
 
+    console.log("Before removing all channels.");
+
     // 3. if passing the check, first delete all channels of the board
-    await removeAllChannelsMember(boardID);
+    await removeAllChannelsBoard(boardID);
+
+    console.log("After removing all channels.");
 
     // 4. then, delete the board
+    
     await deleteBoardModel(boardID);
-
+    
     res.json({message: "Board deleted successfullly."});
-
+    
+    console.log("Removed the board from the user correctly");
+    
   }catch (error){
     res.status(500).json({message: "Error deleting the board."});
   }

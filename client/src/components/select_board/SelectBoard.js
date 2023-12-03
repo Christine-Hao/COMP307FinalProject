@@ -98,9 +98,9 @@ const SelectBoardPage = ( ) => {
       <h1>Your Discussion Boards</h1>
       <div className="board-list">
         {boards.map(board => (
-          <div key={board.id} className="board-item">
-            <span>{board.name}</span>
-            <button onClick={() => handleUnsubscribe(board.id)} className="unsubscribe-btn">Unsubscribe</button>
+          <div key={board.board_id} className="board-item">
+            <span>{board.board_name}</span>
+            <button onClick={() => handleUnsubscribe(board.board_id)} className="unsubscribe-btn">Unsubscribe</button>
           </div>
         ))}
       </div>

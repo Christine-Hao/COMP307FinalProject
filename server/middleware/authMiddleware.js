@@ -31,6 +31,7 @@ export function verifyToken(req, res, next) {
 
     // we can next() without any argument: current function is done, 
     // and move to the next middleware or route handler function
+    //console.log("Authmiddle ware check is valid. The decoded token:", req.user);
     next(); 
 
   } catch (ex) {
