@@ -36,7 +36,7 @@ export async function login(req, res) {
     // 1. generates a Json  Web Token.
     // 2. encodes: the user.id from the database
     // purpose: To confirm the identity of the user on subsequent requests.
-    const token = jwt.sign({userID: user.id}, process.env.JWT_SECRET, {expiresIn: '1h' });
+    const token = jwt.sign({userID: user.id}, process.env.JWT_SECRET, {expiresIn: '12h' });
 
     res.json({token});
 }

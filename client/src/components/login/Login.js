@@ -46,8 +46,8 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
       if (response.ok) {
         const data = await response.json();
         console.log("Login Successful", data);
-        localStorage.setItem('token', data.token); // Storing the token if login is successful
-        onLoginSuccess(); // Navigate to the SelectBoard component
+        //localStorage.setItem('token', data.token); // Storing the token if login is successful
+        onLoginSuccess(data.token); // Navigate to the SelectBoard component
         
       } else {
         console.log("Login failed:", await response.text());

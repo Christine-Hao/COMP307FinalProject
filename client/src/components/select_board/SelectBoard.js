@@ -1,44 +1,96 @@
 import React, { useState, useEffect } from 'react';
 import './selectBoard_styles.css';
 
-const SelectBoardPage = ({ userId }) => {
+const SelectBoardPage = ( ) => {
+
   const [boards, setBoards] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [newBoardName, setNewBoardName] = useState('');
 
   useEffect(() => {
+
     // Mock function to simulate fetching user's boards from a database
     // Replace with an actual API call
     const fetchUserBoards = async () => {
-      const response = await Promise.resolve([
-        { id: 1, name: 'Board 1' },
-        { id: 2, name: 'Board 2' },
-        // ...other boards
-      ]);
-      setBoards(response);
+
+      const token = localStorage.getItem('token');
+      try{
+
+        const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_BOARDS_API}`, {
+          method: 'GET', // GET is the default method?? maybe define it explictly..?
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if(response.ok){
+          const data = await response.json();
+          setBoards(data);
+        }else{
+          console.log("Failed to fetch boards!")
+        }
+
+      } catch(error){
+        console.error("Error on the frontend/backend when fetching boards:", error);
+      }
     };
     
     fetchUserBoards();
-  }, [userId]);
 
-  const handleUnsubscribe = (boardId) => {
-    // Mock function to simulate unsubscribing from a board
-    // Replace with an actual API call
-    setBoards(boards.filter(board => board.id !== boardId));
+  }, );
+
+  const handleUnsubscribe = async (boardId) => {
+
+    const token = localStorage.getItem('token');
+    try{
+      const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_DELETEBOARD_API}/${boardId}`,{
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}` 
+        }
+      });
+
+      if(response.ok){
+        // remove the board from the local state
+        setBoards(boards.filter(board => board.id !== boardId));
+      }else{
+        console.log("Failed to delete board");
+      }
+    }catch(error){
+      console.log("Failed to delete board!");
+    }
   };
 
   const handleNewBoardNameChange = (e) => {
     setNewBoardName(e.target.value);
   };
 
-  const handleCreateBoard = () => {
-    // Mock function to simulate creating a new board
-    // Replace with an actual API call
-    // For now, just add the new board to the local state
-    const newBoard = { id: boards.length + 1, name: newBoardName };
-    setBoards([...boards, newBoard]);
-    setNewBoardName(''); // Reset the input field
-    setShowModal(false); // Close the modal
+  const handleCreateBoard = async () => {
+
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_CREATBOARD_API}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({boardName: newBoardName})
+      });
+
+      if(response.ok){
+        const newBoard = await response.json();
+        setBoards([...boards, newBoard]);
+        setNewBoardName(''); // reinitialize the new board name state.
+        setShowModal(false); // close the modal.
+      }else{
+        console.log("Failed to create board...");
+      }
+      
+    } catch (error) {
+      console.log("Error happens on the frontend/backend:", error);
+    }
   };
 
   return (

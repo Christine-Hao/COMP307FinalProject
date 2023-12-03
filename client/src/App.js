@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import SelectBoard from './components/select_board/SelectBoard';
@@ -13,27 +13,38 @@ function App() {
   //const [selectedBoardId, setSelectedBoardId] = useState(null); 
 
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (token) => {
+    localStorage.setItem('token', token) // store the token
     setIsLoggedIn(true);
     setCurrentPage('selectBoard'); // Set the current page to 'selectBoard'
 
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('token'); // clear the token upon logging out
     setIsLoggedIn(false);
     setCurrentPage('login'); // Redirect back to login page after logout
-    //setSelectedBoardId(null); // Reset selected board
-
   };
 
-  const handleBoardSelect = (boardId) => {
-    //setSelectedBoardId(boardId);
-    //setCurrentPage('???'); // Change to board details page
-  };
+  // const handleBoardSelect = (boardId) => {
+  //   //setSelectedBoardId(boardId);
+  //   //setCurrentPage('???'); // Change to board details page
+  // };
 
   const handleRegistrationSuccess = () => {
     setCurrentPage('login'); // Redirect to login page after successful registration
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    // if the browser has token, then we consider that it is logged in
+    if(token){
+      setIsLoggedIn(true);
+      setCurrentPage('selectBoard');
+    }
+
+  }, 
+  [])
 
   const renderContent = () => {
 
@@ -43,7 +54,8 @@ function App() {
       case 'register':
         return <Registration onLoginClick={() => setCurrentPage('login')} onRegistrationSuccess={handleRegistrationSuccess} />;
       case 'selectBoard':
-        return <SelectBoard onBoardSelect={handleBoardSelect} />;
+        // return <SelectBoard onBoardSelect={handleBoardSelect} />;
+        return <SelectBoard />;
       // case '???':
       //   return <??? boardId={selectedBoardId} />;
       default:
