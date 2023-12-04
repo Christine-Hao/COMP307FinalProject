@@ -5,7 +5,7 @@
 // api prefix in server.js: /api/boards
 
 import { Router } from 'express';
-const router = Router();
+const discussionRoutes = Router();
 import { getBoards, createBoard, addBoardMember, removeBoardMember, deleteBoard } from '../controllers/discussionController.js';
 import { verifyToken } from '../middleware/authMiddleware.js';
 
@@ -19,16 +19,16 @@ api/boards/userBoards/removeMember
 
 */
 
-router.get('/userBoards', verifyToken, getBoards);
+discussionRoutes.get('/userBoards', verifyToken, getBoards);
 
-router.post('/userBoards/createBoard', verifyToken, createBoard);
+discussionRoutes.post('/userBoards/createBoard', verifyToken, createBoard);
 
-router.delete('/userBoards/deleteBoard/:boardID', verifyToken, deleteBoard);
+discussionRoutes.delete('/userBoards/deleteBoard/:boardID', verifyToken, deleteBoard);
 
-router.post('/userBoards/addMember', verifyToken, addBoardMember);
+discussionRoutes.post('/userBoards/addMember', verifyToken, addBoardMember);
 
-router.post('/userBoards/removeMember', verifyToken, removeBoardMember);
+discussionRoutes.post('/userBoards/removeMember', verifyToken, removeBoardMember);
 
 // Other discussion board-related routes...
 
-export default router;
+export default discussionRoutes;
