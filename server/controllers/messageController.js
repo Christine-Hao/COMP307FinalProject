@@ -1,4 +1,4 @@
-import { saveMessage, getMessagesByChannel } from "../models/Message";
+import { saveMessage, getMessagesByChannel } from "../models/Message.js";
 
 export async function handleSaveMessage(content, channelID, userID){
     try{

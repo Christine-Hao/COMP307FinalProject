@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './view_board_styles.css'
 // import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from './../Navbar/Navbar.js';
+//import Navbar from './../Navbar/Navbar.js';
 
 const formatDateTime = () => {
     var now = new Date();
@@ -40,7 +40,7 @@ const DiscussionBoard = () => {
 
     return (
         <div className="d-flex flex-column vh-100">
-            <Navbar />
+            {/* <Navbar /> */}
             <Container fluid className="flex-grow-1">
                 <Row className="h-100">
                 <Col md={2} className="channels-list h-100 p-5">

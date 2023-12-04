@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './selectBoard_styles.css';
 
-const SelectBoardPage = ( ) => {
+const SelectBoardPage = ({onBoardSelect} ) => {
 
   const [boards, setBoards] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -39,7 +39,14 @@ const SelectBoardPage = ( ) => {
 
   }, );
 
-  const handleUnsubscribe = async (boardId) => {
+  const handleBoardSelect = (boardId, event) => {
+    event.stopPropagation(); // prevent the click from bubbling up when delete
+    
+    onBoardSelect(boardId); // tell the parent component about the selected board
+  };
+
+  const handleDelete = async (boardId, event) => {
+    event.stopPropagation(); // prevent the click from bubbling up when delete
 
     const token = localStorage.getItem('token');
     try{
@@ -98,9 +105,13 @@ const SelectBoardPage = ( ) => {
       <h1>Your Discussion Boards</h1>
       <div className="board-list">
         {boards.map(board => (
-          <div key={board.board_id} className="board-item">
+          <div key={board.board_id} className="board-item" onClick={(e) => handleBoardSelect(board.board_id, e)}>
+
             <span>{board.board_name}</span>
-            <button onClick={() => handleUnsubscribe(board.board_id)} className="unsubscribe-btn">Unsubscribe</button>
+            {/* Delete button should be rendered ONLY when board.is_owner is true! (i.e. the user is the owner of the board) */}
+            {board.is_owner && (
+              <button onClick={(e) => handleDelete(board.board_id, e)} className="unsubscribe-btn">Delete</button>
+            )}
           </div>
         ))}
       </div>

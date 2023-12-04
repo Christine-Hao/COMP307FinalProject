@@ -3,14 +3,13 @@ import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import SelectBoard from './components/select_board/SelectBoard';
 // import ViewBoard from './components/view_board/view_board';
+import DiscussionBoard from './components/view_board/view_board';
 
 function App() {
 
   const [currentPage, setCurrentPage] = useState('login');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  //To be added after implementing the selected board?
-  //const [selectedBoardId, setSelectedBoardId] = useState(null); 
+  const [selectedBoardId, setSelectedBoardId] = useState(null); 
 
 
   const handleLoginSuccess = (token) => {
@@ -26,10 +25,10 @@ function App() {
     setCurrentPage('login'); // Redirect back to login page after logout
   };
 
-  // const handleBoardSelect = (boardId) => {
-  //   //setSelectedBoardId(boardId);
-  //   //setCurrentPage('???'); // Change to board details page
-  // };
+  const handleBoardSelect = (boardId) => {
+    setSelectedBoardId(boardId);
+    setCurrentPage('discussionBoard'); // Change to board page
+  };
 
   const handleRegistrationSuccess = () => {
     setCurrentPage('login'); // Redirect to login page after successful registration
@@ -55,9 +54,9 @@ function App() {
         return <Registration onLoginClick={() => setCurrentPage('login')} onRegistrationSuccess={handleRegistrationSuccess} />;
       case 'selectBoard':
         // return <SelectBoard onBoardSelect={handleBoardSelect} />;
-        return <SelectBoard />;
-      // case '???':
-      //   return <??? boardId={selectedBoardId} />;
+        return <SelectBoard onBoardSelect={handleBoardSelect} />;
+      case 'discussionBoard':
+        return <DiscussionBoard boardId={selectedBoardId} />;
       default:
         return <div>Page not found</div>;
     }

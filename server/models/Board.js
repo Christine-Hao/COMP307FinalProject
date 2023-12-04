@@ -10,7 +10,7 @@ export async function findByUserId(userId){
   // join condition -> b.board_id = bm.board_id
   // where statement -> filters results, include only boards of specified user_id
   const result = await pool.query(
-    'SELECT b.* FROM boards b INNER JOIN board_members bm ON b.board_id = bm.board_id WHERE bm.user_id = $1',
+    'SELECT b.*, (b.user_id = $1) as is_owner FROM boards b INNER JOIN board_members bm ON b.board_id = bm.board_id WHERE bm.user_id = $1',
     [userId]
   );
   return result.rows;
