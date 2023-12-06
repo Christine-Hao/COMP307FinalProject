@@ -1,6 +1,21 @@
 //const pool = require('../config/db.mjs');
+/*
+In this project, we assume there is only a default channel(i.e. general) for each board.
+Those database-level channel functions work with the discussionController.js
+ */
 import pool from '../config/db.js';
 
+export async function getchannelIDbyBoard(boardID){
+    const channelResult = await pool.query(
+      "SELECT channel_id FROM channels WHERE board_id = $1",
+      [boardID]
+    );
+
+    const channelIDs = channelResult.rows.map(row => row.channel_id);
+
+    return channelIDs;
+    
+  }
 
 export async function createChannel(boardID, channelName) {
     const result = await pool.query(
@@ -11,6 +26,7 @@ export async function createChannel(boardID, channelName) {
     return result.rows[0];
 
 };
+
 
     // add a member to the channel
 export async function addChannelMember(channelID, userID, isOwner = false){

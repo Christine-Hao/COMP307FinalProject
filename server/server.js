@@ -2,7 +2,6 @@
 // sets up the Express server with middleware(e.g. cors and express.json())
 // cors means Cross-Origin Resource Sharing, allowing frontend to communicate with the backend.
 // This file tells the server to use routes defined in users.js
-
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
@@ -11,7 +10,9 @@ import {Server} from 'socket.io';
 
 import userRoutes from "./routes/users.js";
 import discussionRoutes from './routes/discussionRoutes.js';
-import { handleSaveMessage, handleGetMessages } from './controllers/messageController.js';
+
+import { handleSaveMessage } from './controllers/messageController.js';
+
 // import { saveMessage } from './models/Message.js';
 import jwt from 'jsonwebtoken';
 
@@ -19,7 +20,8 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors:{
-        origin: "URL",
+        //origin: "http://localhost:3000", //replace when on remote
+        origin: `https://doublebound.onrender.com/`,
         methods: ["GET", "POST"]
     }
 });
@@ -58,7 +60,7 @@ io.use((socket, next) => {
 });
 
 io.on('connection', (socket) => {
-    
+
     console.log("A new client is connected with socket id:", socket.id);
 
     socket.on('joinBoard', (boardID) => {
@@ -66,15 +68,23 @@ io.on('connection', (socket) => {
         console.log(`User joined board: ${boardID}`);
     });
 
-    socket.on('message', async({channelID, content}) => {
+    socket.on('message', async(boardID, content) => {
         try {
             // assume saveMessage is implemented later in messageController?
-            const userID = socket.user.id;
-            const message = await handleSaveMessage({boardID, content, userID});
-            io.to(channelID).emit('message', message);
+            const userID = socket.user.userID;
+            console.log("user id:", userID);
+            console.log("board id:", boardID);
+            console.log("content:", content);
+            // save the newly received message to the database
+            
+            const message = await handleSaveMessage(content, boardID, userID);
+
+
+            // emit the newly received message to clients connected to the channel.
+            io.to(boardID).emit('newMessage', message);
 
         } catch (error) {
-            console.error("Error in saving message:", error);
+            console.error("Error on server when saving message:", error);
         }
     })
 

@@ -1,28 +1,41 @@
 // Inside: /server/controllers/discussionController.js
-import { findByUserId, findByBoardId, createBoardModel, deleteBoardModel, addMember, removeMember } from "../models/Board.js";
+import { findByUserId, findByBoardId, createBoardModel, deleteBoardModel, addMember, removeMember, getBoardMembersModel } from "../models/Board.js";
 import { createChannel, addChannelMember, findDefaultChannel, removeAllChannelsMember, removeAllChannelsBoard } from "../models/Channel.js";
 import { findByEmail } from "../models/User.js"; // Adjusted import for findByEmail
 
 export async function getBoards(req, res) {
-
-    try {
-
-      // the authMiddleware will decode the token and assign the decoded to req.user
-      // req.user is of the form {userID : ActualID}
-      const boards = await findByUserId(req.user.userID);
-
-      res.json(boards);
-
-    } catch (error) {
-
-      res.status(500).json({ message: 'Error retrieving discussion boards.' });
-    }
+  
+  try {
+    
+    // the authMiddleware will decode the token and assign the decoded to req.user
+    // req.user is of the form {userID : ActualID}
+    const boards = await findByUserId(req.user.userID);
+    
+    res.json(boards);
+    
+  } catch (error) {
+    
+    res.status(500).json({ message: 'Error retrieving discussion boards.' });
+  }
 }
+
+export const getBoardMembers = async (req, res) => {
+  
+  try {
+
+      const boardID = req.params.boardID;
+      const members = await getBoardMembersModel(boardID);
+      res.json(members);
+
+  } catch (error) {
+      res.status(500).send('Error getting board members on the database.');
+  }
+};
 
 // create a board for the user
 // Additionally, create a default channel (general) for the board
 export async function createBoard(req, res) {
-
+  
   // suppose boardName is stored in the request body
   const{ boardName } = req.body;
   console.log("Board name to create:", boardName);
@@ -85,7 +98,6 @@ export async function deleteBoard(req, res) {
     console.log("After removing all channels.");
 
     // 4. then, delete the board
-    
     await deleteBoardModel(boardID);
     
     res.json({message: "Board deleted successfullly."});
@@ -96,6 +108,9 @@ export async function deleteBoard(req, res) {
     res.status(500).json({message: "Error deleting the board."});
   }
 }
+
+
+
 
 // add an member to the board
 // additionally, the member will be added to the default channel.
