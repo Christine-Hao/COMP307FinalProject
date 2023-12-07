@@ -8,7 +8,7 @@ import Registration from './components/registration/Registration';
 function App() {
   return (
   <div>
-    <Registration />
+    <Login />
   </div>)}
   /*
   const [currentPage, setCurrentPage] = useState('login');
