@@ -76,6 +76,10 @@ const SelectBoardPage = ({onBoardSelect} ) => {
   };
 
   const handleCreateBoard = async () => {
+    if (newBoardName.length > 50) {
+      alert("You cannot exceed 50 characters for the board name.");
+      return;
+    }
 
     const token = localStorage.getItem('token');
 
