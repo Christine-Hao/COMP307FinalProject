@@ -38,14 +38,14 @@ const DiscussionBoard = ({boardId}) => {
                 if (response.ok){
                     const members = await response.json();
                     // console.log("Board id:", boardId);
-                    console.log("Members:", members);
+                    //console.log("Members:", members);
                     setBoardMembers(members);
                     // set the owner of the page.
                     setIsOwner(members.some(member => member.is_owner && member.id === parseInt(localStorage.getItem('userId'))));
-                    console.log("Current user ID:", parseInt(localStorage.getItem('userId')));
-                    console.log("Is owner? :", members.some(member => member.is_owner && member.id === parseInt(localStorage.getItem('userId'))));
+                    //console.log("Current user ID:", parseInt(localStorage.getItem('userId')));
+                    //console.log("Is owner? :", members.some(member => member.is_owner && member.id === parseInt(localStorage.getItem('userId'))));
                 }else{
-                    console.error("failed to fetch members");
+                    console.error("failed to fetch members. reload again.");
                 }
             }catch(error){
                 console.error("Error happens on frontend/backend when fetching members:", error);
@@ -62,10 +62,10 @@ const DiscussionBoard = ({boardId}) => {
                 });
                 if(response.ok){
                     const messages = await response.json();
-                    console.log('messages:', messages);
+                    // console.log('messages:', messages);
                     setMessages(messages);
                 }else{
-                    console.error("Failed to fetch messages.");
+                    console.error("Failed to fetch messages. Reload again.");
                 }
 
             } catch (error) {
@@ -86,7 +86,7 @@ const DiscussionBoard = ({boardId}) => {
 
         // join a board
         socketRef.current.emit('joinBoard', boardId);
-        console.log(`Client attempting to join board: ${boardId}`);
+        // console.log(`Client attempting to join board: ${boardId}`);
 
         // Listen for incoming messages emitted from the server?(Done!)
         socketRef.current.on('newMessage', (newMessage) => {

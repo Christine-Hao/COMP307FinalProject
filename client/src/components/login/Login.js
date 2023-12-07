@@ -43,14 +43,16 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
         body: JSON.stringify({ email, password }), // Sending email and password
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        const data = await response.json();
-        console.log("Login Successful", data);
+        console.log("Login Successful");
+        //console.log("Login Successful", data);
         //localStorage.setItem('token', data.token); // Storing the token if login is successful
         onLoginSuccess(data.token, data.userID); // Navigate to the SelectBoard component
         
       } else {
-        console.log("Login failed:", await response.text());
+        console.error("Login failed:", data.message);
       }
     } catch (error) {
       console.log("Error on logging in:", error);

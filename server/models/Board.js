@@ -1,7 +1,5 @@
 // We are in: server/models/boardModel.js
 import pool from '../config/db.js';
-//const pool = require('../config/db.mjs');
-
 
 export async function findByUserId(userId){   
 
@@ -67,10 +65,7 @@ export async function findByUserId(userId){
       await pool.query(
         "INSERT INTO board_members (board_id, user_id) VALUES ($1, $2)",
         [newBoard.rows[0].board_id, userID]
-        );
-        
-        
-        // create default channels ??
+      );
         
     return newBoard.rows[0];
 
@@ -78,10 +73,8 @@ export async function findByUserId(userId){
 
 
 export async function deleteBoardModel(boardID){
-
-    await pool.query("DELETE FROM board_members WHERE board_id = $1", [boardID]);
-    await pool.query("DELETE FROM boards WHERE board_id = $1", [boardID]);
-    // also delete from channels, channel_members ? need to delete from messages ??
+  await pool.query("DELETE FROM board_members WHERE board_id = $1", [boardID]);
+  await pool.query("DELETE FROM boards WHERE board_id = $1", [boardID]);
 };
 
 export async function addMember(boardID, userID){

@@ -10,7 +10,6 @@ import {Server} from 'socket.io';
 
 import userRoutes from "./routes/users.js";
 import discussionRoutes from './routes/discussionRoutes.js';
-
 import { handleSaveMessage } from './controllers/messageController.js';
 
 // import { saveMessage } from './models/Message.js';
@@ -52,11 +51,6 @@ io.use((socket, next) => {
         next(new Error("Authentication error: Invalid token"));
     }
     
-    // verifyToken(token, (err, user) => {
-    //     if(err) return next(new Error("Authentication error"));
-    //     socket.user = user;
-    //     next();
-    // });
 });
 
 io.on('connection', (socket) => {
@@ -72,14 +66,12 @@ io.on('connection', (socket) => {
         try {
             // assume saveMessage is implemented later in messageController?
             const userID = socket.user.userID;
-            console.log("user id:", userID);
-            console.log("board id:", boardID);
-            console.log("content:", content);
-            
-            // save the newly received message to the database
-            
-            const message = await handleSaveMessage(content, boardID, userID);
+            // console.log("user id:", userID);
+            // console.log("board id:", boardID);
+            // console.log("content:", content);
 
+            // save the newly received message to the database
+            const message = await handleSaveMessage(content, boardID, userID);
 
             // emit the newly received message to clients connected to the channel.
             io.to(boardID).emit('newMessage', message);
@@ -100,5 +92,3 @@ const port = process.env.PORT || 3000;
 httpServer.listen(port, () => {
     console.log(`Server running on port ${port}`);
 })
-
-//app.listen(port, () => console.log(`Server running on port ${port}`));

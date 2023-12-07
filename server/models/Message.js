@@ -33,23 +33,4 @@ export async function getMessagesByChannel(channelId) {
     );
 
     return result.rows;
-    // const result = await pool.query(
-    //     "SELECT * FROM messages WHERE channel_id = $1",
-    //     [channelId]
-    // );
-    // return result.rows;
 }
-
-
-// export async function saveMessage(content, boardID, userId) {
-//     const defaultChannel = await pool.query(
-//         "SELECT * FROM channels WHERE board_id = $1",
-//         [boardID]
-//     );
-
-//     const result = await pool.query(
-//         "INSERT INTO messages (content, channel_id, user_id) VALUES ($1, $2, $3) RETURNING *",
-//         [content,defaultChannel.rows[0].channel_id, userId]
-//     );
-//     return result.rows[0];
-// }

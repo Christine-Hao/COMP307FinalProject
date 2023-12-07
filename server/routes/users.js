@@ -6,10 +6,13 @@ import { Router } from 'express';
 import { login, register } from "../controllers/authController.js";
 const userRoutes = Router(); // used to declare routes
 
-// HTTP method which indicates that this route responds to HTTP POST request
+//  prefifix in server.js: /api/users/
 
-// combined with prefifix in server.js, the full endpoint URL: /api/users/login
-// authCOntroller.login is the handler function.
+/**
+ * /api/users/login
+ * /api/users/register
+ */
+
 userRoutes.post("/login", login); 
 
 userRoutes.post("/register", register);

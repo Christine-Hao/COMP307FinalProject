@@ -23,11 +23,12 @@ const SelectBoardPage = ({onBoardSelect} ) => {
           }
         });
 
+        const data = await response.json();
+
         if(response.ok){
-          const data = await response.json();
           setBoards(data);
         }else{
-          console.log("Failed to fetch boards!")
+          console.error("Failed to fetch boards:", data.message);
         }
 
       } catch(error){
@@ -57,11 +58,13 @@ const SelectBoardPage = ({onBoardSelect} ) => {
         }
       });
 
+      const data = await response.json();
+
       if(response.ok){
         // remove the board from the local state
         setBoards(boards.filter(board => board.id !== boardId));
       }else{
-        console.log("Failed to delete board");
+        console.error("Failed to delete board:", data.message);
       }
     }catch(error){
       console.log("Failed to delete board!");
@@ -86,13 +89,15 @@ const SelectBoardPage = ({onBoardSelect} ) => {
         body: JSON.stringify({boardName: newBoardName})
       });
 
+      const data = await response.json();
+
       if(response.ok){
         const newBoard = await response.json();
         setBoards([...boards, newBoard]);
         setNewBoardName(''); // reinitialize the new board name state.
         setShowModal(false); // close the modal.
       }else{
-        console.log("Failed to create board...");
+        console.error("Failed to create board:", data.message);
       }
       
     } catch (error) {

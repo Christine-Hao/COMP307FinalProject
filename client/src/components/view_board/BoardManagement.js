@@ -54,7 +54,7 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
             }
 
             const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_DELETEFROMBOARD_API}`, {
-                method: 'POST',
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

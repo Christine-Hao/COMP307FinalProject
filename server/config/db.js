@@ -1,10 +1,8 @@
-
-// imports the Pool class from the pg module.
-// Pools manage multiple client connections
-// import { Pool } from 'pg';
+// we need to imports the Pool class from the pg module. Pools manage multiple client connections
 import pg from 'pg';
 const { Pool } = pg;
 
+// Description:
 // a new instance of Pool is created with a configuration object. 
 // This object includes the details required to connect to  PostgreSQL database,
 // such as the username, password, database name, host, and port.

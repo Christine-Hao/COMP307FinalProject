@@ -6,7 +6,6 @@ import { findByEmail } from "../models/User.js"; // Adjusted import for findByEm
 export async function getBoards(req, res) {
   
   try {
-    
     // the authMiddleware will decode the token and assign the decoded to req.user
     // req.user is of the form {userID : ActualID}
     const boards = await findByUserId(req.user.userID);
@@ -14,7 +13,6 @@ export async function getBoards(req, res) {
     res.json(boards);
     
   } catch (error) {
-    
     res.status(500).json({ message: 'Error retrieving discussion boards.' });
   }
 }
@@ -28,7 +26,7 @@ export const getBoardMembers = async (req, res) => {
       res.json(members);
 
   } catch (error) {
-      res.status(500).send('Error getting board members on the database.');
+      res.status(500).json({message:'Error getting board members on the database.'});
   }
 };
 
@@ -38,19 +36,18 @@ export async function createBoard(req, res) {
   
   // suppose boardName is stored in the request body
   const{ boardName } = req.body;
-  console.log("Board name to create:", boardName);
+  //console.log("Board name to create:", boardName);
+
   try{
     
     // still, we suppose the req.user is of the form {userID: ActualID}
-    // the verifyToken function in authMiddleware.js assign this decoded token to req.user
-    // the newly created board data returned by the function.
     const userID = req.user.userID;
     console.log("userID:", userID);
     const newBoard = await createBoardModel(userID, boardName);
 
     console.log("In discussionController creareBoard, the new board:", newBoard);
 
-    // maybe also: Create Default Channel
+    // Create Default Channel
     const defaultChannelName = "general";
     const defaultChannel = await createChannel(newBoard.board_id, defaultChannelName);
 
@@ -70,18 +67,18 @@ export async function deleteBoard(req, res) {
 
   // assume the deleted board ID is known in the request URL path's parameters
   const {boardID} = req.params;
-  console.log("In discussionController deleteBoard");
-  console.log("board ID to delete:", boardID);
-  console.log("user ID that requests:", req.user.userID);
+  // console.log("In discussionController deleteBoard");
+  // console.log("board ID to delete:", boardID);
+  // console.log("user ID that requests:", req.user.userID);
 
   try{
 
     const board = await findByBoardId(boardID);
-    console.log("The board found by the ID:", board);
+    // console.log("The board found by the ID:", board);
 
     // 1. check if board exists
     if(!board){
-      return res.status(404).json({message: "Board not found."});
+      return res.status(404).json({message: "Board not found. Check your inputs."});
     }
 
     // 2. check if board owner is the user who requests for deletion
@@ -90,19 +87,19 @@ export async function deleteBoard(req, res) {
       return res.status(403).json({message:"Not authorized to delete this board."});
     }
 
-    console.log("Before removing all channels.");
+    // console.log("Before removing all channels.");
 
     // 3. if passing the check, first delete all channels of the board
     await removeAllChannelsBoard(boardID);
 
-    console.log("After removing all channels.");
+    // console.log("After removing all channels.");
 
     // 4. then, delete the board
     await deleteBoardModel(boardID);
     
-    res.json({message: "Board deleted successfullly."});
+    res.json({message: "Board deleted successfullly. You can continue now."});
     
-    console.log("Removed the board from the user correctly");
+    // console.log("Removed the board from the user correctly");
     
   }catch (error){
     res.status(500).json({message: "Error deleting the board."});
@@ -110,16 +107,12 @@ export async function deleteBoard(req, res) {
 }
 
 
-
-
-// add an member to the board
-// additionally, the member will be added to the default channel.
+// add an member to the board ( and to the default channel)
 export async function addBoardMember(req, res){
 
   const {boardID, userEmail} = req.body;
 
   try{
-
     const board = await findByBoardId(boardID);
     
     // userToAdd: {id: xx, fullname:xx, username:xx, password: xx, email:xx }
@@ -127,7 +120,7 @@ export async function addBoardMember(req, res){
 
     // 1. check if the board is found in the database
     if(!board){
-      return res.status(404).json({message:"Board not found."});
+      return res.status(404).json({message:"Board not found. Tyry again!"});
     }
 
     // 2. check if the user has the right to delete the board.
@@ -138,7 +131,7 @@ export async function addBoardMember(req, res){
 
     // 3. check if we can find the user in our database
     if(!userToAdd){
-      return res.status(404).json({message: "User not found."});
+      return res.status(404).json({message: "User not found. Check your inputs."});
     }
 
     // 4. check if it's already a member        
@@ -146,7 +139,6 @@ export async function addBoardMember(req, res){
     if (isMember) {
       return res.status(400).json({ message: "User is already a member." });
     }
-
 
     // 5. if passing all the checks, we can add the user!
     await addMember(boardID, userToAdd.id);
@@ -178,22 +170,22 @@ export async function removeBoardMember(req, res) {
 
     // 1. if no board, returns an error msg
     if(!board){
-      return res.status(404).json({message: "Board not found."});
+      return res.status(404).json({message: "Board not found. Try again."});
     }
 
     // 2. if not authorized, returns an error msg
     if(board.user_id !== req.user.userID){
-      return res.status(403).json({message: "Not authorized to remove members from this board"});
+      return res.status(403).json({message: "Not authorized to remove members from this board."});
     }
 
     // 3. check if the user is not found. If so, returns an error msg.
     if(!userToRemove){
-      return res.status(404).json({message: "User not found."});
+      return res.status(404).json({message: "User not found. Check your inputs."});
     }
 
     // 4. does not allow anyone to remove the owner
     if(board.user_id === userToRemove.id){
-      return res.status(403).json({message:"Cannot remove the owner."});
+      return res.status(403).json({message:"Cannot remove the owner!"});
     }
 
     // 5. remove the member
@@ -203,7 +195,7 @@ export async function removeBoardMember(req, res) {
     await removeAllChannelsMember(boardID, userToRemove.id);
 
 
-    res.json({message:"Member removed from board successfully"});
+    res.json({message:"Member removed from board successfully."});
 
 
   }catch(error){

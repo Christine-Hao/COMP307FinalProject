@@ -1,6 +1,7 @@
 import { saveMessage, getMessagesByChannel } from "../models/Message.js";
 import { findDefaultChannel } from "../models/Channel.js";
 
+
 export async function handleSaveMessage(content, boardID, userID){
     try{
         const defaultChannel = await findDefaultChannel(boardID);
@@ -27,11 +28,3 @@ export async function handleGetMessages(req, res){
         res.status(500).send("message controller error when fetching messages");
     }
 }
-// export async function handleGetMessages(channelID){
-//     try{
-//         const messages = await getMessagesByChannel(channelID);
-//         return messages;
-//     }catch(error){
-//         console.error("Error in handleGetMessages:", error);
-//     }
-// }

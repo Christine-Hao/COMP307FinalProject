@@ -1,8 +1,9 @@
 //const pool = require('../config/db.mjs');
 /*
-In this project, we assume there is only a default channel(i.e. general) for each board.
+In our project, we assume there is only a default channel(i.e. general) for each board.
 Those database-level channel functions work with the discussionController.js
  */
+
 import pool from '../config/db.js';
 
 export async function getchannelIDbyBoard(boardID){
@@ -28,7 +29,7 @@ export async function createChannel(boardID, channelName) {
 };
 
 
-    // add a member to the channel
+// add a member to the channel
 export async function addChannelMember(channelID, userID, isOwner = false){
     await pool.query(
         "INSERT INTO channel_members (channel_id, user_id, is_owner) VALUES ($1, $2, $3)",
@@ -36,7 +37,7 @@ export async function addChannelMember(channelID, userID, isOwner = false){
     );
 };
 
-    // find the default channels
+// find the default channels
 export async function findDefaultChannel(boardID){
     const result = await pool.query(
         "SELECT * FROM channels WHERE board_id = $1 AND channel_name = 'general' ",
@@ -45,7 +46,7 @@ export async function findDefaultChannel(boardID){
     return result.rows[0];
 };
 
-    // remove a member from all channels of a board
+// remove a member from all channels of a board
 export async function removeAllChannelsMember(boardID, userID){
     // first, select all channels that the user has
     // secondly, narrow-down the range of channels to those that the user joins in a particular board
