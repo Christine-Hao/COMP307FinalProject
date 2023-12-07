@@ -63,7 +63,7 @@ const DiscussionBoard = ({boardId}) => {
                 if(response.ok){
                     const messages = await response.json();
                     console.log('messages:', messages);
-                    setMessages(messages.reverse());
+                    setMessages(messages);
                 }else{
                     console.error("Failed to fetch messages.");
                 }
@@ -157,6 +157,7 @@ const DiscussionBoard = ({boardId}) => {
                                     </div>
                                     {/* also set the content */}
                                     <div className="message-text">{msg.content}</div>
+                                    <div className="message-timestamp">{new Date(msg.created_at).toLocaleString()}</div>
                                 </div>
                             </div>
                         ))}
@@ -198,8 +199,8 @@ const DiscussionBoard = ({boardId}) => {
                     <ul>
                         {boardMembers.map(member => (
                             <li key={member.id}>
-                                {member.username}
-                                {member.email}
+                                <div>{"Username: " + member.username}</div>
+                                <div>{"Email: " + member.email}</div>
                             </li> // Adjust later
                         ))}
                     </ul>

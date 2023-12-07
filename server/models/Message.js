@@ -6,27 +6,38 @@ import pool from '../config/db.js';
 export async function saveMessage(content, channelID, userID) {
     
     
-    const result = await pool.query(
+    const savedMessage = await pool.query(
         "INSERT INTO messages (content, channel_id, user_id) VALUES ($1, $2, $3) RETURNING *",
         [content, channelID, userID]
-        );
-        return result.rows[0];
+    );
+
+    const sender = await pool.query(
+        "SELECT username FROM users WHERE id = $1",
+        [userID]
+    )
+
+    return {
+        ...savedMessage.rows[0],
+        username: sender.rows[0].username
+    };
 }
 
 export async function getMessagesByChannel(channelId) {
     const result = await pool.query(
-        `SELECT m.message_id, m.content, m.channel_id, u.username 
+        `SELECT m.message_id, m.content, m.channel_id, m.created_at, u.username
         FROM messages m
         JOIN users u ON m.user_id = u.id
-        WHERE m.channel_id = $1;`,
+        WHERE m.channel_id = $1
+        ORDER BY m.created_at ASC`,
         [channelId]
     );
+
     return result.rows;
     // const result = await pool.query(
     //     "SELECT * FROM messages WHERE channel_id = $1",
     //     [channelId]
     // );
-    return result.rows;
+    // return result.rows;
 }
 
 
