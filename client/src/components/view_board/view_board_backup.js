@@ -187,6 +187,7 @@ const DiscussionBoard = ({boardId}) => {
                 <BoardManagement 
                     boardId={boardId} 
                     isOwner={isOwner} 
+                    boardMembers={boardMembers}
                     updateMembers={updateMembers}
                 />
 

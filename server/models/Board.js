@@ -46,6 +46,14 @@ export async function findByUserId(userId){
   
   }
 
+  export async function isUserAlreadyMember(boardID, userID) {
+  
+    const result = await pool.query(
+        "SELECT * FROM board_members WHERE board_id = $1 AND user_id = $2",
+        [boardID, userID]
+    );
+    return result.rowCount > 0;
+  }
 
   export async function createBoardModel(userID, boardName){
     

@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const BoardManagement = ({ boardId, isOwner, updateMembers }) => {
+const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
 
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
 
+    useEffect(() => {
+        let timer;
+        if(error){
+            timer = setTimeout(() => setError(''), 4000); // clear after few secs
+        }
+        return () => clearTimeout(timer); // clear timer
+    })
+    const isUserAlreadyMember = (email) => {
+        return boardMembers.some(member => member.email === email);
+    }
+
     const handleAddMember = async () => {
         try {
+
+            if(isUserAlreadyMember(email)){
+                setError("Member already added to this board!");
+                return;
+            }
 
             const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_ADDTOBOARD_API}`, {
                 method: 'POST',
@@ -21,15 +37,22 @@ const BoardManagement = ({ boardId, isOwner, updateMembers }) => {
                 setEmail('');
                 updateMembers(); // Update member list on success.
             } else {
-                setError('Failed to add member');
+                const data = await response.json();
+                setError(data.message||'Failed to add member!');
             }
         } catch (err) {
-            setError('Error adding member');
+            setError('Error adding member!');
         }
     };
 
     const handleRemoveMember = async () => {
+
         try {
+            if(boardMembers.some(member => member.is_owner && member.email === email)){
+                setError("Cannot remove yourself because you are the owner!");
+                return;
+            }
+
             const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_DELETEFROMBOARD_API}`, {
                 method: 'POST',
                 headers: {
@@ -43,7 +66,8 @@ const BoardManagement = ({ boardId, isOwner, updateMembers }) => {
                 setEmail('');
                 updateMembers(); // Update member list on success...
             } else {
-                setError('Failed to remove member');
+                const data = await response.json();
+                setError(data.message||'Failed to remove member');
             }
         } catch (err) {
             setError('Error removing member');

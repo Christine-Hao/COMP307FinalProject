@@ -1,5 +1,5 @@
 // Inside: /server/controllers/discussionController.js
-import { findByUserId, findByBoardId, createBoardModel, deleteBoardModel, addMember, removeMember, getBoardMembersModel } from "../models/Board.js";
+import { findByUserId, findByBoardId, createBoardModel, deleteBoardModel, addMember, removeMember, getBoardMembersModel, isUserAlreadyMember } from "../models/Board.js";
 import { createChannel, addChannelMember, findDefaultChannel, removeAllChannelsMember, removeAllChannelsBoard } from "../models/Channel.js";
 import { findByEmail } from "../models/User.js"; // Adjusted import for findByEmail
 
@@ -141,10 +141,17 @@ export async function addBoardMember(req, res){
       return res.status(404).json({message: "User not found."});
     }
 
-    // 4. if passing all the checks, we can add the user!
+    // 4. check if it's already a member        
+    const isMember = await isUserAlreadyMember(boardID, userToAdd.id);
+    if (isMember) {
+      return res.status(400).json({ message: "User is already a member." });
+    }
+
+
+    // 5. if passing all the checks, we can add the user!
     await addMember(boardID, userToAdd.id);
     
-    // 5. add the user to the default channel
+    // 6. add the user to the default channel
     const defaultChannel = await findDefaultChannel(boardID);
     await addChannelMember(defaultChannel.channel_id, userToAdd.id, false); // "false" means isOwner = false
 
@@ -184,10 +191,15 @@ export async function removeBoardMember(req, res) {
       return res.status(404).json({message: "User not found."});
     }
 
-    // 4. remove the member
+    // 4. does not allow anyone to remove the owner
+    if(board.user_id === userToRemove.id){
+      return res.status(403).json({message:"Cannot remove the owner."});
+    }
+
+    // 5. remove the member
     await removeMember(boardID, userToRemove.id);
 
-    // 5. also remove the member from all the channels of the board
+    // 6. also remove the member from all the channels of the board
     await removeAllChannelsMember(boardID, userToRemove.id);
 
 
