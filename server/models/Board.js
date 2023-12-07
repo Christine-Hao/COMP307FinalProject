@@ -35,7 +35,7 @@ export async function findByUserId(userId){
     // console.log("Inside Board model, getBoardMembersModel, after getting channel ids");
   
     const membersResult = await pool.query(
-      `SELECT DISTINCT u.id, u.email, u.username
+      `SELECT DISTINCT u.id, u.email, u.username, cm.is_owner
       FROM users u
       INNER JOIN channel_members cm ON u.id = cm.user_id
       WHERE cm.channel_id = ANY($1)`,

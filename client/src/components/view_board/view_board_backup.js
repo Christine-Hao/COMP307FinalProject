@@ -4,14 +4,17 @@ import './view_board_styles.css'
 // import "bootstrap/dist/css/bootstrap.min.css";
 //import Navbar from './../Navbar/Navbar.js';
 import io from 'socket.io-client';
+import BoardManagement from './BoardManagement';
 
 const DiscussionBoard = ({boardId}) => {
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    const [channelMembers, setChannelMembers] = useState([]);
-    const socketRef = useRef();
+    const [boardMembers, setBoardMembers] = useState([]);
+    const [isOwner, setIsOwner] = useState(false);
 
+
+    const socketRef = useRef();
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -22,9 +25,8 @@ const DiscussionBoard = ({boardId}) => {
         scrollToBottom();
     }, [messages]);
 
-
     useEffect( () => {
-        
+
         const fetchChannelMembers = async() => {
             try{
                 const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_MEMBERS_API}/${boardId}`, {
@@ -36,8 +38,12 @@ const DiscussionBoard = ({boardId}) => {
                 if (response.ok){
                     const members = await response.json();
                     // console.log("Board id:", boardId);
-                    // console.log("Members:", members);
-                    setChannelMembers(members);
+                    console.log("Members:", members);
+                    setBoardMembers(members);
+                    // set the owner of the page.
+                    setIsOwner(members.some(member => member.is_owner && member.id === parseInt(localStorage.getItem('userId'))));
+                    console.log("Current user ID:", parseInt(localStorage.getItem('userId')));
+                    console.log("Is owner? :", members.some(member => member.is_owner && member.id === parseInt(localStorage.getItem('userId'))));
                 }else{
                     console.error("failed to fetch members");
                 }
@@ -69,7 +75,7 @@ const DiscussionBoard = ({boardId}) => {
 
         fetchChannelMembers();
         fetchMessages();
-    }, [boardId]);
+    }, [boardId, isOwner]);
 
     useEffect( () => {
         const token = localStorage.getItem('token');
@@ -101,6 +107,28 @@ const DiscussionBoard = ({boardId}) => {
             setNewMessage('');
         }
     };
+
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        handleSendMessage();
+    }
+
+    const updateMembers = async() => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_MEMBERS_API}/${boardId}`,{
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            if(response.ok){
+                const members = await response.json();
+                setBoardMembers(members);
+            }
+        } catch (error) {
+            console.error("Error on frontend/backend when updating members:", error);
+        }
+    }
 
     return (
         <div className="d-flex flex-column vh-100">
@@ -140,7 +168,7 @@ const DiscussionBoard = ({boardId}) => {
                     <div className="flex-fill">
                         item
                     </div>
-                    <Form className="message-input-form">
+                    <Form className="message-input-form" onSubmit={handleFormSubmit}>
                         <Form.Group className="d-flex">
                             <Form.Control
                                 className="message-textbox"
@@ -149,10 +177,18 @@ const DiscussionBoard = ({boardId}) => {
                                 value={newMessage}
                                 onChange={(e) => setNewMessage(e.target.value)}
                             />
-                            <Button variant="primary" onClick={handleSendMessage} className="message-button"><span className="message-button-text"> Send</span></Button>
+                            <Button variant="primary" type="submit" onClick={handleSendMessage} className="message-button"><span className="message-button-text"> Send</span></Button>
                         </Form.Group>
                     </Form>
                 </Col>
+
+                {/* Board Management Section */}
+                <BoardManagement 
+                    boardId={boardId} 
+                    isOwner={isOwner} 
+                    updateMembers={updateMembers}
+                />
+
 
                 {/* Right Column: Channel Info */}
                 <Col md={3} className="channel-info h-100 p-5">
@@ -160,7 +196,7 @@ const DiscussionBoard = ({boardId}) => {
                     {/* <p className="board-description">Here is a discussion board. It is generic.</p> */}
                     {/* Add more info here */}
                     <ul>
-                        {channelMembers.map(member => (
+                        {boardMembers.map(member => (
                             <li key={member.id}>
                                 {member.username}
                                 {member.email}

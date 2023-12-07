@@ -13,8 +13,9 @@ function App() {
   const [selectedBoardId, setSelectedBoardId] = useState(null); 
 
 
-  const handleLoginSuccess = (token) => {
+  const handleLoginSuccess = (token, userId) => {
     localStorage.setItem('token', token) // store the token
+    localStorage.setItem('userId', userId);
     setIsLoggedIn(true);
     setCurrentPage('selectBoard'); // Set the current page to 'selectBoard'
 
@@ -28,6 +29,7 @@ function App() {
 
   const handleBoardSelect = (boardId) => {
     setSelectedBoardId(boardId);
+    localStorage.setItem('selectedBoardId', boardId); // store the selected board ID
     setCurrentPage('discussionBoard'); // Change to board page
   };
 
@@ -37,10 +39,19 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const savedBoardID = localStorage.getItem('selectedBoardId');
     // if the browser has token, then we consider that it is logged in
     if(token){
+
       setIsLoggedIn(true);
-      setCurrentPage('selectBoard');
+
+      if(savedBoardID){
+        setSelectedBoardId(savedBoardID);
+        setCurrentPage('discussionBoard');
+      }else{
+        setCurrentPage('selectBoard');
+        //localStorage.removeItem('selectedBoardId');
+      }
     }
 
   }, 
