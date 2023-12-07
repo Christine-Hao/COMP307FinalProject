@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react'; 
-import './Login_styles.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./Login_styles.css";
+
 //import { useNavigate } from 'react-router-dom';
 
 // The Login component, now receiving 'onRegisterClick' and 'onLoginSuccess' as props
 const Login = ({ onRegisterClick, onLoginSuccess }) => {
   // State variables for Vanta effect, user email, and password
   const [vantaEffect, setVantaEffect] = useState(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // Ref for the Vanta effect
   const vantaRef = useRef(null);
@@ -15,10 +16,12 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
   // useEffect hook to initialize and clean up the Vanta effect
   useEffect(() => {
     if (!vantaEffect) {
-      setVantaEffect(window.VANTA.BIRDS({
-        el: vantaRef.current,
-        THREE: window.THREE,
-      }));
+      setVantaEffect(
+        window.VANTA.BIRDS({
+          el: vantaRef.current,
+          THREE: window.THREE,
+        })
+      );
     }
     return () => {
       if (vantaEffect) vantaEffect.destroy();
@@ -36,10 +39,10 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
     try {
       // Update the URL to point to backend login API endpoint
       // Example: 'http://localhost:3000/api/users/login'
-      const loginApiUrl = `${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_LOGIN_API}`; 
+      const loginApiUrl = `${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_LOGIN_API}`;
       const response = await fetch(loginApiUrl, {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }), // Sending email and password
       });
 
@@ -48,46 +51,62 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
         console.log("Login Successful", data);
         //localStorage.setItem('token', data.token); // Storing the token if login is successful
         onLoginSuccess(data.token, data.userID); // Navigate to the SelectBoard component
-        
       } else {
         console.log("Login failed:", await response.text());
       }
     } catch (error) {
       console.log("Error on logging in:", error);
     }
- 
   };
 
   // Rendering the component
   return (
-    <div className="login-row" ref={vantaRef}>
-      <section className="col-sm-10 col-md-8 col-lg-6 login-container">
-        <p className="welcome-message">Welcome to Double Bound</p>
-        <form className="login-form" onSubmit={handleSubmit}>
-          <label htmlFor="email">McGill Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            placeholder="Enter email"
-            required
-          /><br/>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Enter password"
-            required
-          /><br/>
-          <div className="login-button"  >
-          <button type="submit">Login</button>
+    <div ref={vantaRef}>
+      <div className="container">
+        <div className="login-row row">
+          <div className="col-sm-10 col-md-8 col-lg-6 ">
+            <div className="login-container">
+              <img 
+                src={`${process.env.PUBLIC_URL}/benzene-logo.png`} 
+                alt="Logo" 
+                className="login-logo"
+              />
+              <p className="welcome-message">Welcome to Double Bound !</p>
+              <form className="login-form" onSubmit={handleSubmit}>
+                <label htmlFor="email">McGill Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  placeholder=" Type your McGill email"
+                  required
+                />
+                <br />
+                <label htmlFor="password">Password</label>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  placeholder=" Type your password"
+                  required
+                />
+                <br />
+                <div className="login-button">
+                  <button type="submit">Login</button>
+                </div>
+              </form>
+              <p>
+                Don't have an account?{" "}
+                <button className="link-button" onClick={onRegisterClick}>
+                  Sign Up
+                </button>
+              </p>
+            </div>
           </div>
-        </form>
-        <p>Don't have an account? <button className="link-button" onClick={onRegisterClick}>Register</button></p>
-      </section>
+        </div>
+      </div>
     </div>
   );
 };
