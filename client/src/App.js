@@ -1,16 +1,16 @@
 import React, { useState, useEffect} from 'react';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
-//import SelectBoard from './components/select_board/SelectBoard';
-//import DiscussionBoard from './components/view_board/view_board_backup';
+import SelectBoard from './components/select_board/SelectBoard';
+import DiscussionBoard from './components/view_board/view_board_backup';
 
 
 function App() {
-  return (
-  <div>
-    <Registration />
-  </div>)}
-  /*
+  // return (
+  // <div>
+  //   <Registration />
+  // </div>)}
+  
   const [currentPage, setCurrentPage] = useState('login');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState(null); 
@@ -87,5 +87,5 @@ function App() {
 
  
 }
-*/
+
 export default App;
