@@ -8,6 +8,7 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [preferredName, setPreferredName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   // Handler for Fullname registration
   const handleFullnameRegistration = (event) => {
@@ -27,6 +28,10 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
   // Handler for password registration
   const handlePasswordRegistration = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handlePasswordConfirmation = (event) => {
+    setConfirmPassword(event.target.value);
   };
 
   // Handler for form submission
@@ -52,6 +57,11 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
 
     if (mcgillEmail.length > 50) {
       alert("Email should not exceed 50 characters.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
       return;
     }
 
@@ -95,15 +105,18 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
         <div className="registration-row row">
           <div className="col-sm-10 col-md-8 col-lg-6 mx-auto">
             <div className="register-container">
-              <p className="registration-message">Create Account</p>
+              <p className="registration-message">
+                Create an account and start bounding!
+              </p>
               <form className="registration-form" onSubmit={handleSubmit}>
                 <div className="input-group">
-                  <label htmlFor="fullName"> Name</label>
+                  <label htmlFor="fullName">Full Name</label>
                   <input
                     id="fullName"
                     type="text"
                     value={fullName} // Remember to set up different state variables for each input
                     onChange={handleFullnameRegistration}
+                    placeholder="Input your full name"
                     required
                   />
                 </div>
@@ -115,6 +128,7 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
                     type="text"
                     value={preferredName} // This should probably be a different state variable
                     onChange={handlePreferredNameRegistration}
+                    placeholder="Input your preferred name"
                     required
                   />
                 </div>
@@ -126,6 +140,7 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
                     type="email"
                     value={mcgillEmail}
                     onChange={handleMcgillEmailRegistration}
+                    placeholder="Input your email"
                     required
                   />
                 </div>
@@ -137,6 +152,19 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
                     type="password"
                     value={password}
                     onChange={handlePasswordRegistration}
+                    placeholder="Create your password"
+                    required
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label htmlFor="confirm-password">Confirm Password</label>
+                  <input
+                    id="confirm-password"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={handlePasswordConfirmation}
+                    placeholder="Confirm your password"
                     required
                   />
                 </div>

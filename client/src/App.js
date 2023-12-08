@@ -6,11 +6,12 @@ import DiscussionBoard from './components/view_board/view_board_backup';
 
 
 function App() {
-  // return (
-  // <div>
-  //   <Registration />
-  // </div>)}
+   return (
+   <div>
+   <Registration />
+  </div>)}
   
+  /*
   const [currentPage, setCurrentPage] = useState('login');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState(null); 
@@ -87,5 +88,6 @@ function App() {
 
  
 }
+*/
 
 export default App;

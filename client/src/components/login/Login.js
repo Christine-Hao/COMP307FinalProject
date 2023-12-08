@@ -91,12 +91,12 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
                   type="password"
                   value={password}
                   onChange={handlePasswordChange}
-                  placeholder=" Type your password"
+                  placeholder="Type your password"
                   required
                 />
                 <br />
                 <div className="login-button">
-                  <button type="submit">Login</button>
+                  <button className="btn" type="submit">Login</button>
                 </div>
               </form>
               <p>
