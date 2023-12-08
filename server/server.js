@@ -20,7 +20,7 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors:{
         origin: "http://localhost:3000", //replace when on remote
-        //origin: `https://doublebound.onrender.com/`,
+        //origin: `https://doublebound.onrender.com`,
         methods: ["GET", "POST"]
     }
 });
