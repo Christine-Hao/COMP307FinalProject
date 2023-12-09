@@ -40,7 +40,6 @@ const DiscussionBoard = () => {
 
     return (
         <div className="d-flex flex-column vh-100">
-            {/* <Navbar /> */}
             <Container fluid className="flex-grow-1">
                 <Row className="h-100">
                 <Col md={2} className="channels-list h-100 p-5">

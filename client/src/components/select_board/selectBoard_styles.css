@@ -1,12 +1,13 @@
 .select-board-outer {
-  background-image: url("./discussion_board.png"); /* Update with the correct path to your image */
-  background-size: cover; /* This will make sure your image covers the entire div */
-  background-position: center; /* This will center your image in the div */
-  background-repeat: no-repeat; /* This will prevent the image from repeating */
-  max-height: 100vh; /* This ensures that the outer container doesn't exceed the viewport height */
-  overflow: hidden; /* This hides any overflow to maintain the page size */
+  background-image: url("./discussion_board.png"); /* Correct path to your image */
+  background-size: cover; /* Image covers the entire div */
+  background-position: center; /* Centers the image in the div */
+  background-repeat: no-repeat; /* Prevents image from repeating */
+  max-height: calc(100vh - 65px); /* Adjusted height */
+  overflow: hidden; /* Hides any overflow to maintain page size */
   color: white;
 }
+
 
 .sb-wrapper{
   background: rgba(36, 39, 67, 0.6); /* Semi-transparent black */
