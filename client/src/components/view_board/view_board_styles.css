@@ -123,3 +123,12 @@ html, body {
 .message-button-text {
     font-size: 20px;
 }
+
+.outer-page {
+    max-height: calc(100vh - 65px); /* Adjusted height considering the navbar */
+    overflow-y: auto; /* Enables scrolling for the content */
+}
+
+.vh-100, .h-100 {
+    height: calc(100vh - 65px); /* Subtract the navbar height */
+}

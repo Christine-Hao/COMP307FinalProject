@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './view_board_styles.css'
-// import "bootstrap/dist/css/bootstrap.min.css";
-//import Navbar from './../Navbar/Navbar.js';
 import io from 'socket.io-client';
 import BoardManagement from './BoardManagement';
 
@@ -12,6 +10,8 @@ const DiscussionBoard = ({boardId}) => {
     const [newMessage, setNewMessage] = useState('');
     const [boardMembers, setBoardMembers] = useState([]);
     const [isOwner, setIsOwner] = useState(false);
+    
+    const [boardName, setBoardName] = useState('');
 
 
     const socketRef = useRef();
@@ -73,8 +73,28 @@ const DiscussionBoard = ({boardId}) => {
             }
         }
 
+        const fetchBoardName = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_BOARDNAME_API}/${boardId}`,
+                {
+                    headers:{
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`        
+                    }
+                });
+                const boardData = await response.json();
+              if (response.ok) {
+                setBoardName(boardData.board_name); // Update based on your actual data structure
+              } else {
+                console.error('Failed to fetch board details:', boardData.message);
+              }
+            } catch (error) {
+              console.error('Error fetching board details:', error);
+            }
+          };
+
         fetchChannelMembers();
         fetchMessages();
+        fetchBoardName();
     }, [boardId, isOwner]);
 
     useEffect( () => {
@@ -131,13 +151,12 @@ const DiscussionBoard = ({boardId}) => {
     }
 
     return (
-        <div className="d-flex flex-column vh-100">
+        <div className="d-flex flex-column vh-100 outer-page">
             {/* <Navbar /> */}
             <Container fluid className="flex-grow-1">
                 <Row className="h-100">
                 <Col md={2} className="channels-list h-100 p-5">
-                    <h3 className="channel-header">Channels</h3>
-                    <div className="channel selected-channel">General</div>
+                    <h3>Welcome to <span className="channel-header">{boardName}</span></h3>
                 </Col>
 
                 <Col md={7} className="messages-section d-flex flex-column h-100 border-dividers">

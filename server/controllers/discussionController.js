@@ -19,6 +19,22 @@ export async function getBoards(req, res) {
     res.status(500).json({ message: 'Error retrieving discussion boards.' });
   }
 }
+export const getBoardNameById = async (req, res) => {
+  try {
+    const boardId = req.params.boardID;
+    const result = await BoardModel.findBoardNameById(boardId);
+
+    if (result) {
+      res.json(result);
+    } else {
+      res.status(404).send('Board not found');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+};
+
 
 export const getBoardMembers = async (req, res) => {
   
