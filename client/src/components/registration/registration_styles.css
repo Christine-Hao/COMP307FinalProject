@@ -1,52 +1,6 @@
-
-.outer{
-  background-color: #1a1c20; /* Black-blue-grey background */
-
-}
-
-
-/* Registration container styles */
-.register-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 50px;
-  padding-top: 70px;
-  border-radius: 30px;
-  background: rgba(243, 240, 240, 0.6); /* Semi-transparent black */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  z-index: 10;
-}
-
-
-.input-group {
-  display: flex;
-  justify-content: flex-start; /* Aligns children to the start of the flex container */
-  width: 100%; 
-  margin-bottom: 10px; 
-  
-}
-.input-group label {
-  
-  margin-right: 10px;
-  text-align: left; /* Aligns the text to the right of the label */
-  margin-top: 20px;
-}
-.input-group input {
-  flex: 1; /* Allows input to take up the remaining space */
-  margin-top: 20px;
-  border-radius: 12px;
-  color: rgb(48, 47, 47);
-}
-.registration-message {
-  font-weight: bold;
-  font-size: 24px;
-  width: 100%; /* Ensures it takes the full width */
-  text-align: center; /* Centers the text within the element */
-  margin-top: 20px; /* Optional: Adds space above the title */
-  margin-bottom: 50px; /* Optional: Adds space below the title */
-  
+.outer {
+  background-color: #0b1831; /* Black-blue-grey background */
+  height: 100vh;
 }
 
 .registration-row {
@@ -57,30 +11,78 @@
   height: 100vh;
 }
 
-::placeholder {
-  color: #bbb; /* Lighter color for placeholders for better visibility */
+/* Registration container styles */
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  padding-top: 50px;
+  border-radius: 30px;
+  background: rgba(243, 240, 240, 0.6); /* Semi-transparent black */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
 }
 
+.registration-message {
+  color: #0b1d3f;
+  font-weight: bold;
+  font-size: 22px;
+  width: 100%; /* Ensures it takes the full width */
+  text-align: center; /* Centers the text within the element */
+  margin-bottom: 30px; /* Optional: Adds space below the title */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  margin-bottom: 10px; /* Adjust as needed for space between groups */
+  font-size: 12px;
+  color: #0b1d3f;
+}
+
+.input-group label {
+  color: #0b1d3f;
+  font-size: 12px;
+}
+
+.input-group input {
+  border-radius: 15px;
+  color: rgb(48, 47, 47);
+  width: 250px;
+  padding: 5px 15px;
+}
 
 .link-button-reg {
-  
   cursor: pointer;
   text-decoration: underline;
 }
 
-.link-button-reg:hover,
-.link-button-reg:focus {
-  color: #ddd; /* Lighter shade for hover and focus states */
-  text-decoration: none; 
-}
-
-.registration-form {
+.reg-button {
   display: flex;
-  flex-direction: column;
-  
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 40px;
 }
-.reg-button{
-  margin: 40px;
+.reg-button button:hover {
+  background-color: rgb(255, 204, 2);
 }
 
+.reg-button button {
+  color: #0b1d3f;
+  padding: 8px 55px;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 15px;
+  background-color: rgb(252, 227, 124);
+}
 
+@media (min-width: 780px) {
+  .outer {
+    background-image: url("registration.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

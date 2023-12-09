@@ -1,29 +1,18 @@
 // handle logic of the login process
-// when login request is received, maybe extract the username and password from the request.
-// then uses functions that interact with the database in /server/models/User.js
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { findByEmail, createUser } from "../models/User.js"; // use the functions in models/User.js
+import UserModel from '../models/User.js';
 
 
 // create a login function for other files to use.
 export async function login(req, res) {
 
     const { email, password} = req.body;
-    const user = await findByEmail(email);
+    const user = await UserModel.findByEmail(email);
 
     // check if user exists, and check if the provided password matches with the stored one.
     // bcrypt.compare -> hashes the entered password(left argument), and compare with the correct password(expect to be hashed)
     if(!user || !await bcrypt.compare(password, user.password)){
-
-        //return res.status(401).send("Invalid credentials");
-        // console.log("user password upon login check:", user.password);
-        // console.log("correct password:", user.password)
-        // console.log("not exist?", !user);
-        // console.log("user email upon login check:", user.email);
-        // console.log('correct email:', email);
-        // console.log(" not equal password?", ! await bcrypt.compare(password, user.password));
-
         return res.status(401).json({ message: "Invalid credentials upon login checking" });
     }
 
@@ -42,13 +31,13 @@ export async function register(req, res) {
     // console.log("password:", password);
     // console.log("email:", email);
     try{
-        const existingUser = await findByEmail(email);
+        const existingUser = await UserModel.findByEmail(email);
         if(existingUser){
             return res.status(400).json({message:"Email already taken. Choose another one."});
 
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        await createUser(fullname, username, hashedPassword, email);
+        await UserModel.createUser(fullname, username, hashedPassword, email);
 
         res.status(201).json({message: "User created successfully"});
 
@@ -58,9 +47,3 @@ export async function register(req, res) {
 
     }
 }
-
-// export function logout(req, res) {
-//     // Clear the token from the client by instructing them to clear the storage
-//     res.json({ message: 'You have been logged out.' });
-//     // Note: Actual token invalidation might require a token blacklist or a stateful mechanism
-// }

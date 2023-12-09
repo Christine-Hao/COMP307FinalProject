@@ -7,13 +7,11 @@ import express from 'express';
 import cors from 'cors';
 import {createServer} from 'http';
 import {Server} from 'socket.io';
+import jwt from 'jsonwebtoken';
 
-import userRoutes from "./routes/users.js";
+import userRoutes from "./routes/userRoutes.js";
 import discussionRoutes from './routes/discussionRoutes.js';
 import { handleSaveMessage } from './controllers/messageController.js';
-
-// import { saveMessage } from './models/Message.js';
-import jwt from 'jsonwebtoken';
 
 const app = express();
 const httpServer = createServer(app);
