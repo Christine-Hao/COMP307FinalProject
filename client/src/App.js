@@ -7,11 +7,11 @@ import Navbar from './components/Navbar/Navbar';
 
 function App() {
 
-   return (
-   <div>
-   <SelectBoard />
-   </div>)}
-/*
+  //  return (
+  //  <div>
+  //  <SelectBoard />
+  //  </div>)}
+
   const [currentPage, setCurrentPage] = useState('login');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState(null); 
@@ -92,7 +92,6 @@ function App() {
 
  
 }
-*/
 
 
 export default App;

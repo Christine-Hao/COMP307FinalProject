@@ -55,7 +55,9 @@ const SelectBoardPage = ({ onBoardSelect }) => {
       );
 
       if (response.ok) {
-        setBoards(boards.filter((board) => board.id !== boardId));
+
+        setBoards(boards.filter((board) => board.board_id !== boardId));
+        
       } else {
         console.error("Failed to delete board:", await response.json().message);
       }
@@ -90,7 +92,10 @@ const SelectBoardPage = ({ onBoardSelect }) => {
 
       if (response.ok) {
         const newBoard = await response.json();
+
+        newBoard.is_owner = true;
         setBoards([...boards, newBoard]);
+
         setNewBoardName("");
         setShowModal(false);
       } else {
