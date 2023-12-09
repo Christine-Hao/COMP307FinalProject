@@ -1,25 +1,37 @@
 server directory:
-where the Node.js and Express.js application resides and uses the packages about
-express, pg, bcrypt, jsonwebtoken, cors.
 
-/server/config/:
-    db.js: basic code for database creation.
-/server/controllers/:
-    authController.js: handle login logic
-/server/models/:
-    User.js: interaction with the database
-/server/routes/:
-    users.js: routes user request to specific programs to handle
-/server/:
-    servers.js: entry point that defines and sets up the Node.js server configs above.
+server/
+    server.js     the entry point of the backend server. It also handles the messaging functionality(listens and emit message)
 
+server/config                                 # Configuration files(e.g. database connection)
+    db.js: code for database connection
 
-routes:
-1. In server.js, any routes defined in users.js shuold be prefixed with "/api/users":
-    const userRoutes = require("./routes/users");
-    app.use('/api/users', userRoutes); 
+server/controllers                            # Backend intermediate logic
+    authController.js:
+        controller level code for user authentications (handles user login & registration)
+    discussionController.js:
+        controller level code for board-related logic (handles board creation, deletion, retrieval of boards, board member management...)
+    messageController.js
+        controller level code for message-related logic (save message, get message, delete message...)
+    
+server/middleware                             # middleware function (e.g. token verification)
+    authMiddleware.js:
+        a middleware that handles authentication of the user through tokens
 
-    So, for Frontend to make an API call, -> fetch("/api/users" + some route in users.js) (POST)
+server/models                                 # models containing  data management/database query
+    Board.js:
+        model level code related to the data of the board
+    Channel.js
+        model level code related to the data of the channel
+    Message.js
+        model level code realted to the data of the messages
+    User.js
+        model level code related to the data of the users
 
-    When deploying app, the domain or IP of backend server is in the requested URL.
-    e.g. await fetch("https://backendwebsite.com/api/users/register);
+server/routes                              # Express routes(guide the frontend requests to handler functions)
+
+    discussionRoutes.js:
+        defines API endpoints, relevant middleware verification functions and endpoint handler functions related to discussion board
+        (including select-discussion-board page and specific discussion board page)
+    userRoutes.js
+        defines API endpoints, relevant middleware verification functions and endpoint handler functions related to user login & registration
