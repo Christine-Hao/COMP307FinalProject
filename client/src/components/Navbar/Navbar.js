@@ -34,8 +34,8 @@ function Navbar_loggedin({ handleLogout, handleWorkspacesClick }) {
           <img src="/dropdown.png" width="15" className="rounded-circle" alt="dropdown" />
       </div>
       <div className="dropdown-menu">
-          <a className="dropdown-item" href="#" onClick={handleWorkspacesClick}>My Discussion Boards</a>
-          <a className="dropdown-item" href="#" onClick={handleLogout}>Sign Out</a>
+          <a className="dropdown-item" href="" onClick={handleWorkspacesClick}>My Discussion Boards</a>
+          <a className="dropdown-item" href="" onClick={handleLogout}>Sign Out</a>
       </div>
   </div>
 </div>
