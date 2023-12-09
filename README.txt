@@ -59,6 +59,13 @@ Members' main responsibilties
         Nicholas Foisy, Yuanqing hao, Jiahao Jiang: database design
         Jiahao Jiang: database operations
 
+5. Security
+    Yuanqing Hao & Jiahao Jiang & Nicholas Foisy:
+        use local storage to store tokens and non-crucial user data.
+        use trustful hosting services that adopts HTTPs.
+    Jiahao Jiang:
+        verifies the user tokens sent from the client before using the requested services on the backend.
+
 Directory structures:
 
 COMP307FINALPROJECT/
