@@ -14,6 +14,7 @@ GET:
 api/boards/userBoards
 api/boards/userBoards/members/:boardID
 api/boards/userBoards/messages/:boardID
+api/boards/userBoards/name/:boardID
 
 POST:
 api/boards/userBoards/createBoard

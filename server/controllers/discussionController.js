@@ -21,17 +21,18 @@ export async function getBoards(req, res) {
 }
 export const getBoardNameById = async (req, res) => {
   try {
+
     const boardId = req.params.boardID;
     const result = await BoardModel.findBoardNameById(boardId);
 
     if (result) {
       res.json(result);
     } else {
-      res.status(404).send('Board not found');
+      res.status(404).send('Board not found in the database.');
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error');
+    res.status(500).send('Error retrieving the board.');
   }
 };
 
