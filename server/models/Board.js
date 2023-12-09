@@ -19,14 +19,9 @@ const BoardModel = {
     async findBoardNameById(boardID) {
       try {
         const result = await pool.query("SELECT * FROM boards WHERE board_id = $1", [boardID]);
-        
-        console.log('findByBoardId result:', result.rows[0]); // Log the result
-  
         return result.rows[0];
       } catch (error) {
-        console.error('Error in findByBoardId:', error); // Log any error that occurs
-  
-        throw error; // Re-throw the error to be handled by the caller
+        throw error;
       }
     },
     
