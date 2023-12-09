@@ -38,7 +38,4 @@ discussionRoutes.post('/userBoards/createBoard', verifyToken, createBoard);
 discussionRoutes.post('/userBoards/addMember', verifyToken, addBoardMember);
 
 
-
-// Other discussion board-related routes...
-
 export default discussionRoutes;

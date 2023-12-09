@@ -1,12 +1,12 @@
-import { saveMessage, getMessagesByChannel } from "../models/Message.js";
-import { findDefaultChannel } from "../models/Channel.js";
+import MessageModel from "../models/Message.js";
+import ChannelModel from "../models/Channel.js";
 
-
+// save a message and return the message
 export async function handleSaveMessage(content, boardID, userID){
     try{
-        const defaultChannel = await findDefaultChannel(boardID);
+        const defaultChannel = await ChannelModel.findDefaultChannel(boardID);
 
-        const message = await saveMessage(content, defaultChannel.channel_id, userID);
+        const message = await MessageModel.saveMessage(content, defaultChannel.channel_id, userID);
         
         return message;
 
@@ -14,13 +14,13 @@ export async function handleSaveMessage(content, boardID, userID){
         console.error("Error in handleSaveMessage:", error);
     }
 }
-
+// get messsages of a board
 export async function handleGetMessages(req, res){
     try {
 
         const boardID = req.params.boardID;
-        const defaultChannel = await findDefaultChannel(boardID);
-        const messages = await getMessagesByChannel(defaultChannel.channel_id);
+        const defaultChannel = await ChannelModel.findDefaultChannel(boardID);
+        const messages = await MessageModel.getMessagesByChannel(defaultChannel.channel_id);
 
         res.json(messages);
 
