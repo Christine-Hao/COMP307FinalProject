@@ -73,7 +73,7 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
                 alt="Logo" 
                 className="login-logo"
               />
-              <p className="welcome-message">Welcome to Double Bound !</p>
+              <p className="welcome-message">Welcome to Double Bond !</p>
               <form className="login-form" onSubmit={handleSubmit}>
                 <label htmlFor="email">McGill Email</label>
                 <input

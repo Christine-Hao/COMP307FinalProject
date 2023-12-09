@@ -3,7 +3,7 @@ import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import SelectBoard from './components/select_board/SelectBoard';
 import DiscussionBoard from './components/view_board/view_board_backup';
-
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   /*
@@ -35,6 +35,10 @@ function App() {
     setSelectedBoardId(boardId);
     localStorage.setItem('selectedBoardId', boardId); // store the selected board ID
     setCurrentPage('discussionBoard'); // Change to board page
+  };
+
+  const handleWorkspacesClick = () => {
+    setCurrentPage('selectBoard');
   };
 
   const handleRegistrationSuccess = () => {
@@ -79,12 +83,12 @@ function App() {
 
   }
 
-  return(
+  return (
     <div>
-      {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
+      {isLoggedIn && <Navbar handleLogout={handleLogout} handleWorkspacesClick={handleWorkspacesClick} />}
       {renderContent()}
     </div>
-  )
+  );
 
  
 }

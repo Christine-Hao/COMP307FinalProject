@@ -106,7 +106,7 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
           <div className="col-sm-10 col-md-8 col-lg-6 mx-auto">
             <div className="register-container">
               <p className="registration-message">
-                Create an account and start bounding!
+                Create an account and start bonding!
               </p>
               <form className="registration-form" onSubmit={handleSubmit}>
                 <div className="input-group">
