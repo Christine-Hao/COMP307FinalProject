@@ -1,0 +1,60 @@
+.custom-navbar {
+    background-color: #343a40; /* Bootstrap's dark navbar color */
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+.custom-navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    text-decoration: none;
+    color: white;
+}
+
+.custom-nav-dropdown {
+    position: relative;
+    color: white;
+}
+
+.custom-dropdown-menu {
+    position: absolute;
+    right: 0;
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.25rem;
+    padding: 0.5rem 0;
+}
+
+.custom-dropdown-item {
+    display: block;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.custom-dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.custom-brand-section {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.custom-navbar-toggle {
+    display: none; /* Adjust as needed for mobile responsiveness */
+}
+
+/* Add more custom styles as needed for other elements */

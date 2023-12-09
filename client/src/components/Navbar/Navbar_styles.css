@@ -1,119 +1,158 @@
-.navbar {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
+* {
+    box-sizing: border-box;
 }
 
-.img-container {
-    margin-bottom: 20px;
-}
-.form-control-lg {
-    margin-bottom: 10px;
+body {
+    margin: 0px;
 }
 
-.form-group label, .form-group input {
-    display: block; /* Makes element occupy the full width */
-    width: 475px; /* Ensures it takes up all available space */
-    box-sizing: border-box; /* Optional: ensures padding doesn't affect width */
-    font-size: 15px;
+.custom-nav {
+    height: 65px;
+    width: 100%;
+    background-color: #343a40;
+    position: relative;
 }
 
-.form-group label {
-    margin-bottom: 0.5em;
+.custom-nav-header {
+    display: inline;
 }
 
-.form-group input {
-    margin-bottom: 1em;
+.custom-nav-title {
+    display: inline-block;
+    font-size: 22px;
+    color: #fff;
+    padding: 10px 10px;
 }
-input[type="text"], input[type="email"] {
-    font-size: 20px;
+
+.custom-nav-btn {
+    display: none;
 }
-input, select, textarea{
+
+.custom-nav-links {
+    display: inline;
+    float: right;
+    font-size: 18px;
+    padding-right: 20px;
+    padding-top: 17px
+}
+
+.custom-nav-link {
+    display: inline-block;
+    padding: 20.5px 10px;
+    text-decoration: none;
+    color: #efefef;
+}
+
+.custom-nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.custom-nav-check {
+    display: none;
+}
+
+@media (max-width:600px) {
+    .custom-nav-btn {
+        display: inline-block;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+
+    .custom-nav-btn-label {
+        display: inline-block;
+        width: 50px;
+        height: 65px;
+        padding: 24.5px;
+    }
+
+    .custom-nav-btn-label:hover, 
+    .custom-nav-checked:checked ~ .custom-nav-btn-label {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .custom-nav-btn-span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 2px solid #eee;
+    }
+
+    .custom-nav-links {
+        position: absolute;
+        display: block;
+        width: 100%;
+        background-color: #333;
+        height: 0px;
+        transition: all 0.3s ease-in;
+        overflow-y: hidden;
+        top: 65px;
+    }
+
+    .custom-nav-link {
+        display: block;
+        width: 100%;
+    }
+
+    .custom-nav-unchecked:not(:checked) ~ .custom-nav-links {
+        height: 0px;
+    }
+
+    .custom-nav-checked:checked ~ .custom-nav-links {
+        height: calc(100vh - 65px);
+        overflow-y: auto;
+    }
+}
+
+/* dropdown */
+
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+    /* Add more styles for the toggle button */
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    margin-top: -5px;
+    right: 0;
+    background-color: white;
+    width: 180px;
+    margin-right: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-menu .dropdown-item {
     color: black;
-
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
-.form-text {
-    font-size: 13px;
-    margin-top: -15px;
-    margin-left: 3px;
-    font-style: oblique;
+.dropdown-menu .dropdown-item:hover {
+    background-color: #f1f1f1;
 }
 
-.navbar-username {
+.nav-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-divider {
+    height: 1px;
+    margin: 0.5em 0;
+    overflow: hidden;
+    background-color: #eceeef;
+}
+
+
+.navbar-username{
+    margin-right: 10px;
     color: white;
-    font-size: 18px;
-    font-weight: bold;
-}
-.dropdown-item {
-    color: black;
-    font-size: 18px;
-}
-
-.navbar {
-    height: 60px;
-}
-
-.my-custom-dropdown .dropdown-toggle::after {
-    display: none !important; 
-  }
-  
-.navbar {
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-  
-body, html {
-padding-top: 0;
-margin-top: 0;
-}  
-
-.nav-sign-btn {
-    margin-right: 5px;
-    font-weight: bold;
-    color: inherit;
-}
-
-.nav-sign-btn:first-child {
-    margin-right: -20px;
-  }
-
-.brand-section {
-    font-size: 30px;
-}
-
-.img-container {
-    margin-bottom: 20px;
-}
-.form-control-lg {
-    margin-bottom: 10px;
-}
-
-.form-group label, .form-group input {
-    display: block; /* Makes element occupy the full width */
-    width: 430px; /* Ensures it takes up all available space */
-    box-sizing: border-box; /* Optional: ensures padding doesn't affect width */
-    font-size: 15px;
-}
-
-.form-group label {
-    margin-bottom: 0.5em;
-}
-
-.form-group input {
-    margin-bottom: 1em;
-}
-input[type="text"], input[type="email"] {
-    font-size: 20px;
-}
-input, select, textarea{
-    color: black;
-
-}
-
-.form-text {
-    font-size: 13px;
-    margin-top: -15px;
-    margin-left: 3px;
-    font-style: oblique;
+    font-family: Helvetica;
 }
