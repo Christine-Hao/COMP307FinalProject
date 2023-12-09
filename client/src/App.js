@@ -39,6 +39,7 @@ function App() {
 
   const handleWorkspacesClick = () => {
     setCurrentPage('selectBoard');
+    localStorage.removeItem('selectedBoardId');
   };
 
   const handleRegistrationSuccess = () => {
@@ -58,7 +59,6 @@ function App() {
         setCurrentPage('discussionBoard');
       }else{
         setCurrentPage('selectBoard');
-        //localStorage.removeItem('selectedBoardId');
       }
     }
 
