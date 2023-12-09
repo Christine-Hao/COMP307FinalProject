@@ -3,9 +3,43 @@
   background-size: cover; /* This will make sure your image covers the entire div */
   background-position: center; /* This will center your image in the div */
   background-repeat: no-repeat; /* This will prevent the image from repeating */
+  max-height: 100vh; /* This ensures that the outer container doesn't exceed the viewport height */
+  overflow: hidden; /* This hides any overflow to maintain the page size */
+  color: white;
 }
+
+.sb-wrapper{
+  background: rgba(36, 39, 67, 0.6); /* Semi-transparent black */
+}
+.registration-row h1{
+  text-align: center; /* Centers the text of all direct child elements */
+  size:20px;
+}
+
 .board-list {
-  margin-bottom: 20px;
+  max-height: 65vh; /* Adjust this value based on your layout and requirements */
+  overflow-y: auto; /* This will add a scrollbar when the content exceeds max-height */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.5) transparent; /* For Firefox */
+  padding-right: 15px;
+  margin: 40px;
+}
+/* Styles for Webkit browsers like Chrome, Safari */
+.board-list::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+.board-list::-webkit-scrollbar-track {
+  background: transparent; /* Background of the track */
+  border-radius: 10px; 
+}
+.board-list::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5); /* Color of the scrollbar thumb */
+  border-radius: 10px; 
+  border: 3px solid transparent; /* Creates padding effect inside the thumb */
+}
+
+.board-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.6); /* Slightly lighter on hover */
 }
 
 .board-item {
@@ -27,7 +61,9 @@
 }
 
 .unsubscribe-btn {
+  font-size: 12px;
   background-color: red;
+  border-radius: 12px;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -36,12 +72,22 @@
 
 .create-board-btn {
   padding: 10px 20px;
+ 
+  border-radius: 15px;
   background-color: green;
   color: white;
   border: none;
   cursor: pointer;
+  display: block; /* Makes the button a block-level element */
+  margin: 0 auto; /* Auto margins on both sides */
 }
 
+/*Pop-up for cerate board*/
+.modal h2{
+  color: black;
+  
+  font-size: 25px;
+}
 .modal {
   position: fixed;
   top: 0;
@@ -52,14 +98,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 .modal-content {
+  border-radius: 20px;
   background: white;
   color: black;
   padding: 20px;
   border-radius: 5px;
   position: relative;
+  text-align: center; 
 }
 
 .modal-close {
@@ -74,10 +123,14 @@
   width: 100%;
   padding: 10px;
   margin: 20px 0;
+  border-radius: 20px;
 }
 
 .modal-create-btn {
+  padding: 10px 20px;
   background-color: blue;
+  border-radius: 20px;
   color: white;
   border: none;
+
 }
