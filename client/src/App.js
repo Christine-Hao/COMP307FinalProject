@@ -22,6 +22,9 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('token'); // clear the token upon logging out
+    localStorage.removeItem('userId'); // clear the user ID upon logging out
+    localStorage.removeItem('selectedBoardId'); // clear the board ID too
+    
     setIsLoggedIn(false);
     setCurrentPage('login'); // Redirect back to login page after logout
   };
