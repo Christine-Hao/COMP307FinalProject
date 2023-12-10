@@ -55,9 +55,7 @@ const SelectBoardPage = ({ onBoardSelect }) => {
       );
 
       if (response.ok) {
-
         setBoards(boards.filter((board) => board.board_id !== boardId));
-        
       } else {
         console.error("Failed to delete board:", await response.json().message);
       }
@@ -109,63 +107,70 @@ const SelectBoardPage = ({ onBoardSelect }) => {
   return (
     <div className="select-board-outer">
       <div className="container sb-wrapper">
-        <div className="registration-row row">
-          <div className="col-sm-10 col-md-8 col-lg-6 mx-auto">
-            <h1>Your Discussion Boards</h1>
-            <div className="board-list">
-              {boards.map((board) => (
-                <div
-                  key={board.board_id}
-                  className="board-item"
-                  onClick={(e) => handleBoardSelect(board.board_id, e)}
-                >
-                  <span>{board.board_name}</span>
-                  {/* Delete button should be rendered ONLY when board.is_owner is true! (i.e. the user is the owner of the board) */}
-                  {board.is_owner && (
-                    <button
-                      onClick={(e) => handleDelete(board.board_id, e)}
-                      className="unsubscribe-btn"
-                    >
-                      Delete
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={() => setShowModal(true)}
-              className="create-board-btn"
-            >
-              Create New Board
-            </button>
-
-            {/* Custom Modal for Creating New Board */}
-            {showModal && (
-              <div className="modal">
-                <div className="modal-content">
-                  <span
-                    className="modal-close"
-                    onClick={() => setShowModal(false)}
-                  >
-                    &times;
-                  </span>
-                  <h2>Create a New Board</h2>
-                  <input
-                    type="text"
-                    value={newBoardName}
-                    onChange={handleNewBoardNameChange}
-                    placeholder="Board name"
-                    className="modal-input"
-                  />
-                  <button
-                    onClick={handleCreateBoard}
-                    className="modal-create-btn"
-                  >
-                    Create
-                  </button>
-                </div>
+        <div className="sb-row row">
+          <div className="col-sm-10 col-md-8 col-lg-6 mx-auto ">
+            <div className="sb">
+              <div className="sb-message">
+                <h1>Select Your Workspace</h1>
               </div>
-            )}
+
+              <div className="board-list">
+                {boards.map((board) => (
+                  <div
+                    key={board.board_id}
+                    className="board-item"
+                    onClick={(e) => handleBoardSelect(board.board_id, e)}
+                  >
+                    <span>{board.board_name}</span>
+                    {/* Delete button should be rendered ONLY when board.is_owner is true! (i.e. the user is the owner of the board) */}
+                    {board.is_owner && (
+                      <button
+                        onClick={(e) => handleDelete(board.board_id, e)}
+                        className="unsubscribe-btn"
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="footer">
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="create-board-btn"
+                >
+                  Create New Board
+                </button>
+              </div>
+
+              {/* Custom Modal for Creating New Board */}
+              {showModal && (
+                <div className="modal">
+                  <div className="modal-content">
+                    <span
+                      className="modal-close"
+                      onClick={() => setShowModal(false)}
+                    >
+                      &times;
+                    </span>
+                    <h2>Create a New Board</h2>
+                    <input
+                      type="text"
+                      value={newBoardName}
+                      onChange={handleNewBoardNameChange}
+                      placeholder="Board name"
+                      className="modal-input"
+                    />
+                    <button
+                      onClick={handleCreateBoard}
+                      className="modal-create-btn"
+                    >
+                      Create
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
