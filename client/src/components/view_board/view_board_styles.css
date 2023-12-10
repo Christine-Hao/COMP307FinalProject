@@ -5,7 +5,7 @@ html, body {
 
 .h-100 {
     height: calc(100vh - 65px);
-    min-height: 750px;
+    min-height: 550px;
 }
 
 .channels-list, .messages-section, .left-board-info {

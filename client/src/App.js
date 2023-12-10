@@ -7,11 +7,6 @@ import Navbar from './components/Navbar/Navbar';
 
 function App() {
 
-  //  return (
-  //  <div>
-  //  <SelectBoard />
-  //  </div>)}
-
   const [currentPage, setCurrentPage] = useState('login');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState(null); 
@@ -75,23 +70,25 @@ function App() {
       case 'selectBoard':
         // return <SelectBoard onBoardSelect={handleBoardSelect} />;
         return <SelectBoard onBoardSelect={handleBoardSelect} />;
-      case 'discussionBoard':
-        return <DiscussionBoard boardId={selectedBoardId} />;
-      default:
-        return <div>Page not found</div>;
+        case 'discussionBoard':
+          // Render Navbar only on DiscussionBoard page
+          return (
+            <div>
+              {isLoggedIn && <Navbar handleLogout={handleLogout} handleWorkspacesClick={handleWorkspacesClick} />}
+              <DiscussionBoard boardId={selectedBoardId} />
+            </div>
+          );
+        default:
+          return <div>Page not found</div>;
+      }
     }
-
+  
+    return (
+      <div>
+        {renderContent()}
+      </div>
+    );
   }
-
-  return (
-    <div>
-      {isLoggedIn && <Navbar handleLogout={handleLogout} handleWorkspacesClick={handleWorkspacesClick} />}
-      {renderContent()}
-    </div>
-  );
-
- 
-}
 
 
 export default App;
