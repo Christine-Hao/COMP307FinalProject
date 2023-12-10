@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import './view_board_styles.css'
+
 
 const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
 
@@ -20,7 +23,7 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
         try {
 
             if(isUserAlreadyMember(email)){
-                setError("Member already added to this board!");
+                setError("This user is already a member of this board.");
                 return;
             }
 
@@ -38,7 +41,7 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
                 updateMembers(); // Update member list on success.
             } else {
                 const data = await response.json();
-                setError(data.message||'Failed to add member!');
+                setError(data.message||'Failed to add member.');
             }
         } catch (err) {
             setError('Error adding member!');
@@ -49,7 +52,7 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
 
         try {
             if(boardMembers.some(member => member.is_owner && member.email === email)){
-                setError("Cannot remove yourself because you are the owner!");
+                setError("A board owner cannot be removed as member.");
                 return;
             }
 
@@ -78,15 +81,34 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
 
     return (
         <div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <input 
+            {/* <input 
                 type="email" 
                 value={email} 
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter user email"
-            />
-            <button onClick={handleAddMember}>Add Member</button>
-            <button onClick={handleRemoveMember}>Remove Member</button>
+            /> */}
+            <div className="rounded-box">
+                <h3 className="board-title">Membership Management</h3>
+                <p className="text-in-rounded">Enter the email of a user you wish to add or remove.</p>
+                {error && <p className="error-message">Error: {error}</p>}
+                <Form className="define-user-form">
+                    <Form.Group className="d-flex">
+                        <Form.Control
+                            className="define-user-textbox"
+                            type="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter user email"
+                        />
+                    </Form.Group>
+                </Form>
+                <Button variant="primary" className="define-user-button" size="md" onClick={handleAddMember}>
+                    Add Member
+                </Button>{' '}
+                <Button variant="secondary" className="define-user-button" size="md" onClick={handleRemoveMember}>
+                Remove Member
+                </Button>
+            </div>
         </div>
     );
 };

@@ -6,102 +6,37 @@ body {
     margin: 0px;
 }
 
-.custom-nav {
+.site-nav {
     height: 65px;
     width: 100%;
     background-color: #343a40;
     position: relative;
 }
 
-.custom-nav-header {
+.site-nav-header, .site-nav-links {
     display: inline;
 }
 
-.custom-nav-title {
+.site-nav-title {
     display: inline-block;
     font-size: 22px;
     color: #fff;
     padding: 10px 10px;
 }
 
-.custom-nav-btn {
-    display: none;
-}
-
-.custom-nav-links {
-    display: inline;
+.site-nav-links {
     float: right;
     font-size: 18px;
     padding-right: 20px;
     padding-top: 17px
 }
 
-.custom-nav-link {
-    display: inline-block;
-    padding: 20.5px 10px;
-    text-decoration: none;
-    color: #efefef;
-}
-
-.custom-nav-link:hover {
+.site-nav-link:hover {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.custom-nav-check {
+.site-nav-check {
     display: none;
-}
-
-@media (max-width:600px) {
-    .custom-nav-btn {
-        display: inline-block;
-        position: absolute;
-        right: 0px;
-        top: 0px;
-    }
-
-    .custom-nav-btn-label {
-        display: inline-block;
-        width: 50px;
-        height: 65px;
-        padding: 24.5px;
-    }
-
-    .custom-nav-btn-label:hover, 
-    .custom-nav-checked:checked ~ .custom-nav-btn-label {
-        background-color: rgba(0, 0, 0, 0.3);
-    }
-
-    .custom-nav-btn-span {
-        display: block;
-        width: 25px;
-        height: 10px;
-        border-top: 2px solid #eee;
-    }
-
-    .custom-nav-links {
-        position: absolute;
-        display: block;
-        width: 100%;
-        background-color: #333;
-        height: 0px;
-        transition: all 0.3s ease-in;
-        overflow-y: hidden;
-        top: 65px;
-    }
-
-    .custom-nav-link {
-        display: block;
-        width: 100%;
-    }
-
-    .custom-nav-unchecked:not(:checked) ~ .custom-nav-links {
-        height: 0px;
-    }
-
-    .custom-nav-checked:checked ~ .custom-nav-links {
-        height: calc(100vh - 65px);
-        overflow-y: auto;
-    }
 }
 
 /* dropdown */
@@ -149,7 +84,6 @@ body {
     overflow: hidden;
     background-color: #eceeef;
 }
-
 
 .navbar-username{
     margin-right: 10px;

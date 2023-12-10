@@ -3,43 +3,29 @@ html, body {
     margin: 0;
 }
 
-.vh-100, .h-100 {
-    height: 100vh;
+.h-100 {
+    height: calc(100vh - 65px);
+    min-height: 750px;
 }
 
-.channels-list, .messages-section, .channel-info {
+.channels-list, .messages-section, .left-board-info {
     background-color: #1f1f1f;
+    text-align: center;
     padding: 10px;
     overflow-y: auto;
 }
 
-.channels-list, .messages-section, .channel-info {
-    background-color: #1f1f1f;
-    padding: 10px;
-    overflow-y: auto;
-}
-
-.channel, .message {
+.message {
     border-bottom: 1px solid #333;
     padding: 5px;
     color: #ddd;
 }
-
-.channel {
-    font-size: 20px;
-}
-
 .message {
     display: flex;
     align-items: flex-start;
     border-bottom: 1px solid #333;
     padding: 5px;
     color: #ddd;
-}
-
-.profile-pic {
-    border-radius: 50%;
-    margin-right: 10px;
 }
 
 .message-content {
@@ -54,14 +40,18 @@ html, body {
 .message-sender {
     margin-right: 10px;
     font-size: 18px;
+    font-weight: bold;
 }
 
-.message-time {
-    font-size: 0.8em;
-    color: #bbb;
-    font-size: 15px;
+.message-timestamp, .message-sender {
+    display: inline;
 }
 
+.message-timestamp {
+    color: grey;
+    font-size: 13px;
+    font-style: oblique;
+}
 .message-text {
     margin-left: 50px;
     font-size: 22px;
@@ -79,30 +69,38 @@ html, body {
 .message-input-form {
     padding: 10px;
     background-color: #1f1f1f;
-    margin-right: 5px;
+    width: 100%;
 }
 
-.board-description {
-    font-size: 20px;
+.message-input-form .d-flex {
+    display: flex;
+    align-items: center;
 }
 
-.channel-title {
+.message-textbox {
+    flex-grow: 1;
+    margin-right: 10px;
+    color: black;
+}
+
+.message-textbox::placeholder {
+    color: #2a2727;
+    font-size: 15px;
+    font-style: oblique;
+}
+
+.left-board-title {
     font-size: 40px;
     margin-left: 10px;
 }
 
-.board-title, .channel-header, .channel-title, h2, h3 {
+.board-title, .left-board-header, .left-board-title, h2, h3, .user-list, .text-in-rounded {
     color: white;
 }
 
-.channel-header, .board-title {
-    font-size: 35px;
+.left-board-header, .board-title {
+    font-size: 30px;
     font-weight: bold;
-    margin-top: 20px;
-}
-
-.selected-channel {
-    font-style: italic;
 }
 
 .border-dividers {
@@ -112,7 +110,8 @@ html, body {
 
 .message-button {
     height: 50px;
-    width: 70px;
+    width: 80px;
+    display: inline;
 }
 
 .message-textbox {
@@ -124,11 +123,87 @@ html, body {
     font-size: 20px;
 }
 
-.outer-page {
-    max-height: calc(100vh - 65px); /* Adjusted height considering the navbar */
-    overflow-y: auto; /* Enables scrolling for the content */
+.outer-viewboard-page {
+    max-height: calc(100vh - 65px);
+    overflow-y: auto;
+    background-color: #1f1f1f;
+    min-width: 500px;
 }
 
-.vh-100, .h-100 {
-    height: calc(100vh - 65px); /* Subtract the navbar height */
+.messages-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.message-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+@media (max-width: 767.98px) {
+    .channels-list, .messages-section, .left-board-info {
+        border-bottom: 1px solid darkslategrey;
+    }
+    .left-board-info {
+        border-bottom: none;
+    }
+} 
+
+.rounded-box {
+    background-color:#323949;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-list {
+    text-align: left;
+}
+
+.list-username {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.list-email {
+    font-style: oblique;
+    color: #D3D3D3;
+    font-size: 15px;
+}
+
+.text-in-rounded {
+    font-size: 20px;
+}
+
+.message-input-form {
+    padding: 10px;
+    background-color: #1f1f1f;
+    width: 100%;
+}
+
+.define-user-form .d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.define-user-textbox {
+    margin-bottom: 10px;
+    flex-grow: 1;
+    margin-right: 10px;
+    color: black;
+}
+
+.define-user-textbox::placeholder {
+    color: #2a2727;
+    font-size: 15px;
+    font-style: oblique;
+}
+
+.error-message {
+    font-style: oblique;
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
 }

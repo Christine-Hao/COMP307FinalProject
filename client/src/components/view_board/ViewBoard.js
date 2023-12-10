@@ -151,18 +151,20 @@ const DiscussionBoard = ({boardId}) => {
     }
 
     return (
-        <div className="d-flex flex-column vh-100 outer-page">
-            {/* <Navbar /> */}
+        <div className="d-flex outer-viewboard-page">
             <Container fluid className="flex-grow-1">
                 <Row className="h-100">
-                <Col md={2} className="channels-list h-100 p-5">
-                    <h3>Welcome to <span className="channel-header">{boardName}</span></h3>
+                <Col lg={2} md={3} sm={12} className="channels-list p-5">
+                    <div className="rounded-box">
+                        <h3>Welcome to</h3>
+                        <h3 className="left-board-header">{boardName}</h3>
+                    </div>
                 </Col>
 
-                <Col md={7} className="messages-section d-flex flex-column h-100 border-dividers">
-                    <p className="channel-title">General</p>
+                <Col lg={7} md={6} sm={12} className="messages-section d-flex h-100 border-dividers">
+                    <p className="left-board-title">Chat</p>
                     
-                    <div className="message-list flex-grow-1">
+                    <div className="message-list flex-grow-1" style={{ textAlign: "left"}}>
 
                         {messages.map((msg, index) => (
 
@@ -172,11 +174,21 @@ const DiscussionBoard = ({boardId}) => {
                                     <div className="message-header">
                                         {/* set the content to the sender(msg.username) returned from our backend */}
                                         <span className="message-sender">{msg.username}</span>
+                                        <div className="message-timestamp">
+                                        {new Date(msg.created_at).toLocaleString(undefined, { 
+                                            year: 'numeric', 
+                                            month: 'numeric', 
+                                            day: 'numeric', 
+                                            hour: '2-digit', 
+                                            minute: '2-digit',
+                                            hour12: true,
+                                            hourCycle: 'h12'
+                                        })}
+                                        </div>
                                         {/* <span className="messange-time">{msg.time}</span> */}
                                     </div>
                                     {/* also set the content */}
                                     <div className="message-text">{msg.content}</div>
-                                    <div className="message-timestamp">{new Date(msg.created_at).toLocaleString()}</div>
                                 </div>
                             </div>
                         ))}
@@ -186,7 +198,7 @@ const DiscussionBoard = ({boardId}) => {
 
                     </div>
                     <div className="flex-fill">
-                        item
+                        {/* empty */}
                     </div>
                     <Form className="message-input-form" onSubmit={handleFormSubmit}>
                         <Form.Group className="d-flex">
@@ -202,28 +214,24 @@ const DiscussionBoard = ({boardId}) => {
                     </Form>
                 </Col>
 
-                {/* Board Management Section */}
-                <BoardManagement 
-                    boardId={boardId} 
-                    isOwner={isOwner} 
-                    boardMembers={boardMembers}
-                    updateMembers={updateMembers}
-                />
-
-
                 {/* Right Column: Channel Info */}
-                <Col md={3} className="channel-info h-100 p-5">
-                    <h3 className="board-title">Channel Members</h3>
-                    {/* <p className="board-description">Here is a discussion board. It is generic.</p> */}
-                    {/* Add more info here */}
-                    <ul>
-                        {boardMembers.map(member => (
-                            <li key={member.id}>
-                                <div>{"Username: " + member.username}</div>
-                                <div>{"Email: " + member.email}</div>
-                            </li> // Adjust later
-                        ))}
-                    </ul>
+                <Col lg={3} md={3} sm={12} className="left-board-info p-5">
+                    <div className="rounded-box">
+                        <h3 className="board-title">Channel Members</h3>
+                            {boardMembers.reverse().map(member => (
+                                <p key={member.id} className="user-list">
+                                    <span className="list-username">{member.username} </span> 
+                                    <span className="list-email">({member.email})</span>
+                                </p>
+                            ))}
+                        {/* Board Management Section */}
+                    </div>
+                    <BoardManagement 
+                        boardId={boardId} 
+                        isOwner={isOwner} 
+                        boardMembers={boardMembers}
+                        updateMembers={updateMembers}
+                    />
                 </Col>
                 </Row>
             </Container>

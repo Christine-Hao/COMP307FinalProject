@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import SelectBoard from './components/select_board/SelectBoard';
-import DiscussionBoard from './components/view_board/view_board_backup';
+import DiscussionBoard from './components/view_board/ViewBoard';
 import Navbar from './components/Navbar/Navbar';
 
 function App() {
