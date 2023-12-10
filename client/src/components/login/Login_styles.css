@@ -1,9 +1,11 @@
 /* Base styles */
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
 }
-.container{ /*This will also influence registration page*/
+.container {
+  /*This will also influence registration page*/
   height: 100vh;
 }
 
@@ -49,14 +51,13 @@ body, html {
   padding: 7px;
   border-radius: 13px;
   width: 100%;
-  background-color:rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Placeholder styles */
 input::placeholder {
   font-size: 12px;
   color: #a4a3a3;
-
 }
 
 /* Button styles */
@@ -67,8 +68,8 @@ input::placeholder {
   margin-bottom: 40px;
 }
 
-.login-button button:hover{
- background-color:rgb(255, 204, 2) ;
+.login-button button:hover {
+  background-color: rgb(255, 204, 2);
 }
 
 .login-form button {
@@ -105,4 +106,34 @@ input::placeholder {
 .login-row p,
 label {
   color: white;
+}
+
+/*Change Font size for smaller screens*/
+@media (max-width: 680px) {
+  /* Welcome message styles */
+  .welcome-message {
+    font-size: 19px;
+  }
+  .login-row label,
+  p {
+    font-size: 12px;
+  }
+  .login-form button {
+    padding: 6px 35px;
+    font-size: 12px;
+    border-radius: 15px;
+  }
+  input::placeholder {
+    font-size: 10px;
+    color: #a4a3a3;
+  }
+  .login-form input {
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 13px;
+    width: 100%;
+    font-size: 13px;
+  
+  }
+
 }
