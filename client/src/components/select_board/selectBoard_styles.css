@@ -1,3 +1,5 @@
+
+
 .select-board-outer {
   background-image: url("./discussion_board.png");
   background-size: cover;
@@ -6,6 +8,55 @@
   color: white;
   position: relative; /* If you want to absolutely position any child inside */
 }
+/*Nav Bar*/
+.select-board-outer .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px; /* Adjust the height as needed */
+  background: rgba(58, 60, 76, 0.8); /* Semi-transparent black */
+  color: white;
+  display: flex;
+  justify-content: space-between; /* This will place the logo on the left and the link on the right */
+
+  align-items: center;
+  padding: 0 20px; /* Padding on the sides */
+  z-index: 1000; /* Ensures the navbar stays on top */
+}
+.navbar-logo {
+  height: 3cap; 
+  margin-left: 10px; /* Add some margin to the left if needed */
+ 
+  display: block;
+  margin-left: 10px;
+ 
+}
+.logout-link {
+  color: rgb(218, 218, 218); /* Color for the logout text */
+  cursor: pointer;
+  padding: 10px 20px; /* Padding for clickable area */
+  text-decoration: none; /* Remove underline from links */
+
+}
+.logout-link:hover{
+  color: white;
+  text-decoration: none; /* Remove underline from links */
+}
+.logo-and-title {
+  display: flex;
+  align-items: center; /* Align the logo and text vertically */
+  margin-right: 60%;
+
+}
+.sb-message{
+  margin-left: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+
+
 
 .sb-wrapper{
   background: rgba(36, 39, 67, 0.6); /* Semi-transparent black */
@@ -16,10 +67,7 @@
   justify-content: center; /* Align children vertically in the center */
   align-items: center; /* Align children horizontally in the center */
 }
-.sb h1{
-  margin-top: 40px;
-  text-align: center;
-}
+
 
 
 .board-list {
@@ -27,13 +75,13 @@
   max-width: 600px; /* Adjust the maximum width as needed */
   overflow-y: auto; /* Add scroll if content overflows */
   flex-grow: 1; /* This will allow this section to take up available space */
-  
-  height: 65vh; 
+ 
+  height: 70vh; 
   overflow-y: auto; /* This will add a scrollbar when the content exceeds max-height */
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: rgba(0, 0, 0, 0.5) transparent; /* For Firefox */
-  padding-right: 15px;
-  margin: 40px;
+  
+  margin-top:80px;
 }
 /* Styles for Webkit browsers like Chrome, Safari */
 .board-list::-webkit-scrollbar {
@@ -53,6 +101,16 @@
   background-color: rgba(255, 255, 255, 0.6); /* Slightly lighter on hover */
 }
 
+/*If there is no board*/
+.no-boards-message {
+  height: 70vh; 
+  color: #fff; /* White text color */
+  text-align: center; /* Center the text */
+  padding: 20px; /* Add some padding */
+  font-size: 12px; /* Increase the font size */
+  margin-top: 80px;
+}
+
 .board-item {
   cursor: pointer;
   padding: 10px;
@@ -65,6 +123,7 @@
   align-items: center;
   margin-bottom: 10px;
   overflow: auto;
+
   white-space: normal; /* Ensures text wraps and doesn't stay on one line */
 }
 
@@ -93,7 +152,13 @@
   border: none;
   cursor: pointer;
   display: block; /* Makes the button a block-level element */
-  margin: 0 auto; /* Auto margins on both sides */
+  margin-top: 20px ; /* Auto margins on both sides */
+}
+.footer {
+  display: flex;
+  justify-content: center; /* Align horizontally in the center */
+  align-items: center; /* Align vertically in the center */
+  padding: 20px; /* Add padding as needed */
 }
 
 /*Pop-up for cerate board*/
@@ -150,13 +215,34 @@
 }
 
 
-@media (max-width: 680px) {
-  .sb h1{
-   font-size: 20px;
-  } 
+
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 5px; /* Reduce padding on smaller screens */
+  }
+  
+  .sb-message {
+    margin-left: 5px; /* Reduce space between logo and title on smaller screens */
+    font-size: 16px; /* You might want to adjust font size for smaller screens */
+  }
+  
+  .navbar-logo {
+    height: 30px; /* Adjust logo size for smaller screens if necessary */
+  }
   .board-list {
     max-width: 250PX;
     max-height: 600px;
   }
   
+  /* If needed, hide title on very small screens */
+  @media (max-width: 480px) {
+    .sb-message {
+      display: none;
+    }
+    .board-list {
+      max-width: 250PX;
+      max-height: 600px;
+    }
+  }
 }

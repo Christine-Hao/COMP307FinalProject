@@ -6,9 +6,61 @@ import DiscussionBoard from './components/view_board/ViewBoard';
 import Navbar from './components/Navbar/Navbar';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('login');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedBoardId, setSelectedBoardId] = useState(null); 
+
+
+  const handleLoginSuccess = (token, userId) => {
+    localStorage.setItem('token', token) // store the token
+    localStorage.setItem('userId', userId);
+    setIsLoggedIn(true);
+    setCurrentPage('selectBoard'); // Set the current page to 'selectBoard'
+
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // clear the token upon logging out
+    setIsLoggedIn(false);
+    setCurrentPage('login'); // Redirect back to login page after logout
+  };
+
+  const handleBoardSelect = (boardId) => {
+    setSelectedBoardId(boardId);
+    localStorage.setItem('selectedBoardId', boardId); // store the selected board ID
+    setCurrentPage('discussionBoard'); // Change to board page
+  };
+
+  const handleWorkspacesClick = () => {
+    setCurrentPage('selectBoard');
+    localStorage.removeItem('selectedBoardId');
+  };
+
+  const handleRegistrationSuccess = () => {
+    setCurrentPage('login'); // Redirect to login page after successful registration
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const savedBoardID = localStorage.getItem('selectedBoardId');
+    // if the browser has token, then we consider that it is logged in
+    if(token){
+
+      setIsLoggedIn(true);
+
+      if(savedBoardID){
+        setSelectedBoardId(savedBoardID);
+        setCurrentPage('discussionBoard');
+      }else{
+        setCurrentPage('selectBoard');
+      }
+    }
+
+  }, 
+  []);
   return (
     <div>
-      <SelectBoard />
+     <SelectBoard onBoardSelect={handleBoardSelect} onLogout={handleLogout} />
     </div>
   )}
   /*
@@ -74,7 +126,7 @@ function App() {
         return <Registration onLoginClick={() => setCurrentPage('login')} onRegistrationSuccess={handleRegistrationSuccess} />;
       case 'selectBoard':
         // return <SelectBoard onBoardSelect={handleBoardSelect} />;
-        return <SelectBoard onBoardSelect={handleBoardSelect} />;
+        return <SelectBoard onBoardSelect={handleBoardSelect} onLogout={handleLogout} />;
         case 'discussionBoard':
           // Render Navbar only on DiscussionBoard page
           return (

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./selectBoard_styles.css";
 
-const SelectBoardPage = ({ onBoardSelect }) => {
+const SelectBoardPage = ({ onBoardSelect,onLogout }) => {
   const [boards, setBoards] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [newBoardName, setNewBoardName] = useState("");
+
 
   useEffect(() => {
     const fetchUserBoards = async () => {
@@ -106,16 +107,24 @@ const SelectBoardPage = ({ onBoardSelect }) => {
 
   return (
     <div className="select-board-outer">
+      <div className="navbar">
+        <div className="logo-and-title">
+          <img src="benzene-logo.png" alt="Logo" className="navbar-logo" />
+          <div className="sb-message">Your Workspaces</div>
+        </div>
+
+        <a onClick={onLogout} className="logout-link">
+          Logout
+        </a>
+      </div>
       <div className="container sb-wrapper">
         <div className="sb-row row">
           <div className="col-sm-10 col-md-8 col-lg-6 mx-auto ">
             <div className="sb">
-              <div className="sb-message">
-                <h1>Select Your Workspace</h1>
-              </div>
-
-              <div className="board-list">
-                {boards.map((board) => (
+              
+              {boards.length > 0 ? (
+        <div className="board-list">
+             {boards.map((board) => (
                   <div
                     key={board.board_id}
                     className="board-item"
@@ -133,7 +142,15 @@ const SelectBoardPage = ({ onBoardSelect }) => {
                     )}
                   </div>
                 ))}
-              </div>
+        </div>
+      ) : (
+        <div className="no-boards-message">
+          <p>It looks like you don't have any workspaces yet...</p>
+          <p>Create a workspace and start bonding!</p>
+        </div>
+      )}
+             
+              
               <div className="footer">
                 <button
                   onClick={() => setShowModal(true)}
