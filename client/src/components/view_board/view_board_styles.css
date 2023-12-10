@@ -1,11 +1,26 @@
+/* general page styling */
+
 html, body {
     height: 100%;
     margin: 0;
 }
 
+.text-white {
+    color:white;
+}
+
+.text-black {
+    color: black;
+}
+
 .h-100 {
-    height: calc(100vh - 65px);
-    min-height: 550px;
+    height: calc(100vh - 55px); /* to fit 55 px navbar */
+}
+
+@media (min-width: 577px) {
+    .message-section-height { 
+        height: calc(100vh - 55px); /* to fit 55 px navbar */
+    }
 }
 
 .channels-list, .messages-section, .left-board-info {
@@ -53,6 +68,7 @@ html, body {
     font-style: oblique;
 }
 .message-text {
+    white-space: pre-wrap; /* support line breaks */
     margin-left: 50px;
     font-size: 22px;
 }
@@ -64,6 +80,7 @@ html, body {
 
 .message-list {
     overflow-y: auto;
+    text-align: left;
 }
 
 .message-input-form {
@@ -81,6 +98,8 @@ html, body {
     flex-grow: 1;
     margin-right: 10px;
     color: black;
+    overflow: 'hidden';
+    resize: 'none'
 }
 
 .message-textbox::placeholder {
@@ -94,18 +113,9 @@ html, body {
     margin-left: 10px;
 }
 
-.board-title, .left-board-header, .left-board-title, h2, h3, .user-list, .text-in-rounded {
-    color: white;
-}
-
 .left-board-header, .board-title {
     font-size: 30px;
     font-weight: bold;
-}
-
-.border-dividers {
-    border-left: 2px solid #212529;
-    border-right: 2px solid #212529;
 }
 
 .message-button {
@@ -124,16 +134,20 @@ html, body {
 }
 
 .outer-viewboard-page {
-    max-height: calc(100vh - 65px);
+    /* max-height: calc(100vh - 55px); */
     overflow-y: auto;
     background-color: #1f1f1f;
-    min-width: 500px;
+    min-width: 300px;
 }
 
 .messages-section {
     display: flex;
     flex-direction: column;
     height: 100%;
+
+    /* creates borders in between sections */
+    border-left: 2px solid #212529;
+    border-right: 2px solid #212529;
 }
 
 .message-list {
@@ -141,25 +155,26 @@ html, body {
     overflow-y: auto;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 992px) {
     .channels-list, .messages-section, .left-board-info {
         border-bottom: 1px solid darkslategrey;
     }
     .left-board-info {
         border-bottom: none;
     }
-} 
+}
 
 .rounded-box {
     background-color:#323949;
     border-radius: 15px;
-    padding: 20px;
+    padding: 15px;
     margin: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .user-list {
     text-align: left;
+    overflow-wrap: break-word;
 }
 
 .list-username {
@@ -206,4 +221,14 @@ html, body {
     font-size: 15px;
     color: white;
     font-weight: bold;
+}
+
+.message-textbox.auto-resize-textarea {
+    max-height: 100px;
+}
+
+.empty-chat-message {
+    color: grey;
+    font-style: italic;
+    text-align: center;
 }

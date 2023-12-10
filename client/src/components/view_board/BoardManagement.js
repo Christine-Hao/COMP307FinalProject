@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import './view_board_styles.css'
 
 
@@ -82,13 +82,7 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
 
     return (
         <div>
-            {/* <input 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter user email"
-            /> */}
-            <div className="rounded-box">
+            <div className="rounded-box text-white">
                 <h3 className="board-title">Membership Management</h3>
                 <p className="text-in-rounded">Enter the email of a user you wish to add or remove.</p>
                 {error && <p className="error-message">Error: {error}</p>}
@@ -100,15 +94,17 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
                             value={email} 
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Enter user email"
+                            maxLength={50}
                         />
                     </Form.Group>
+                    <Button variant="primary" className="define-user-button" size="md" onClick={handleAddMember}>
+                        Add Member
+                    </Button>{' '}
+                    <Button variant="secondary" className="define-user-button text-black" size="md" onClick={handleRemoveMember}>
+                    Remove Member
+                    </Button>
                 </Form>
-                <Button variant="primary" className="define-user-button" size="md" onClick={handleAddMember}>
-                    Add Member
-                </Button>{' '}
-                <Button variant="secondary" className="define-user-button" size="md" onClick={handleRemoveMember}>
-                Remove Member
-                </Button>
+
             </div>
         </div>
     );
