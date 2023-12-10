@@ -1,6 +1,6 @@
 /*
 In our project, we assume there is only a default channel(i.e. general) for each board.
-Those database-level channel functions work with the discussionController.js
+Those database-level channel functions work with the discussion Controller
  */
 
 import pool from '../config/db.js';
@@ -48,7 +48,8 @@ const ChannelModel = {
 
     // remove a member from all channels of a board
     async removeAllChannelsMember(boardID, userID){
-        // first, select all channels that the user has
+
+        // firstly, select all channels that the user has
         // secondly, narrow-down the range of channels to those that the user joins in a particular board
         // then, remove those channels from the database.
         await pool.query(

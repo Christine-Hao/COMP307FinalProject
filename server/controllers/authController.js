@@ -11,14 +11,12 @@ export async function login(req, res) {
     const user = await UserModel.findByEmail(email);
 
     // check if user exists, and check if the provided password matches with the stored one.
-    // bcrypt.compare -> hashes the entered password(left argument), and compare with the correct password(expect to be hashed)
     if(!user || !await bcrypt.compare(password, user.password)){
         return res.status(401).json({ message: "Invalid credentials upon login checking" });
     }
 
     // 1. generates a Json  Web Token.
     // 2. encodes: the user.id from the database
-    // purpose: To confirm the identity of the user on subsequent requests.
     const token = jwt.sign({userID: user.id}, process.env.JWT_SECRET, {expiresIn: '12h' });
 
     res.json({token, userID: user.id});
@@ -26,10 +24,7 @@ export async function login(req, res) {
 
 export async function register(req, res) {
     const {fullname, username, password, email} = req.body;
-    // console.log("fullname:", fullname);
-    // console.log("username:", username);
-    // console.log("password:", password);
-    // console.log("email:", email);
+
     try{
         const existingUser = await UserModel.findByEmail(email);
         if(existingUser){

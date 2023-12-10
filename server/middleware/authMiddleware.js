@@ -17,20 +17,19 @@ export function verifyToken(req, res, next) {
 
   try {
 
-    // step 1. It verifies the JWT using the secret key from the .env file (i.e. the environment variable...)
-    // step 2. If the JWT is invalid or expired, it sends a 400 status response.
+    // verifies the JWT using the secret key from the .env
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Now, we can add the decoded info to the req.user (token should contain userID (implmented in controller??))
+    // Now, we can add the decoded info to the req.user (token should contain userID)
     // req.user would be set to sth like: {userID: ActualID }
     req.user = decoded; 
 
-    // we can do next() without any argument: current function is done.
     next(); 
+
     //console.log("Authmiddleware check is valid. The decoded token:", req.user);
 
   } catch (error) {
     // bad request
-    res.status(400).json({ message: 'Invalid token.' });
+    res.status(400).json({ message: 'Invalid token. Request is blocked!' });
   }
 }

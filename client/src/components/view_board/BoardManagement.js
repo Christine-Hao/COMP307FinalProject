@@ -11,9 +11,9 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
     useEffect(() => {
         let timer;
         if(error){
-            timer = setTimeout(() => setError(''), 4000); // clear after few secs
+            timer = setTimeout(() => setError(''), 4000);
         }
-        return () => clearTimeout(timer); // clear timer
+        return () => clearTimeout(timer);
     })
     const isUserAlreadyMember = (email) => {
         return boardMembers.some(member => member.email === email);
@@ -38,7 +38,7 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
 
             if (response.ok) {
                 setEmail('');
-                updateMembers(); // Update member list on success.
+                updateMembers();
             } else {
                 const data = await response.json();
                 setError(data.message||'Failed to add member.');
@@ -67,7 +67,7 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
 
             if (response.ok) {
                 setEmail('');
-                updateMembers(); // Update member list on success...
+                updateMembers();
             } else {
                 const data = await response.json();
                 setError(data.message||'Failed to remove member');
@@ -77,7 +77,8 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
         }
     };
 
-    if (!isOwner) return null; // Hide if not owner ?
+    // Hide if not owner
+    if (!isOwner) return null;
 
     return (
         <div>

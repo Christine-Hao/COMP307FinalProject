@@ -9,20 +9,20 @@ import { verifyToken } from '../middleware/authMiddleware.js';
 
 // api prefix in server.js: /api/boards/
 
-/*full server side api:
+/*our full list of server side api, related to discussion boards(both select-board & individual board):
 GET:
-api/boards/userBoards
-api/boards/userBoards/members/:boardID
-api/boards/userBoards/messages/:boardID
-api/boards/userBoards/name/:boardID
+api/boards/userBoards                         -> get the boards of a user
+api/boards/userBoards/members/:boardID        -> get the board members
+api/boards/userBoards/messages/:boardID       -> get the messages of a board
+api/boards/userBoards/name/:boardID           -> get a specific board
 
 POST:
-api/boards/userBoards/createBoard
-api/boards/userBoards/addMember
+api/boards/userBoards/createBoard             -> create a board
+api/boards/userBoards/addMember               -> add members to the board
 
 DELETE:
-api/boards/userBoards/deleteBoard/:boardID
-api/boards/userBoards/removeMember
+api/boards/userBoards/deleteBoard/:boardID   -> delete a board
+api/boards/userBoards/removeMember           -> delete a member to the board
 
 */
 

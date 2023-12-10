@@ -1,14 +1,10 @@
-// We are in: server/models/boardModel.js
+// Inside: server/models/Board.js
 import pool from '../config/db.js';
 
 const BoardModel = {
 
   async findByUserId(userId){   
-  
-    // give "boards" an alias called "b", and "board_members" an alias called "bm"
-    // inner join -> all records in boards with the board_members table
-    // join condition -> b.board_id = bm.board_id
-    // where statement -> filters results, include only boards of specified user_id
+
     const result = await pool.query(
       'SELECT b.*, (b.user_id = $1) as is_owner FROM boards b INNER JOIN board_members bm ON b.board_id = bm.board_id WHERE bm.user_id = $1',
       [userId]
@@ -27,14 +23,12 @@ const BoardModel = {
       try {
         const result = await pool.query("SELECT * FROM boards WHERE board_id = $1", [boardID]);
 
-        console.log('findByBoardId result:', result.rows[0]); // Log the result
+        console.log('findByBoardId result:', result.rows[0]);
 
         return result.rows[0];
       } catch (error) {
-        console.error('Error in findByBoardId:', error); // Log any error that occurs
-
-        throw error; // Re-throw the error to be handled by the caller
-        throw error;
+        console.error('Error in findByBoardId:', error);
+        // throw error;
       }
     },
     

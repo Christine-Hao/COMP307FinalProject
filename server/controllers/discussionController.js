@@ -9,8 +9,9 @@ import MessageModel from "../models/Message.js";
 export async function getBoards(req, res) {
   
   try {
-    // the authMiddleware will decode the token and assign the decoded to req.user
-    // req.user is of the form {userID : ActualID}
+
+    // we used the authMiddleware to decode the token and assign the decoded to req.user
+    // req.user should be of the form {userID : ActualID}
     const boards = await BoardModel.findByUserId(req.user.userID);
     
     res.json(boards);
@@ -51,7 +52,7 @@ export const getBoardMembers = async (req, res) => {
 };
 
 // create a board for the user
-// Additionally, create a default channel (general) for the board
+// Additionally, create a default channel (called general) for the board
 export async function createBoard(req, res) {
   
   const{ boardName } = req.body;
@@ -80,16 +81,11 @@ export async function createBoard(req, res) {
 
 export async function deleteBoard(req, res) {
 
-  // assume the deleted board ID is known in the request URL path's parameters
   const {boardID} = req.params;
-  // console.log("In discussionController deleteBoard");
-  // console.log("board ID to delete:", boardID);
-  // console.log("user ID that requests:", req.user.userID);
 
   try{
 
     const board = await BoardModel.findByBoardId(boardID);
-    // console.log("The board found by the ID:", board);
 
     // 1. check if board exists
     if(!board){
@@ -97,12 +93,10 @@ export async function deleteBoard(req, res) {
     }
 
     // 2. check if board owner is the user who requests for deletion
-    // assume req.user is the decoded token, which is of the form {userID: ActualID}
+
     if(board.user_id !== req.user.userID){
       return res.status(403).json({message:"Not authorized to delete this board."});
     }
-
-    // console.log("Before removing all channels.");
 
     // 3. if passing the check, delete all messages in the baord
     const defaultChannel = await ChannelModel.findDefaultChannel(boardID);

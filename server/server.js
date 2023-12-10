@@ -1,7 +1,9 @@
-// entry point of Node.js server
-// sets up the Express server with middleware(e.g. cors and express.json())
-// cors means Cross-Origin Resource Sharing, allowing frontend to communicate with the backend.
-// This file tells the server to use routes defined in users.js
+/* Description:
+1. entry point of Node.js server
+2. sets up the Express server with middleware(e.g. cors and express.json())
+3. This file tells the server to use routes manually defined in the routes folder
+4. Sets up socket.io connection with the client, listens & emits incoming messages and store it in the database.
+*/
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
@@ -17,13 +19,12 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors:{
-        // origin: "http://localhost:3000", //replace when on remote
+        // origin: "http://localhost:3000", // testing on local
         origin: `https://doublebound.onrender.com`,
         methods: ["GET", "POST"]
     }
 });
 
-// the middlewares
 app.use(cors());
 app.use(express.json());
 
@@ -34,7 +35,8 @@ app.use('/api/boards', discussionRoutes);
 
 // Socket.IO setup
 io.use((socket, next) => {
-    // assume token is sent as a parameter
+    
+    // token is sent as a parameter
     const token = socket.handshake.query.token;
     if(!token){
         return next(new Error("Authentication error: No token provided"));
@@ -62,7 +64,7 @@ io.on('connection', (socket) => {
 
     socket.on('message', async(boardID, content) => {
         try {
-            // assume saveMessage is implemented later in messageController?
+
             const userID = socket.user.userID;
             // console.log("user id:", userID);
             // console.log("board id:", boardID);
@@ -84,8 +86,9 @@ io.on('connection', (socket) => {
     });
 });
 
-
+// speciallized port number or default port number
 const port = process.env.PORT || 3000;
+
 
 httpServer.listen(port, () => {
     console.log(`Server running on port ${port}`);

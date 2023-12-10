@@ -2,6 +2,8 @@ Group name: Debug Demons
 
 Project: The slack replacement project
 
+Website name: Double Bond
+
 Competition: NO.
 
 Group members:
@@ -10,7 +12,7 @@ Group members:
 3. Nicholas Foisy (261055677)
 
 Link to our website:
-TBD
+https://doublebound.onrender.com
 
 Technology Stack:
     Frontend: React, Bootstrap, HTML, CSS, JS
@@ -52,9 +54,11 @@ Members' main responsibilties
 
 4. For the (specific)discussion board page:
     Frontend:
-        Nicholas Foisy: Design, Formatting, Animation
+        Nicholas Foisy: Design, Formatting, Animation, input validation.
     Backend:
-        Jiahao Jiang: messaging, board management, retriving messages and board members
+        Jiahao Jiang: messaging, board management, retriving board information(members, messages)
+        Nicholas Foisy: retriving board information(names)
+        Jiahao Jiang & Nicholas Foisy: routing
     Database:
         Nicholas Foisy, Yuanqing hao, Jiahao Jiang: database design
         Jiahao Jiang: database operations
@@ -75,16 +79,7 @@ COMP307FINALPROJECT/
 │   ├── package-lock.json       
 │   ├── package.json
 │   ├── public                              # Static files & public resources
-│   │   ├── benzene-logo.png
-│   │   ├── dropdown.png
-│   │   ├── favicon.ico
-│   │   ├── icon.png
-│   │   ├── index.html
-│   │   ├── logo192.png
-│   │   ├── logo512.png
-│   │   ├── manifest.json
-│   │   ├── pfp_icon.png
-│   │   └── robots.txt
+│   │   ├── public files...
 │   └── src
 │       ├── App.css
 │       ├── App.js
@@ -120,13 +115,13 @@ COMP307FINALPROJECT/
 ├── package-lock.json
 └── server                                     # Node backend
     ├── README.txt
-    ├── config                                 # Configuration files(e.g. database connection)
+    ├── config                                 # Configuration file(set up database connection)
     │   └── db.js
     ├── controllers                            # Backend intermediate logic
     │   ├── authController.js
     │   ├── discussionController.js
     │   └── messageController.js
-    ├── middleware                             # middleware function (e.g. token verification)
+    ├── middleware                             # specialized middleware function (e.g. token verification)
     │   └── authMiddleware.js
     ├── models                                 # models containing  data management/database query
     │   ├── Board.js
@@ -135,7 +130,7 @@ COMP307FINALPROJECT/
     │   └── User.js
     ├── package-lock.json
     ├── package.json
-    ├── routes                              # Express routes(guide the API calls to handler functions)
+    ├── routes                                  # Express routes(guide the API calls to handler functions)
     │   ├── discussionRoutes.js
     │   └── userRoutes.js
-    └── server.js                           # entry point of the backend server
+    └── server.js                               # entry point of the backend server

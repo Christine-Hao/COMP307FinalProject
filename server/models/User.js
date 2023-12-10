@@ -1,9 +1,8 @@
-// This file: defines how to interact with the users table in PostgreSQL database.
 import pool from '../config/db.js';
 
+// the model related to users (login, finding users, register...)
 const UserModel = {
 
-    // define a User object with some functions.
     async findByUsername (username){
         const result = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
         return result.rows[0];

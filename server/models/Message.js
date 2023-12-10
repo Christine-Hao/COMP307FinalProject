@@ -5,7 +5,6 @@ const MessageModel = {
     // save message to default channel
     async saveMessage(content, channelID, userID) {
         
-        
         const savedMessage = await pool.query(
             "INSERT INTO messages (content, channel_id, user_id) VALUES ($1, $2, $3) RETURNING *",
             [content, channelID, userID]

@@ -33,7 +33,7 @@ const SelectBoardPage = ({ onBoardSelect }) => {
     };
 
     fetchUserBoards();
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   const handleBoardSelect = (boardId, event) => {
     event.stopPropagation();

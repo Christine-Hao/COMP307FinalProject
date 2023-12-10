@@ -38,8 +38,9 @@ const DiscussionBoard = ({boardId}) => {
                 if (response.ok){
                     const members = await response.json();
                     // console.log("Board id:", boardId);
-                    //console.log("Members:", members);
+                    // console.log("Members:", members);
                     setBoardMembers(members);
+                    
                     // set the owner of the page.
                     setIsOwner(members.some(member => member.is_owner && member.id === parseInt(localStorage.getItem('userId'))));
                     //console.log("Current user ID:", parseInt(localStorage.getItem('userId')));
@@ -83,7 +84,7 @@ const DiscussionBoard = ({boardId}) => {
                 });
                 const boardData = await response.json();
               if (response.ok) {
-                setBoardName(boardData.board_name); // Update based on your actual data structure
+                setBoardName(boardData.board_name);
               } else {
                 console.error('Failed to fetch board details:', boardData.message);
               }
@@ -106,6 +107,7 @@ const DiscussionBoard = ({boardId}) => {
 
         // join a board
         socketRef.current.emit('joinBoard', boardId);
+
         // console.log(`Client attempting to join board: ${boardId}`);
 
         // Listen for incoming messages emitted from the server?(Done!)
@@ -185,7 +187,6 @@ const DiscussionBoard = ({boardId}) => {
                                             hourCycle: 'h12'
                                         })}
                                         </div>
-                                        {/* <span className="messange-time">{msg.time}</span> */}
                                     </div>
                                     {/* also set the content */}
                                     <div className="message-text">{msg.content}</div>
@@ -224,7 +225,7 @@ const DiscussionBoard = ({boardId}) => {
                                     <span className="list-email">({member.email})</span>
                                 </p>
                             ))}
-                        {/* Board Management Section */}
+                    {/* Board Management Section */}
                     </div>
                     <BoardManagement 
                         boardId={boardId} 
