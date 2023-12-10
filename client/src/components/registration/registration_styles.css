@@ -34,6 +34,7 @@
   margin-bottom: 30px; /* Optional: Adds space below the title */
 }
 
+/*Registration Input*/
 .input-group {
   display: flex;
   flex-direction: column; /* Stack children vertically */
@@ -54,11 +55,13 @@
   padding: 5px 15px;
 }
 
+/*Link to go back to login*/
 .link-button-reg {
   cursor: pointer;
   text-decoration: underline;
 }
 
+/*Sign Up Button*/
 .reg-button {
   display: flex;
   justify-content: center;
@@ -67,6 +70,7 @@
 }
 .reg-button button:hover {
   background-color: rgb(255, 204, 2);
+  color: black ;
 }
 
 .reg-button button {
