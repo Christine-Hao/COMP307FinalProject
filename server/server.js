@@ -19,8 +19,8 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors:{
-        origin: "http://localhost:3000", // testing on local
-        // origin: `https://doublebound.onrender.com`,
+        // origin: "http://localhost:3000", // testing on local
+        origin: `https://doublebound.onrender.com`,
         methods: ["GET", "POST"]
     }
 });
