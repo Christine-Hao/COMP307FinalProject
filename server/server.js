@@ -19,8 +19,8 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors:{
-        // origin: "http://localhost:3000", // testing on local
-        origin: `https://doublebound.onrender.com`,
+        origin: "http://localhost:3000", // testing on local
+        // origin: `https://doublebound.onrender.com`,
         methods: ["GET", "POST"]
     }
 });
@@ -66,9 +66,9 @@ io.on('connection', (socket) => {
         try {
 
             const userID = socket.user.userID;
-            // console.log("user id:", userID);
-            // console.log("board id:", boardID);
-            // console.log("content:", content);
+            console.log("user id:", userID);
+            console.log("board id:", boardID);
+            console.log("content:", content);
 
             // save the newly received message to the database
             const message = await handleSaveMessage(content, boardID, userID);
