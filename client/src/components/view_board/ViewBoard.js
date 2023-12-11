@@ -100,8 +100,7 @@ const DiscussionBoard = ({boardId}) => {
 
     useEffect( () => {
 
-        // proceed when board Id exists.
-        if (!boardId) return;
+        //if (!boardId) return;
 
         const token = localStorage.getItem('token');
         
@@ -120,10 +119,7 @@ const DiscussionBoard = ({boardId}) => {
         });
 
         return () => {
-            if(socketRef.current){
-                socketRef.current.disconnect();
-                socketRef.current = null;
-            }
+            socketRef.current.disconnect();
         }
     }, [boardId]);
 
