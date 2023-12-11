@@ -21,7 +21,10 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // clear the token upon logging out
+    // clear everything we stored in the local storage
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('userId');
+    localStorage.removeItem('selectedBoardId');
     setIsLoggedIn(false);
     setCurrentPage('login'); // Redirect back to login page after logout
   };
