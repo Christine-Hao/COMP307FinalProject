@@ -21,10 +21,14 @@ function App() {
   };
 
   const handleLogout = () => {
+
+    setSelectedBoardId(null); // clear the id
+
     // clear everything we stored in the local storage
     localStorage.removeItem('token'); 
     localStorage.removeItem('userId');
     localStorage.removeItem('selectedBoardId');
+    
     setIsLoggedIn(false);
     setCurrentPage('login'); // Redirect back to login page after logout
   };

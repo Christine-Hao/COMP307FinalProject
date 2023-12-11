@@ -120,7 +120,9 @@ const DiscussionBoard = ({boardId}) => {
         });
 
         return () => {
-            socketRef.current.disconnect();
+            if(socketRef.current){
+                socketRef.current.disconnect();
+            }
         }
     }, [boardId]);
 
