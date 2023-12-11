@@ -1,12 +1,10 @@
-
-
 .select-board-outer {
   background-image: url("./discussion_board.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: white;
-  position: relative; /* If you want to absolutely position any child inside */
+  position: relative; 
 }
 /*Nav Bar*/
 .select-board-outer .navbar {
@@ -18,70 +16,65 @@
   background: rgba(58, 60, 76, 0.8); /* Semi-transparent black */
   color: white;
   display: flex;
-  justify-content: space-between; /* This will place the logo on the left and the link on the right */
+  justify-content: space-between; 
 
   align-items: center;
   padding: 0 20px; /* Padding on the sides */
   z-index: 1000; /* Ensures the navbar stays on top */
 }
 .navbar-logo {
-  height: 3cap; 
+  height: 3cap;
   margin-left: 10px; /* Add some margin to the left if needed */
- 
+
   display: block;
   margin-left: 10px;
- 
 }
 .logout-link {
-  color: rgb(218, 218, 218); /* Color for the logout text */
+  color: rgb(218, 218, 218); 
   cursor: pointer;
   padding: 10px 20px; /* Padding for clickable area */
-  text-decoration: none; /* Remove underline from links */
-
+  text-decoration: none; 
 }
-.logout-link:hover{
+.logout-link:hover {
   color: white;
-  text-decoration: none; /* Remove underline from links */
+  text-decoration: none; 
 }
 .logo-and-title {
   display: flex;
-  align-items: center; /* Align the logo and text vertically */
+  align-items: center; 
   margin-right: 60%;
-
 }
-.sb-message{
+.sb-message {
   margin-left: 10px;
   font-size: 15px;
   font-weight: bold;
 }
 
+/*Main content*/
 
-
-
-.sb-wrapper{
+.sb-wrapper {
   background: rgba(36, 39, 67, 0.6); /* Semi-transparent black */
 }
-.sb-row{
+.sb-row {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Align children vertically in the center */
-  align-items: center; /* Align children horizontally in the center */
+  justify-content: center; 
+  align-items: center; 
 }
 
-
-
+/*List of dicussion boards*/
 .board-list {
-  width: 100%; /* Set to 100% of its parent's width */
-  max-width: 600px; /* Adjust the maximum width as needed */
-  overflow-y: auto; /* Add scroll if content overflows */
-  flex-grow: 1; /* This will allow this section to take up available space */
- 
-  height: 70vh; 
-  overflow-y: auto; /* This will add a scrollbar when the content exceeds max-height */
-  scrollbar-width: thin; /* For Firefox */
+  width: 100%; 
+  max-width: 600px; 
+  overflow-y: auto; 
+  flex-grow: 1; 
+
+  height: 70vh;
+  overflow-y: auto; 
+  scrollbar-width: thin; 
   scrollbar-color: rgba(0, 0, 0, 0.5) transparent; /* For Firefox */
-  
-  margin-top:80px;
+
+  margin-top: 80px;
 }
 /* Styles for Webkit browsers like Chrome, Safari */
 .board-list::-webkit-scrollbar {
@@ -89,28 +82,29 @@
 }
 .board-list::-webkit-scrollbar-track {
   background: transparent; /* Background of the track */
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 .board-list::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.5); /* Color of the scrollbar thumb */
-  border-radius: 10px; 
-  border: 3px solid transparent; /* Creates padding effect inside the thumb */
+  border-radius: 10px;
+  border: 3px solid transparent; 
 }
 
 .board-list::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.6); /* Slightly lighter on hover */
+  background-color: rgba(255, 255, 255, 0.6); 
 }
 
 /*If there is no board*/
 .no-boards-message {
-  height: 70vh; 
-  color: #fff; /* White text color */
-  text-align: center; /* Center the text */
-  padding: 20px; /* Add some padding */
-  font-size: 12px; /* Increase the font size */
+  height: 70vh;
+  color: #fff; 
+  text-align: center;
+  padding: 20px; 
+  font-size: 12px; 
   margin-top: 80px;
 }
 
+/*Each board styles*/
 .board-item {
   cursor: pointer;
   padding: 10px;
@@ -124,7 +118,7 @@
   margin-bottom: 10px;
   overflow: auto;
 
-  white-space: normal; /* Ensures text wraps and doesn't stay on one line */
+  white-space: normal; 
 }
 
 /*added to make board-item appear selectable*/
@@ -132,6 +126,7 @@
   background-color: #f0f0f0;
 }
 
+/*Delete board styling*/
 .unsubscribe-btn {
   font-size: 12px;
   background-color: red;
@@ -145,26 +140,26 @@
 
 .create-board-btn {
   padding: 10px 20px;
- 
+
   border-radius: 15px;
   background-color: green;
   color: white;
   border: none;
   cursor: pointer;
-  display: block; /* Makes the button a block-level element */
-  margin-top: 20px ; /* Auto margins on both sides */
+  display: block; 
+  margin-top: 20px; 
 }
 .footer {
   display: flex;
-  justify-content: center; /* Align horizontally in the center */
-  align-items: center; /* Align vertically in the center */
-  padding: 20px; /* Add padding as needed */
+  justify-content: center; 
+  align-items: center; 
+  padding: 20px; 
 }
 
 /*Pop-up for cerate board*/
-.modal h2{
+.modal h2 {
   color: black;
-  
+
   font-size: 25px;
 }
 .modal {
@@ -177,7 +172,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
 .modal-content {
@@ -187,7 +181,7 @@
   padding: 20px;
   border-radius: 5px;
   position: relative;
-  text-align: center; 
+  text-align: center;
 }
 
 .modal-close {
@@ -211,38 +205,34 @@
   border-radius: 20px;
   color: white;
   border: none;
-
 }
 
-
-
-
+/*Responsive design */
 @media (max-width: 768px) {
   .navbar {
     padding: 0 5px; /* Reduce padding on smaller screens */
   }
-  
+
   .sb-message {
     margin-left: 5px; /* Reduce space between logo and title on smaller screens */
-    font-size: 16px; /* You might want to adjust font size for smaller screens */
-  }
-  
-  .navbar-logo {
-    height: 30px; /* Adjust logo size for smaller screens if necessary */
-  }
-  .board-list {
-    max-width: 250PX;
-    max-height: 600px;
-  }
-  
-  /* If needed, hide title on very small screens */
-  @media (max-width: 480px) {
-    .sb-message {
-      display: none;
+    font-size: 16px;
+
+    .navbar-logo {
+      height: 30px;
     }
     .board-list {
-      max-width: 250PX;
+      max-width: 250px;
       max-height: 600px;
+    }
+
+    @media (max-width: 480px) {
+      .sb-message {
+        display: none;
+      }
+      .board-list {
+        max-width: 250px;
+        max-height: 600px;
+      }
     }
   }
 }

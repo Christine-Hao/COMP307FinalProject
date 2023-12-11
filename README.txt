@@ -22,6 +22,7 @@ Technology Stack:
     Backend: Express.js , Node.js, JS
     Database: PostgreSQL
     Externals: bcrypt, JWT, SOCKET.IO
+    Image Creation: Canva
 
 NOTE:
     1. Due to time constraints, we did not implement all elements in the provided storyboard.
@@ -35,8 +36,8 @@ NOTE:
 Members' main responsibilties
 1. For the login page:
     Frontend:
-        Yuanqing Hao: Design, Formatting, Animation, Input validation
-        Yuanqing Hao & Jiahao Jiang : Page redirection
+        Christine Yuanqing Hao: Design, Formatting, Animation, Input validation
+        Christine Yuanqing Hao & Jiahao Jiang : Page redirection
     Backend:
         Jiahao Jiang: Login verfication, authentication via token, routing
     Database:
@@ -44,7 +45,7 @@ Members' main responsibilties
 
 2. For the registration page:
     Frontend:
-        Yuanqing Hao: Design, Formatting, Input validation
+        Christine Yuanqing Hao: Design, Formatting, Input validation, Password confirmation, Background image design and creation
     Backend:
         Jiahao Jiang: User registration, routing.
     Database:
@@ -52,7 +53,7 @@ Members' main responsibilties
 
 3. For the select-discussion-board page
     Frontend:
-        Yuanqing Hao: Design, Formatting, Input validation, Display effect of Board creation & deletion
+        Yuanqing Hao: Design, Formatting, Input validation, Display flow of Board creation & deletion
     Backend:
         Jiahao Jiang: Board creation & deletion, retrieval of board list, routing
     Database:
@@ -61,17 +62,18 @@ Members' main responsibilties
 
 4. For the specific discussion board page:
     Frontend:
-        Nicholas Foisy: Design, Formatting, Animation, input validation.
+        Nicholas Foisy: Design, Formatting, input validation.
+        Christine Yuanqing Hao: Design and creation of the background image
     Backend:
         Jiahao Jiang: messaging, board management, retriving board information(members, messages)
         Nicholas Foisy: retriving board information(names)
         Jiahao Jiang & Nicholas Foisy: routing
     Database:
-        Nicholas Foisy, Yuanqing hao, Jiahao Jiang: database design
+        Nicholas Foisy, Christine Yuanqing hao, Jiahao Jiang: database design
         Jiahao Jiang: database operations
 
 5. Security
-    Yuanqing Hao & Jiahao Jiang & Nicholas Foisy:
+    Christine Yuanqing Hao & Jiahao Jiang & Nicholas Foisy:
         use local storage to store tokens and non-crucial user data.
         use trustful hosting services that adopts HTTPs.
     Jiahao Jiang:
