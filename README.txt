@@ -33,6 +33,12 @@ NOTE:
        and the Channel model will simply interact with the discussion board controller. We implemented all the other
        private-facing circles and public-facing webpages.
 
+NOTE 2:
+If you saw "WebSocket connection to 'wss://doublebound.onrender.com:10000/ws' failed" error on the console, it is very likely
+due to the issues of the hosting platform we choose(Similar cases happen on this platform).
+However, it should not affect how you use and test our project.
+All the functionalities are not impacted.
+
 Members' main responsibilties
 1. For the login page:
     Frontend:
