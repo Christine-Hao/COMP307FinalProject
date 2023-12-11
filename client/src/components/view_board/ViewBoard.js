@@ -99,6 +99,10 @@ const DiscussionBoard = ({boardId}) => {
     }, [boardId, isOwner]);
 
     useEffect( () => {
+
+        // proceed when board Id exists.
+        if (!boardId) return;
+
         const token = localStorage.getItem('token');
         
         socketRef.current = io(`${process.env.REACT_APP_URL_PREFIX}`, {

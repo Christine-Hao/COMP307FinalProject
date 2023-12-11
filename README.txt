@@ -8,9 +8,12 @@ Competition: NO.
 
 Group members:
 1. Jiahao Jiang (261038881)
+   Email: jiahao.jiang@mail.mcgill.ca
 2. Yuanqing Hao (261053765)
+   Email: yuanqing.hao@mail.mcgill.ca
 3. Nicholas Foisy (261055677)
-
+   Email: nicholas.foisy@mail.mcgill.ca
+   
 Link to our website:
 https://doublebound.onrender.com
 
@@ -21,9 +24,13 @@ Technology Stack:
     Externals: bcrypt, JWT, SOCKET.IO
 
 NOTE:
-    Due to time constraints, we did not implement all elements in the provided storyboard.
-    After reading the instruction and confirming with the Professor, we selected at least 4 private facing circles
-    and all public-facing webpages to implement.
+    1. Due to time constraints, we did not implement all elements in the provided storyboard.
+       After reading the instruction and confirming with the Professor, we selected at least 4 private facing circles
+       and all public-facing webpages to implement.
+    2. To elaborate on, we did not implement the cirlces about channel management function and search message. Instead,
+       we create only a default channel (i.e. general) for each board. But we still created a Channel model in the backend,
+       and the Channel model will simply interact with the discussion board controller. We implemented all the other
+       private-facing circles and public-facing webpages.
 
 Members' main responsibilties
 1. For the login page:
@@ -45,14 +52,14 @@ Members' main responsibilties
 
 3. For the select-discussion-board page
     Frontend:
-        Yuanqing Hao: Design, Formatting, Input validation, Display flow of Board creation & deletion
+        Yuanqing Hao: Design, Formatting, Input validation, Display effect of Board creation & deletion
     Backend:
         Jiahao Jiang: Board creation & deletion, retrieval of board list, routing
     Database:
         Nicholas Foisy, Yuanqing hao, Jiahao Jiang: Database design
         Jiahao Jiang: Database operations    
 
-4. For the (specific)discussion board page:
+4. For the specific discussion board page:
     Frontend:
         Nicholas Foisy: Design, Formatting, Animation, input validation.
     Backend:
@@ -70,20 +77,16 @@ Members' main responsibilties
     Jiahao Jiang:
         verifies the user tokens sent from the client before using the requested services on the backend.
 
-Directory structures:
+
+Main Directory Structures(include the main files):
 
 COMP307FINALPROJECT/
 ├── README.md
-├── client                                  # React frontend
-│   ├── README.md
-│   ├── package-lock.json       
-│   ├── package.json
+├── client                                  # React frontend (The View part in MVC)
 │   ├── public                              # Static files & public resources
 │   │   ├── public files...
 │   └── src
-│       ├── App.css
 │       ├── App.js
-│       ├── App.test.js
 │       ├── components                      # Reusable components
 │       │   ├── Navbar
 │       │   │   ├── AccountInfoPopup.js
@@ -92,7 +95,6 @@ COMP307FINALPROJECT/
 │       │   ├── login
 │       │   │   ├── Login.js
 │       │   │   ├── Login_styles.css
-│       │   │   └── README.md
 │       │   ├── registration
 │       │   │   ├── Registration.js
 │       │   │   ├── registration.png
@@ -109,28 +111,23 @@ COMP307FINALPROJECT/
 │       │       └── view_board_styles.css
 │       ├── index.css
 │       ├── index.js
-│       ├── logo.svg
-│       ├── reportWebVitals.js
-│       └── setupTests.js
-├── package-lock.json
-└── server                                     # Node backend
+└── server                                     # Node backend (The Model and Controller parts in MVC)
     ├── README.txt
     ├── config                                 # Configuration file(set up database connection)
     │   └── db.js
-    ├── controllers                            # Backend intermediate logic
+    ├── controllers                            # Backend intermediate logic (The Controller part in MVC)
     │   ├── authController.js
     │   ├── discussionController.js
     │   └── messageController.js
     ├── middleware                             # specialized middleware function (e.g. token verification)
     │   └── authMiddleware.js
-    ├── models                                 # models containing  data management/database query
+    ├── models                                 # data management/query (The Model part in MVC)
     │   ├── Board.js
     │   ├── Channel.js
     │   ├── Message.js
     │   └── User.js
-    ├── package-lock.json
-    ├── package.json
-    ├── routes                                  # Express routes(guide the API calls to handler functions)
+    ├── routes                                  # Express routes(guide the API calls from the frontend to the backend)
     │   ├── discussionRoutes.js
     │   └── userRoutes.js
     └── server.js                               # entry point of the backend server
+
