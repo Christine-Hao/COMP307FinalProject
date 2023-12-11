@@ -216,7 +216,7 @@ const DiscussionBoard = ({boardId}) => {
                                 e.target.style.height = 'inherit';
                                 e.target.style.height = `${e.target.scrollHeight}px`;
                             }}
-                            maxLength={200}
+                            maxLength={300}
                         />
                         <Button variant="primary" type="submit" onClick={handleSendMessage} className="message-button">
                             <span className="message-button-text">Send</span>

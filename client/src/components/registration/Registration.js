@@ -10,8 +10,13 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
   const [preferredName, setPreferredName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [error, setError] = useState('');
+  let flag = false;
+  let alert_text = '';
+
   // Handler for Fullname registration
   const handleFullnameRegistration = (event) => {
+
     setFullName(event.target.value);
   };
 
@@ -37,31 +42,35 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
   // Handler for form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("McGill Email:", mcgillEmail, "Password:", password);
 
     // Check if the username, password, or email exceed the character limits
     if (preferredName.length > 45) {
-      alert("Preferred name should not exceed 45 characters.");
-      return;
+      flag=true;
+      alert_text+= "Preferred name should not exceed 45 characters.\n";
     }
 
     if (fullName.length > 45) {
-      alert("Full Name should not exceed 45 characters.");
-      return;
+      flag=true;
+      alert_text+= "Full Name should not exceed 45 characters.\n";
     }
 
     if (password.length > 50) {
-      alert("Password should not exceed 50 characters.");
-      return;
+      flag=true;
+      alert_text+= "Password should not exceed 50 characters.\n";
     }
 
     if (mcgillEmail.length > 50) {
-      alert("Email should not exceed 50 characters.");
-      return;
+      flag=true;
+      alert_text+= "Email should not exceed 50 characters.\n";
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+      flag=true;
+      alert_text+= "Passwords must match.\n";
+    }
+
+    if (flag) {
+      alert(alert_text);
       return;
     }
 
@@ -88,13 +97,15 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Registration Successful", data);
+        // console.log("Registration Successful", data);
         onRegistrationSuccess(); // Call the callback to redirect after successful registration
       } else {
-        console.error("Registration failed:", data.message);
+        // console.error("Registration failed:", data.message);
+        setError("Error: " + data.message);
       }
     } catch (error) {
-      console.error("Error during registration:", error);
+      // console.error("Error during registration:", error);
+      setError("Error during registration. Refresh the page and try again.");
     }
   };
 
@@ -168,13 +179,13 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
                     required
                   />
                 </div>
-
                 <div className="reg-button">
                   <button type="submit" className="btn btn-primary">
                     Sign Up
                   </button>
                 </div>
               </form>
+              {error && <p className="reg-error-message">{error}</p>}
               <p className="account-exists">
                 Already have an account?{" "}
                 <span className="link-button-reg" onClick={onLoginClick}>

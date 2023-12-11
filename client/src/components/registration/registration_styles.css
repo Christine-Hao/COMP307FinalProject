@@ -90,3 +90,9 @@
     background-repeat: no-repeat;
   }
 }
+
+.reg-error-message {
+  color: red;
+  font-size: 15px;
+  font-weight: bold;
+}
