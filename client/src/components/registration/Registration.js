@@ -101,11 +101,11 @@ const Registration = ({ onLoginClick, onRegistrationSuccess }) => {
         onRegistrationSuccess(); // Call the callback to redirect after successful registration
       } else {
         // console.error("Registration failed:", data.message);
-        setError("Error: " + data.message);
+        alert("Error: " + data.message);
       }
     } catch (error) {
       // console.error("Error during registration:", error);
-      setError("Error during registration. Refresh the page and try again.");
+      alert("Error during registration. Refresh the page and try again.");
     }
   };
 
