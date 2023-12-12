@@ -208,12 +208,12 @@ const DiscussionBoard = ({boardId, noLongerMember}) => {
             <Col lg={2} md={3} sm={12} className="channels-list p-5">
                 <div className="rounded-box">
                     <h3>Welcome to</h3>
-                    <h3 className="left-board-header ">{boardName}</h3>
+                    <h3 className="board-name ">{boardName}</h3>
                 </div>
             </Col>
 
             <Col lg={7} md={6} sm={12} className="messages-section d-flex message-section-height border-dividers">
-                <p className="left-board-title">General Chat</p>
+                <p className="board-title">General Chat</p>
 
                 <div className="message-list flex-grow-1">
                     {messages.length === 0 ? (

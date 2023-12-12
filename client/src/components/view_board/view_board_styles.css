@@ -17,7 +17,7 @@ html, body {
     height: calc(100vh - 55px); /* to fit 55 px navbar */
 }
 
-@media (min-width: 577px) {
+@media (min-width: 577px) { /* set size to full screen only on full screen view*/
     .message-section-height { 
         height: calc(100vh - 55px); /* to fit 55 px navbar */
     }
@@ -30,11 +30,7 @@ html, body {
     overflow-y: auto;
 }
 
-.message {
-    border-bottom: 1px solid #333;
-    padding: 5px;
-    color: #ddd;
-}
+/* message section styling */
 .message {
     display: flex;
     align-items: flex-start;
@@ -95,6 +91,7 @@ html, body {
 }
 
 .message-textbox {
+    resize:none;
     flex-grow: 1;
     margin-right: 10px;
     color: black;
@@ -108,12 +105,13 @@ html, body {
     font-style: oblique;
 }
 
-.left-board-title {
-    font-size: 40px;
+.board-title {
     margin-left: 10px;
+    font-size: 40px;
+    font-weight: bold;
 }
 
-.left-board-header, .board-title {
+.board-name {
     font-size: 30px;
     font-weight: bold;
 }
@@ -134,7 +132,6 @@ html, body {
 }
 
 .outer-viewboard-page {
-    /* max-height: calc(100vh - 55px); */
     overflow-y: auto;
     background-color: #1f1f1f;
     min-width: 300px;
@@ -155,6 +152,12 @@ html, body {
     overflow-y: auto;
 }
 
+.empty-chat-message {
+    color: grey;
+    font-style: italic;
+    text-align: center;
+}
+
 @media (max-width: 992px) {
     .channels-list, .messages-section, .left-board-info {
         border-bottom: 1px solid darkslategrey;
@@ -164,12 +167,18 @@ html, body {
     }
 }
 
+/* board title, membership columsn (left, right) */
+
 .rounded-box {
     background-color:#323949;
     border-radius: 15px;
     padding: 15px;
     margin: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-in-rounded {
+    font-size: 20px;
 }
 
 .user-list {
@@ -188,9 +197,6 @@ html, body {
     font-size: 15px;
 }
 
-.text-in-rounded {
-    font-size: 20px;
-}
 
 .message-input-form {
     padding: 10px;
@@ -223,12 +229,6 @@ html, body {
     font-weight: bold;
 }
 
-.message-textbox.auto-resize-textarea {
+.message-textbox.auto-resize-textarea { /* css for resizing of text box */
     max-height: 100px;
-}
-
-.empty-chat-message {
-    color: grey;
-    font-style: italic;
-    text-align: center;
 }

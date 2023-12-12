@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import './Navbar_styles.css';
 
-function Navbar_loggedin({ handleLogout, handleWorkspacesClick }) {
+function Navbar({ handleLogout, handleWorkspacesClick }) {
   return (
     <div className="outer-navbar">
       <div className="site-nav">
@@ -19,7 +19,7 @@ function Navbar_loggedin({ handleLogout, handleWorkspacesClick }) {
           </div>
         </div>
       <div className="site-nav-buttons">
-        <Button variant="outline-primary" onClick={handleWorkspacesClick}>Discussion Boards</Button>{' '}
+        <Button onClick={handleWorkspacesClick}>Discussion Boards</Button>{' '}
         <Button variant="outline-danger" onClick={handleLogout}>Log out</Button>
       </div>
     </div>
@@ -29,4 +29,4 @@ function Navbar_loggedin({ handleLogout, handleWorkspacesClick }) {
 }
 
 
-export default Navbar_loggedin;
+export default Navbar;
