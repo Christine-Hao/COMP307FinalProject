@@ -54,10 +54,10 @@ const Login = ({ onRegisterClick, onLoginSuccess }) => {
         //localStorage.setItem('token', data.token); // Storing the token if login is successful
         onLoginSuccess(data.token, data.userID); // Navigate to the SelectBoard component
       } else {
-        console.error("Login failed:", data.message);
+        alert("Login failed:" + data.message);
       }
     } catch (error) {
-      console.log("Error on logging in:", error);
+      alert("Error on logging in:" + error);
     }
   };
 

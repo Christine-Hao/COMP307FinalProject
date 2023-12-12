@@ -89,13 +89,13 @@ export async function deleteBoard(req, res) {
 
     // 1. check if board exists
     if(!board){
-      return res.status(404).json({message: "Board not found. Check your inputs."});
+      return res.status(404).json({message: "Board not found. Verify input."});
     }
 
     // 2. check if board owner is the user who requests for deletion
 
     if(board.user_id !== req.user.userID){
-      return res.status(403).json({message:"Not authorized to delete this board."});
+      return res.status(403).json({message:"You are not authorized to delete this board."});
     }
 
     // 3. if passing the check, delete all messages in the baord
@@ -108,7 +108,7 @@ export async function deleteBoard(req, res) {
     // 5. then, delete the board
     await BoardModel.deleteBoardModel(boardID);
     
-    res.json({message: "Board deleted successfullly. You can continue now."});
+    res.json({message: "Board deleted successfullly."});
         
   }catch (error){
     res.status(500).json({message: "Error deleting the board."});
@@ -129,24 +129,24 @@ export async function addBoardMember(req, res){
 
     // 1. check if the board is found in the database
     if(!board){
-      return res.status(404).json({message:"Board not found. Tyry again!"});
+      return res.status(404).json({message:"Board not found. Try again!"});
     }
 
     // 2. check if the user has the right to delete the board.
     // suppose the middleware function verifyToken assisn req.user the decoded token of the form {userID: actualID}
     if(board.user_id !== req.user.userID){
-      return res.status(403).json({message:"Not authorized to add members to this board."});
+      return res.status(403).json({message:"You are authorized to add members to this board."});
     }
 
     // 3. check if we can find the user in our database
     if(!userToAdd){
-      return res.status(404).json({message: "User not found. Check your inputs."});
+      return res.status(404).json({message: "User not found."});
     }
 
     // 4. check if it's already a member        
     const isMember = await BoardModel.isUserAlreadyMember(boardID, userToAdd.id);
     if (isMember) {
-      return res.status(400).json({ message: "User is already a member." });
+      return res.status(400).json({ message: "User is already a member of this board." });
     }
 
     // 5. if passing all the checks, we can add the user!
@@ -189,7 +189,7 @@ export async function removeBoardMember(req, res) {
 
     // 3. check if the user is not found. If so, returns an error msg.
     if(!userToRemove){
-      return res.status(404).json({message: "User not found. Check your inputs."});
+      return res.status(404).json({message: "User not found."});
     }
 
     // 4. does not allow anyone to remove the owner
