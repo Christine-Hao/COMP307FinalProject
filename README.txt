@@ -17,6 +17,7 @@ Group members:
 Link to our website:
 https://doublebound.onrender.com
 
+
 Technology Stack:
     Frontend: React, Bootstrap, HTML, CSS, JS
     Backend: Express.js , Node.js, JS
@@ -34,17 +35,23 @@ NOTE:
        private-facing circles and public-facing webpages.
 
 NOTE 2:
-If you saw "WebSocket connection to 'wss://doublebound.onrender.com:10000/ws' failed" error on the console, it is very likely
-due to the issues of the hosting platform we choose(Similar cases happen on this platform).
-However, it should not affect how you use and test our project.
-All the functionalities are not impacted.
+    Due to the hosting services, you may occasionally find that the messages are not displayed in real-time 
+    If such things happen, you can go to the select-Board page, refresh, and enter the board again. Then your
+    messages should be displayed in a real-time fashion.
+
+    All the functionalities should not be impacted.
+
+NOTE 3:
+    In case you can't register for an account(You shoule be able to do that unless our website breaks), you can
+    use this account for testing (or just feel free to use it):
+    Email:    ta.test@mcgill.ca
+    Password: tatest123
 
 Members' main responsibilties
 1. For the login page:
     Frontend:
         Christine Yuanqing Hao: Design, Formatting, Animation, Input validation
         Christine Yuanqing Hao & Jiahao Jiang : Page redirection
-        Nicholas Foisy : Some input validation
     Backend:
         Jiahao Jiang: Login verfication, authentication via token, routing
     Database:
@@ -53,7 +60,6 @@ Members' main responsibilties
 2. For the registration page:
     Frontend:
         Christine Yuanqing Hao: Design, Formatting, Input validation, Password confirmation, Background image design and creation
-        Nicholas Foisy : Some input validation
     Backend:
         Jiahao Jiang: User registration, routing.
     Database:
@@ -87,6 +93,13 @@ Members' main responsibilties
         use trustful hosting services that adopts HTTPs.
     Jiahao Jiang:
         verifies the user tokens sent from the client before using the requested services on the backend.
+
+6. Bonus Feature
+    Observer pattern:
+        1. In most cases, the messages are updated in real time for all users. If it's not updated, it should be acceidental
+        and please refer to NOTE 2 above to solve it.
+        2. In the discussion board, if the owner removes the user out of the board during chatting, the user will receive
+        such notification via a popup, and be redirected to the select-board page upon closing the popup. 
 
 
 Main Directory Structures(include the main files):

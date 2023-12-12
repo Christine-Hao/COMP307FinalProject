@@ -1,5 +1,9 @@
 Documentation about the server directory:
 
+URL of the server after deployment(used purely to process fronend request):
+https://doubleboundserver.onrender.com
+
+
 server/
     server.js     the entry point of the backend server. It also handles the messaging functionality(listens and emit message)
 
