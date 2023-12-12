@@ -4,13 +4,14 @@ import './view_board_styles.css'
 import io from 'socket.io-client';
 import BoardManagement from './BoardManagement';
 
-const DiscussionBoard = ({boardId}) => {
+const DiscussionBoard = ({boardId, noLongerMember}) => {
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [boardMembers, setBoardMembers] = useState([]);
     const [isOwner, setIsOwner] = useState(false);
-    
+    const [isMember, setIsMember] = useState(true);
+
     const [boardName, setBoardName] = useState('');
 
 
@@ -43,8 +44,7 @@ const DiscussionBoard = ({boardId}) => {
                     
                     // set the owner of the page.
                     setIsOwner(members.some(member => member.is_owner && member.id === parseInt(localStorage.getItem('userId'))));
-                    //console.log("Current user ID:", parseInt(localStorage.getItem('userId')));
-                    //console.log("Is owner? :", members.some(member => member.is_owner && member.id === parseInt(localStorage.getItem('userId'))));
+
                 }else{
                     console.error("failed to fetch members. reload again.");
                 }
@@ -96,6 +96,14 @@ const DiscussionBoard = ({boardId}) => {
         fetchChannelMembers();
         fetchMessages();
         fetchBoardName();
+
+        const interval = setInterval(() => {
+            checkMembership();
+        }, 2000);
+    
+        return () => clearInterval(interval);
+
+
     }, [boardId, isOwner]);
 
     useEffect( () => {
@@ -123,7 +131,43 @@ const DiscussionBoard = ({boardId}) => {
         }
     }, [boardId]);
 
+    
+    const checkMembership = async () => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_MEMBERS_API}/${boardId}`, {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+
+            if(response.ok){
+
+                const members = await response.json();
+                const userId = parseInt(localStorage.getItem('userId'));
+                const currentIsMember = members.some(member => member.id === userId);
+                
+                setIsMember(currentIsMember);
+                if (!currentIsMember) {
+                    alert("You are no longer a member of this board. Please exit this page.");
+                    noLongerMember();   
+                }
+                if (!isMember) {
+                    
+                }
+            }
+        } catch (error) {
+            console.error("Error checking membership:", error);
+        }
+    }
+
     const handleSendMessage = () => {
+
+        if (!isMember) {
+            alert("You cannot send messages becuase you are no longer a member of this board.");
+            noLongerMember();
+            return;
+        }
 
         if (newMessage.trim()) {
             // emit the message to the server

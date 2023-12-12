@@ -28,7 +28,7 @@ function App() {
     localStorage.removeItem('token'); 
     localStorage.removeItem('userId');
     localStorage.removeItem('selectedBoardId');
-    
+
     setIsLoggedIn(false);
     setCurrentPage('login'); // Redirect back to login page after logout
   };
@@ -47,6 +47,11 @@ function App() {
   const handleRegistrationSuccess = () => {
     setCurrentPage('login'); // Redirect to login page after successful registration
   };
+
+  const handleMemberBeingRemoved=() =>{
+    localStorage.removeItem(selectedBoardId);
+    setCurrentPage('selectBoard');
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -82,7 +87,7 @@ function App() {
           return (
             <div>
               {isLoggedIn && <Navbar handleLogout={handleLogout} handleWorkspacesClick={handleWorkspacesClick} />}
-              <DiscussionBoard boardId={selectedBoardId} />
+              <DiscussionBoard boardId={selectedBoardId} noLongerMember={handleMemberBeingRemoved} />
             </div>
           );
         default:
