@@ -23,8 +23,6 @@ const BoardModel = {
       try {
         const result = await pool.query("SELECT * FROM boards WHERE board_id = $1", [boardID]);
 
-        console.log('findByBoardId result:', result.rows[0]);
-
         return result.rows[0];
       } catch (error) {
         console.error('Error in findByBoardId:', error);

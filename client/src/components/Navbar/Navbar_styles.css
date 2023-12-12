@@ -42,9 +42,7 @@ body {
     padding-top: 5px;
 }
 
-
-
-.site-nav-buttons {
+.site-nav-buttons { /* for two buttons on right side */
     float: right;
     font-size: 18px;
     padding-right: 10px;
