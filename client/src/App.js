@@ -49,7 +49,7 @@ function App() {
   };
 
   const handleMemberBeingRemoved=() =>{
-    localStorage.removeItem(selectedBoardId);
+    localStorage.removeItem('selectedBoardId');
     setCurrentPage('selectBoard');
   }
 
