@@ -98,7 +98,9 @@ const DiscussionBoard = ({boardId, noLongerMember}) => {
         fetchBoardName();
 
         const interval = setInterval(() => {
-            checkMembership();
+            if(isMember){
+                checkMembership();
+            }
         }, 2000);
     
         return () => clearInterval(interval);

@@ -56,6 +56,11 @@ const BoardManagement = ({ boardId, isOwner, boardMembers, updateMembers }) => {
                 return;
             }
 
+            if(!boardMembers.some(member => member.email === email)) {
+                setError("Member is not in the board.");
+                return;
+            }
+
             const response = await fetch(`${process.env.REACT_APP_URL_PREFIX}${process.env.REACT_APP_DELETEFROMBOARD_API}`, {
                 method: 'DELETE',
                 headers: {
