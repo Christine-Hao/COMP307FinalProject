@@ -12,7 +12,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 40px; /* Adjust the height as needed */
+  height: 40px;
   background: rgba(58, 60, 76, 0.8); /* Semi-transparent black */
   color: white;
   display: flex;
@@ -24,7 +24,7 @@
 }
 .navbar-logo {
   height: 3cap;
-  margin-left: 10px; /* Add some margin to the left if needed */
+  margin-left: 10px;
 
   display: block;
   margin-left: 10px;
