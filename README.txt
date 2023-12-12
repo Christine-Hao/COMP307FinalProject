@@ -72,8 +72,9 @@ Members' main responsibilties
     Frontend:
         Nicholas Foisy: Design, Formatting, input validation.
         Christine Yuanqing Hao: Design and creation of the background image
+        Nicholas & Jiahao: message display
     Backend:
-        Jiahao Jiang: messaging, board management, retriving board information(members, messages)
+        Jiahao Jiang: messaging(save, load messages), board management, retriving board information(members, messages)
         Nicholas Foisy: retriving board information(names)
         Jiahao Jiang & Nicholas Foisy: routing
     Database:

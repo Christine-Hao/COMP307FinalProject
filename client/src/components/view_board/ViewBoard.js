@@ -101,7 +101,7 @@ const DiscussionBoard = ({boardId, noLongerMember}) => {
             if(isMember){
                 checkMembership();
             }
-        }, 2000);
+        }, 2500);
     
         return () => clearInterval(interval);
 
@@ -153,9 +153,6 @@ const DiscussionBoard = ({boardId, noLongerMember}) => {
                 if (!currentIsMember) {
                     alert("You are no longer a member of this board. Please exit this page.");
                     noLongerMember();   
-                }
-                if (!isMember) {
-                    
                 }
             }
         } catch (error) {
