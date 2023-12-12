@@ -44,6 +44,7 @@ Members' main responsibilties
     Frontend:
         Christine Yuanqing Hao: Design, Formatting, Animation, Input validation
         Christine Yuanqing Hao & Jiahao Jiang : Page redirection
+        Nicholas Foisy : Some input validation
     Backend:
         Jiahao Jiang: Login verfication, authentication via token, routing
     Database:
@@ -52,6 +53,7 @@ Members' main responsibilties
 2. For the registration page:
     Frontend:
         Christine Yuanqing Hao: Design, Formatting, Input validation, Password confirmation, Background image design and creation
+        Nicholas Foisy : Some input validation
     Backend:
         Jiahao Jiang: User registration, routing.
     Database:

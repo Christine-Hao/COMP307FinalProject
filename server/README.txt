@@ -1,4 +1,4 @@
-Documentattion about the server directory:
+Documentation about the server directory:
 
 server/
     server.js     the entry point of the backend server. It also handles the messaging functionality(listens and emit message)
