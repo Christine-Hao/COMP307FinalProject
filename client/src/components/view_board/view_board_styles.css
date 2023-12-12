@@ -23,7 +23,7 @@ html, body {
     }
 }
 
-.channels-list, .messages-section, .left-board-info {
+.channels-list, .messages-section, .board-info {
     background-color: #1f1f1f;
     text-align: center;
     padding: 10px;
@@ -64,7 +64,7 @@ html, body {
     font-style: oblique;
 }
 .message-text {
-    white-space: pre-wrap; /* support line breaks */
+    white-space: pre-wrap; /* supporting line breaks in messages */
     margin-left: 50px;
     font-size: 22px;
 }
@@ -159,15 +159,15 @@ html, body {
 }
 
 @media (max-width: 992px) {
-    .channels-list, .messages-section, .left-board-info {
+    .channels-list, .messages-section, .board-info {
         border-bottom: 1px solid darkslategrey;
     }
-    .left-board-info {
+    .board-info {
         border-bottom: none;
     }
 }
 
-/* board title, membership columsn (left, right) */
+/* board title, membership columns (left, right) */
 
 .rounded-box {
     background-color:#323949;

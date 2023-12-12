@@ -203,90 +203,90 @@ const DiscussionBoard = ({boardId, noLongerMember}) => {
 
     return (
         <div className="d-flex outer-viewboard-page text-white">
-    <Container fluid className="flex-grow-1">
-        <Row className="h-100">
-            <Col lg={2} md={3} sm={12} className="channels-list p-5">
-                <div className="rounded-box">
-                    <h3>Welcome to</h3>
-                    <h3 className="board-name ">{boardName}</h3>
-                </div>
-            </Col>
+            <Container fluid className="flex-grow-1">
+                <Row className="h-100">
+                    <Col lg={2} md={3} sm={12} className="channels-list p-5">
+                        <div className="rounded-box">
+                            <h3>Welcome to</h3>
+                            <h3 className="board-name ">{boardName}</h3>
+                        </div>
+                    </Col>
 
-            <Col lg={7} md={6} sm={12} className="messages-section d-flex message-section-height border-dividers">
-                <p className="board-title">General Chat</p>
-
-                <div className="message-list flex-grow-1">
-                    {messages.length === 0 ? (
-                        <p className="empty-chat-message">This chat is empty - send the first message!</p>
-                    ) : (
-                        messages.map((msg, index) => (
-                            <div className="message" key={index}>
-                                <img src="/pfp_icon.png" width="20" className="rounded-circle message-pfp" alt="profile" />
-                                <div className="message-content">
-                                    <div className="message-header">
-                                        <span className="message-sender">{msg.username}</span>
-                                        <div className="message-timestamp">
-                                            {new Date(msg.created_at).toLocaleString(undefined, { 
-                                                year: 'numeric', 
-                                                month: 'numeric', 
-                                                day: 'numeric', 
-                                                hour: '2-digit', 
-                                                minute: '2-digit',
-                                                hour12: true,
-                                                hourCycle: 'h12'
-                                            })}
+                    <Col lg={7} md={6} sm={12} className="messages-section d-flex message-section-height border-dividers">
+                        <p className="board-title">General Chat</p>
+                        <div className="message-list flex-grow-1">
+                            {messages.length === 0 ? (
+                                <p className="empty-chat-message">This chat is empty - send the first message!</p>
+                            ) : (
+                                messages.map((msg, index) => (
+                                    <div className="message" key={index}>
+                                        <img src="/pfp_icon.png" width="20" className="rounded-circle message-pfp" alt="profile" />
+                                        <div className="message-content">
+                                            <div className="message-header">
+                                                <span className="message-sender">{msg.username}</span>
+                                                <div className="message-timestamp">
+                                                    {new Date(msg.created_at).toLocaleString(undefined, { 
+                                                        year: 'numeric', 
+                                                        month: 'numeric', 
+                                                        day: 'numeric', 
+                                                        hour: '2-digit', 
+                                                        minute: '2-digit',
+                                                        hour12: true,
+                                                        hourCycle: 'h12'
+                                                    })}
+                                                </div>
+                                            </div>
+                                            <div className="message-text">{msg.content}</div>
                                         </div>
                                     </div>
-                                    <div className="message-text">{msg.content}</div>
-                                </div>
-                            </div>
-                        ))
-                    )}
+                                ))
+                            )}
 
-                    <div ref={messagesEndRef} />
-                </div>
+                            <div ref={messagesEndRef} />
+                        </div>
 
-                <Form className="message-input-form" onSubmit={handleFormSubmit}>
-                    <Form.Group className="d-flex">
-                        <Form.Control
-                            as="textarea"
-                            className="message-textbox auto-resize-textarea"
-                            placeholder="Type a message..."
-                            value={newMessage}
-                            onChange={(e) => setNewMessage(e.target.value)}
-                            onInput={(e) => {
-                                e.target.style.height = 'inherit';
-                                e.target.style.height = `${e.target.scrollHeight}px`;
-                            }}
-                            maxLength={300}
-                        />
-                        <Button variant="primary" type="submit" onClick={handleSendMessage} className="message-button">
-                            <span className="message-button-text">Send</span>
-                        </Button>
-                    </Form.Group>
-                </Form>
-            </Col>
+                        {/* send message form */}
+                        <Form className="message-input-form" onSubmit={handleFormSubmit}>
+                            <Form.Group className="d-flex">
+                                <Form.Control
+                                    as="textarea"
+                                    className="message-textbox auto-resize-textarea"
+                                    placeholder="Type a message..."
+                                    value={newMessage}
+                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    onInput={(e) => {
+                                        e.target.style.height = 'inherit';
+                                        e.target.style.height = `${e.target.scrollHeight}px`;
+                                    }}
+                                    maxLength={300} /* define max length of text box */
+                                />
+                                <Button variant="primary" type="submit" onClick={handleSendMessage} className="message-button">
+                                    <span className="message-button-text">Send</span>
+                                </Button>
+                            </Form.Group>
+                        </Form>
+                    </Col>
 
 
-            <Col lg={3} md={3} sm={12} className="left-board-info p-5">
-                <div className="rounded-box">
-                    <h3 className="board-title ">Channel Members</h3>
-                    {boardMembers.reverse().map(member => (
-                        <p key={member.id} className="user-list ">
-                            <span className="list-username">{member.username} </span><br /> 
-                            <span className="list-email">({member.email})</span>
-                        </p>
-                    ))}
-                </div>
-                <BoardManagement 
-                    boardId={boardId} 
-                    isOwner={isOwner} 
-                    boardMembers={boardMembers}
-                    updateMembers={updateMembers}
-                />
-            </Col>
-        </Row>
-    </Container>
+                <Col lg={3} md={3} sm={12} className="board-info p-5">
+                    <div className="rounded-box">
+                        <h3 className="board-title ">Channel Members</h3>
+                        {boardMembers.reverse().map(member => (
+                            <p key={member.id} className="user-list ">
+                                <span className="list-username">{member.username} </span><br /> 
+                                <span className="list-email">({member.email})</span>
+                            </p>
+                        ))}
+                    </div>
+                    <BoardManagement 
+                        boardId={boardId} 
+                        isOwner={isOwner} 
+                        boardMembers={boardMembers}
+                        updateMembers={updateMembers}
+                    />
+                </Col>
+                </Row>
+            </Container>
 </div>
     );
 };
