@@ -6,6 +6,10 @@ Website name: Double Bond
 
 Competition: NO.
 
+Team captain:
+   Jiahao Jiang (261038881)
+   Email: jiahao.jiang@mail.mcgill.ca
+
 Group members:
 1. Jiahao Jiang (261038881)
    Email: jiahao.jiang@mail.mcgill.ca
