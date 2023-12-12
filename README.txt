@@ -82,7 +82,7 @@ Members' main responsibilties
         Christine Yuanqing Hao: Design and creation of the background image
         Nicholas & Jiahao: message display
     Backend:
-        Jiahao Jiang: messaging(save, load messages), board management, retriving board information(members, messages)
+        Jiahao Jiang: message processing(save, load messages), board management, retriving board information(members, messages)
         Nicholas Foisy: retriving board information(names)
         Jiahao Jiang & Nicholas Foisy: routing
     Database:
@@ -96,7 +96,7 @@ Members' main responsibilties
     Jiahao Jiang:
         verifies the user tokens sent from the client before using the requested services on the backend.
 
-6. Bonus Feature
+6. Bonus Feature (Christine, Jiahao, Nicholas)
     Observer pattern:
         1. In most cases, the messages are updated in real time for all users. If it's not updated, it should be acceidental
         and please refer to NOTE 2 above to solve it.
